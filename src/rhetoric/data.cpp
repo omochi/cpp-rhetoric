@@ -69,12 +69,12 @@ namespace rhetoric {
         size_ = value;
     }
 
-    void Data::Append(const Data & data) {
-        if (data.size_ == 0) {
+    void Data::Append(const Ptr<const Data> & data) {
+        if (data->size_ == 0) {
             return;
         }
 
-        int new_size = size_ + data.size_;
+        int new_size = size_ + data->size_;
         if (new_size > capacity_) {
             if (new_size <= capacity_ * 2) {
                 ReserveCapacity(capacity_ * 2);
@@ -83,7 +83,7 @@ namespace rhetoric {
             }
         }
 
-        memcpy((uint8_t *)bytes_ + size_, data.bytes_, data.size_);
+        memcpy((uint8_t *)bytes_ + size_, data->bytes_, data->size_);
         size_ = new_size;
     }
 

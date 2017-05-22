@@ -2,6 +2,7 @@
 
 #include "./assert.h"
 #include "./std_dependency.h"
+#include "./ptr.h"
 
 namespace rhetoric {
     class Data : public std::enable_shared_from_this<Data> {
@@ -20,7 +21,7 @@ namespace rhetoric {
         int size() const;
         void set_size(int value);
 
-        void Append(const Data & data);
+        void Append(const Ptr<const Data> & data);
 
         void ReserveCapacity(int capacity);
     private:
