@@ -1,8 +1,8 @@
 namespace rhetoric {
-    template <typename A, typename C>
+    template <typename A, typename P>
     Optional<int>
     ArrayFind(const A & array,
-              const T & pred)
+              const P & pred)
     {
         auto begin = array.cbegin();
         auto end = array.cend();
@@ -14,10 +14,10 @@ namespace rhetoric {
         return Some(offset);
     }
 
-    template <typename A, typename C>
+    template <typename A, typename P>
     Optional<int>
     ArrayFindR(const A & array,
-               const T & pred)
+               const P & pred)
     {
         auto begin = array.cbegin();
         auto end = array.cend();
@@ -31,16 +31,16 @@ namespace rhetoric {
 
     template <typename A, typename P>
     void
-    ArrayRemove(C & array,
+    ArrayRemove(A & array,
                 const P & pred)
     {
         auto new_end = std::remove_if(array.begin(), array.end(), pred);
-        std::erase(new_end, array.end());
+        array.erase(new_end, array.end());
     }
 
-    template <typename C>
+    template <typename A>
     void
-    ArrayRemoveAt(C & array, int index)
+    ArrayRemoveAt(A & array, int index)
     {
         array.erase(array.begin() + index);
     }

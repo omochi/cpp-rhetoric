@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./optional.h"
 #include "./std_dependency.h"
 
 namespace rhetoric {
@@ -15,12 +16,12 @@ namespace rhetoric {
 
     template <typename A, typename P>
     void
-    ArrayRemove(C & array,
+    ArrayRemove(A & array,
                 const P & pred);
 
-    template <typename C>
+    template <typename A>
     void
-    ArrayRemoveAt(C & array, int index);
+    ArrayRemoveAt(A & array, int index);
 }
 
 #include "./array_function_inline.h"

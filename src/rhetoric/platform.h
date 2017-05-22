@@ -10,3 +10,8 @@
 #       define RHETORIC_MACOS 1
 #   endif
 #endif
+
+#ifdef _WIN32
+#   undef RHETORIC_WINDOWS
+#   define RHETORIC_WINDOWS 1
+#endif
