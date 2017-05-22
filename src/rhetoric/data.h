@@ -1,9 +1,10 @@
 #pragma once
 
 #include "./assert.h"
+#include "./std_dependency.h"
 
 namespace rhetoric {
-    class Data {
+    class Data : public std::enable_shared_from_this<Data> {
     public:
         Data();
         Data(int size);

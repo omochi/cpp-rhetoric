@@ -1,6 +1,7 @@
 #pragma once
 
 #define RHETORIC_MACOS 0
+#define RHETORIC_WINDOWS 0
 
 #ifdef __APPLE__
 #   include <TargetConditionals.h>
