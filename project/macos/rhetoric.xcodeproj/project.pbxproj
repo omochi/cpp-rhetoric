@@ -74,6 +74,8 @@
 		D65E83A31ED28FC800705DB0 /* defer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = defer.cpp; sourceTree = "<group>"; };
 		D65E83A41ED28FC800705DB0 /* defer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defer.h; sourceTree = "<group>"; };
 		D65E83A71ED2902C00705DB0 /* unix_dependency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unix_dependency.h; sourceTree = "<group>"; };
+		D65E83A81ED29FF600705DB0 /* array_function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = array_function.h; sourceTree = "<group>"; };
+		D65E83A91ED2A05000705DB0 /* array_function_inline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = array_function_inline.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,8 @@
 		D65E83631ECEE39300705DB0 /* rhetoric */ = {
 			isa = PBXGroup;
 			children = (
+				D65E83A81ED29FF600705DB0 /* array_function.h */,
+				D65E83A91ED2A05000705DB0 /* array_function_inline.h */,
 				D65E838D1ECEFFD900705DB0 /* array_macro.h */,
 				D65E83741ECEEADE00705DB0 /* assert.cpp */,
 				D65E83751ECEEADE00705DB0 /* assert.h */,

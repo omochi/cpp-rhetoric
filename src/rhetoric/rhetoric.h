@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./array_function.h"
 #include "./array_macro.h"
 #include "./assert.h"
 #include "./attribute.h"

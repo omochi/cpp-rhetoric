@@ -1,4 +1,3 @@
-
 namespace rhetoric {
     template <typename T>
     Optional<T>::Optional():Optional(None()){}
