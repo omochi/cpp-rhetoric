@@ -335,6 +335,8 @@ namespace rhetoric {
 
         auto last_element = string.substr(0, pos);
         elements.push_back(last_element);
+
+        std::reverse(elements.begin(), elements.end());
         
         return elements;
     }

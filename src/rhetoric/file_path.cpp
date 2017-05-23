@@ -48,11 +48,20 @@ namespace rhetoric {
     }
 
     bool FilePath::operator==(const FilePath & other) const {
-        return ToString() == other.ToString();
+        return (type_ == other.type_ &&
+                drive_letter_ == other.drive_letter_ &&
+                elements_ == other.elements_);
     }
 
     bool FilePath::operator!=(const FilePath & other) const {
         return !(*this == other);
+    }
+
+    bool FilePath::is_root() const {
+        if (type_ == Type::Absolute && elements_.size() == 0) {
+            return true;
+        }
+        return false;
     }
 
     FilePath FilePath::parent() const {
@@ -226,7 +235,7 @@ namespace rhetoric {
     }
 
     Result<bool> FilePath::GetExists() const {
-        auto st = GetStatResult();
+        auto st = GetStat();
         if (st.err == ENOENT) {
             return Success(false);
         }
@@ -254,6 +263,29 @@ namespace rhetoric {
             entry_type = FileEntryType::Other;
         }
         return Success(Some(entry_type));
+    }
+
+    Result<None> FilePath::CreateDirectory(bool recursive) const {
+        if (!recursive) {
+            return CreateDirectorySingle();
+        }
+
+        FilePath path = Normalized();
+        FilePath create_path(path);
+        create_path.elements_.clear();
+
+        for (auto element : path.elements_) {
+            create_path.Append(FilePath(element));
+
+            auto create_ret = create_path.CreateDirectorySingle();
+            if (!create_ret) {
+                return Failure(GenericError::Create(create_ret.error(),
+                                                    "CreateDirectorySingle: path=%s",
+                                                    ToString().c_str()));
+            }
+        }
+
+        return Success(None());
     }
 
     std::string FilePath::separator() {
@@ -302,7 +334,7 @@ namespace rhetoric {
         err = 0;
     }
 
-    FilePath::GetStatResult FilePath::GetStat() {
+    FilePath::GetStatResult FilePath::GetStat() const {
         GetStatResult ret;
         int x = stat(ToString().c_str(), &ret.st);
         if (x == -1) {
@@ -310,6 +342,15 @@ namespace rhetoric {
             return ret;
         }
         return ret;
+    }
+
+    Result<None> FilePath::CreateDirectorySingle() const {
+        std::string path = ToString();
+        int t = mkdir(path.c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
+        if (t == -1) {
+            return Failure(PosixError::Create(errno, "mkdir(%s)", path.c_str()));
+        }
+        return Success(None());
     }
 
     FilePath FilePath::Parse(const std::string & string) {
