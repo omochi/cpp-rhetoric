@@ -12,6 +12,12 @@
 #include "./unix_dependency.h"
 
 namespace rhetoric {
+    enum class FileEntryType {
+        File = 1,
+        Directory = 2,
+        Other
+    };
+
     class FilePath {
     public:
         enum class Type {
@@ -47,7 +53,12 @@ namespace rhetoric {
         FilePath operator+(const FilePath & other) const;
 
         void Normalize();
+        FilePath Normalized() const;
         void Expand();
+        FilePath Expanded() const;
+
+        Result<bool> GetExists() const;
+        Result<Optional<FileEntryType>> GetEntryType() const;
 
         static std::string separator();
         static FilePath current();
@@ -56,6 +67,15 @@ namespace rhetoric {
         FilePath(Type type,
                  const Optional<std::string> & drive_letter,
                  const std::vector<std::string> & elements);
+
+        struct GetStatResult {
+            struct stat st;
+            int err;
+
+            GetStatResult();
+        };
+
+        GetStatResult GetStat();
 
         static FilePath Parse(const std::string & string);
 

@@ -180,6 +180,10 @@ namespace rhetoric {
     }
 
     void FilePath::Normalize() {
+        *this = Normalized();
+    }
+
+    FilePath FilePath::Normalized() const {
         FilePath ret(*this);
 
         ret.elements_.clear();
@@ -197,10 +201,14 @@ namespace rhetoric {
             ret.elements_.push_back(element);
         }
 
-        *this = ret;
+        return ret;
     }
 
     void FilePath::Expand() {
+        *this = Expanded();
+    }
+
+    FilePath FilePath::Expanded() const {
         FilePath ret;
 
         switch (type_) {
@@ -214,7 +222,38 @@ namespace rhetoric {
 
         ret.Normalize();
 
-        *this = ret;
+        return ret;
+    }
+
+    Result<bool> FilePath::GetExists() const {
+        auto st = GetStatResult();
+        if (st.err == ENOENT) {
+            return Success(false);
+        }
+        if (st.err != 0) {
+            return Failure(PosixError::Create(st.err, "stat(%s)", ToString().c_str()));
+        }
+        return Success(true);
+    }
+
+    Result<Optional<FileEntryType>> FilePath::GetEntryType() const {
+        auto st = GetStatResult();
+        if (st.err == ENOENT) {
+            return Success(None());
+        }
+        if (st.err != 0) {
+            return Failure(PosixError::Create(st.err, "stat(%s)", ToString().c_str()));
+        }
+
+        FileEntryType entry_type;
+        if (S_ISREG(st.st.st_mode)) {
+            entry_type = FileEntryType::File;
+        } else if (S_ISDIR(st.st.st_mode)) {
+            entry_type = FileEntryType::Directory;
+        } else {
+            entry_type = FileEntryType::Other;
+        }
+        return Success(Some(entry_type));
     }
 
     std::string FilePath::separator() {
@@ -256,6 +295,21 @@ namespace rhetoric {
     drive_letter_(drive_letter),
     elements_(elements)
     {
+    }
+
+    FilePath::GetStatResult::GetStatResult() {
+        memset(&st, 0, sizeof(st));
+        err = 0;
+    }
+
+    FilePath::GetStatResult FilePath::GetStat() {
+        GetStatResult ret;
+        int x = stat(ToString().c_str(), &ret.st);
+        if (x == -1) {
+            ret.err = errno;
+            return ret;
+        }
+        return ret;
     }
 
     FilePath FilePath::Parse(const std::string & string) {

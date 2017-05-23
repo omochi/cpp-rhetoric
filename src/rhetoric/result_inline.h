@@ -29,8 +29,11 @@ namespace rhetoric {
     Result<T>::Result(const Result<U> & other,
                       typename std::enable_if<std::is_convertible<U, T>::value>::type * enabler)
     {
-        value_ = Optional<T>(other.value_);
-        error_ = other.error_;
+        if (other) {
+            value_ = other.value();
+        } else {
+            error_ = other.error();
+        }
     }
 
     template <typename T>
@@ -44,7 +47,7 @@ namespace rhetoric {
 
     template <typename T>
     Result<T>::operator bool() const {
-        return value_ != nullptr;
+        return value_.presented();
     }
 
     template <typename T>
@@ -66,6 +69,14 @@ namespace rhetoric {
     template <typename T>
     const T & Result<T>::operator*() const {
         return *operator->();
+    }
+
+    template <typename T>
+    T Result<T>::Recover(const T & recovery_value) const {
+        if (!succeeded()) {
+            return recovery_value;
+        }
+        return value();
     }
 
     template <typename T>

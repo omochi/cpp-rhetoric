@@ -37,6 +37,8 @@ namespace rhetoric {
         const T * operator->() const;
         const T & operator*() const;
 
+        T Recover(const T & recovery_value) const;
+
     private:
         Optional<T> value_;
         Ptr<Error> error_;
