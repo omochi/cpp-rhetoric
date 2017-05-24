@@ -24,6 +24,8 @@ namespace rhetoric {
         void Append(const Ptr<const Data> & data);
 
         void ReserveCapacity(int capacity);
+
+        std::string ToString() const;
     private:
         void * bytes_;
         int capacity_;

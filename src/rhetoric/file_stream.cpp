@@ -27,6 +27,37 @@ namespace rhetoric {
         }
     }
 
+    Result<Ptr<Data>> FileStream::Read() {
+        auto data = New<Data>();
+
+        while (true) {
+            auto chunk_ret = Read(1024);
+            if (!chunk_ret) {
+                return Failure(chunk_ret);
+            }
+            auto chunk = *chunk_ret;
+            if (chunk->size() == 0) {
+                break;
+            }
+            data->Append(chunk);
+        }
+
+        return Success(data);
+    }
+
+    Result<Ptr<Data>> FileStream::Read(int size) {
+        Ptr<Data> data = New<Data>(size);
+
+        auto read_ret = ReadToBytes(data->bytes(), data->size());
+        if (!read_ret) {
+            return Failure(read_ret);
+        }
+
+        data->set_size(*read_ret);
+
+        return Success(data);
+    }
+
     Result<int> FileStream::ReadToBytes(void * bytes, int size) {
         RHETORIC_ASSERT(!closed());
 
@@ -42,6 +73,10 @@ namespace rhetoric {
                                               path_.ToString().c_str()));
         }
         return Success(len);
+    }
+
+    Result<None> FileStream::Write(const Ptr<const Data> & data) {
+        return WriteFromBytes(data->bytes(), data->size());
     }
 
     Result<None> FileStream::WriteFromBytes(const void * bytes, int size) {

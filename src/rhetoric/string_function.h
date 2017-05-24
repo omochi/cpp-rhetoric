@@ -1,7 +1,9 @@
 #pragma once
 
+#include "./data.h"
 #include "./optional.h"
 #include "./std_dependency.h"
+#include "./ptr.h"
 
 namespace rhetoric {
     bool CheckStartWith(const std::string & string,
@@ -89,6 +91,8 @@ namespace rhetoric {
 
     std::string Join(const std::vector<std::string> & array,
                      const std::string & glue);
+
+    Ptr<Data> StringToData(const std::string & string);
 }
 
 

@@ -33,6 +33,8 @@
 		D65E83A21ED27F4E00705DB0 /* file_path.h in Headers */ = {isa = PBXBuildFile; fileRef = D65E83A01ED27F4E00705DB0 /* file_path.h */; };
 		D65E83A51ED28FC800705DB0 /* defer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D65E83A31ED28FC800705DB0 /* defer.cpp */; };
 		D65E83A61ED28FC800705DB0 /* defer.h in Headers */ = {isa = PBXBuildFile; fileRef = D65E83A41ED28FC800705DB0 /* defer.h */; };
+		D6695F571ED5417C0009FF3B /* string_windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6695F551ED5417C0009FF3B /* string_windows.cpp */; };
+		D6695F581ED5417C0009FF3B /* string_windows.h in Headers */ = {isa = PBXBuildFile; fileRef = D6695F561ED5417C0009FF3B /* string_windows.h */; };
 		D6E5AF261ED427E600718686 /* file_stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6E5AF241ED427E600718686 /* file_stream.cpp */; };
 		D6E5AF271ED427E600718686 /* file_stream.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E5AF251ED427E600718686 /* file_stream.h */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		D65E83A71ED2902C00705DB0 /* unix_dependency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unix_dependency.h; sourceTree = "<group>"; };
 		D65E83A81ED29FF600705DB0 /* array_function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = array_function.h; sourceTree = "<group>"; };
 		D65E83A91ED2A05000705DB0 /* array_function_inline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = array_function_inline.h; sourceTree = "<group>"; };
+		D6695F551ED5417C0009FF3B /* string_windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = string_windows.cpp; sourceTree = "<group>"; };
+		D6695F561ED5417C0009FF3B /* string_windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_windows.h; sourceTree = "<group>"; };
 		D6E5AF241ED427E600718686 /* file_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_stream.cpp; sourceTree = "<group>"; };
 		D6E5AF251ED427E600718686 /* file_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_stream.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +156,8 @@
 				D65E83641ECEE3C800705DB0 /* std_dependency.h */,
 				D65E83961ED015C100705DB0 /* string_function.cpp */,
 				D65E83971ED015C100705DB0 /* string_function.h */,
+				D6695F551ED5417C0009FF3B /* string_windows.cpp */,
+				D6695F561ED5417C0009FF3B /* string_windows.h */,
 				D65E83A71ED2902C00705DB0 /* unix_dependency.h */,
 			);
 			name = rhetoric;
@@ -167,6 +173,7 @@
 			files = (
 				D65E83951ED0133500705DB0 /* none.h in Headers */,
 				D65E83A21ED27F4E00705DB0 /* file_path.h in Headers */,
+				D6695F581ED5417C0009FF3B /* string_windows.h in Headers */,
 				D65E839D1ED2788200705DB0 /* result.h in Headers */,
 				D65E83A61ED28FC800705DB0 /* defer.h in Headers */,
 				D6E5AF271ED427E600718686 /* file_stream.h in Headers */,
@@ -245,6 +252,7 @@
 				D65E83721ECEEA2E00705DB0 /* fatal.cpp in Sources */,
 				D65E83941ED0133500705DB0 /* none.cpp in Sources */,
 				D65E83A51ED28FC800705DB0 /* defer.cpp in Sources */,
+				D6695F571ED5417C0009FF3B /* string_windows.cpp in Sources */,
 				D65E83761ECEEADE00705DB0 /* assert.cpp in Sources */,
 				D65E839C1ED2788200705DB0 /* result.cpp in Sources */,
 				D65E83821ECEF63C00705DB0 /* posix_error.cpp in Sources */,

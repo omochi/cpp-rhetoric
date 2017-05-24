@@ -83,5 +83,10 @@ namespace rhetoric {
     Result<T> Success(const T & value) {
         return Result<T>(value, ResultSuccessTag());
     }
-    
+
+    template <typename T>
+    ResultFailure Failure(const Result<T> & result) {
+        return ResultFailure { result.error() };
+    }
+
 }

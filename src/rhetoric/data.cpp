@@ -111,4 +111,7 @@ namespace rhetoric {
         free_when_done_ = true;
     }
 
+    std::string Data::ToString() const {
+        return std::string(static_cast<const char *>(bytes_), size_);
+    }
 }

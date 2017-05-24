@@ -6,12 +6,15 @@
 #include "./generic_error.h"
 #include "./optional.h"
 #include "./posix_error.h"
+#include "./ptr.h"
 #include "./result.h"
 #include "./std_dependency.h"
 #include "./string_function.h"
 #include "./unix_dependency.h"
 
 namespace rhetoric {
+    class FileStream;
+
     enum class FileEntryType {
         File = 1,
         Directory = 2,
@@ -67,6 +70,15 @@ namespace rhetoric {
 
         RHETORIC_NO_DISCARD
         Result<None> CreateDirectory(bool recursive = false) const;
+
+        RHETORIC_NO_DISCARD
+        Result<Ptr<FileStream>> Open(const std::string & mode) const;
+
+        RHETORIC_NO_DISCARD
+        Result<Ptr<Data>> Read() const;
+
+        RHETORIC_NO_DISCARD
+        Result<None> Write(const Ptr<const Data> & data) const;
 
         static std::string separator();
         static FilePath current();

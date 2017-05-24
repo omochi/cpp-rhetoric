@@ -354,6 +354,10 @@ namespace rhetoric {
         }
         return ret;
     }
+
+    Ptr<Data> StringToData(const std::string & string) {
+        return New<Data>(string.c_str(), (int)string.size());
+    }
 }
 
 

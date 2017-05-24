@@ -1,5 +1,7 @@
 #include "./file_path.h"
 
+#include "./file_stream.h"
+
 namespace rhetoric {
     FilePath::FilePath():
     type_(Type::Relative)
@@ -279,7 +281,7 @@ namespace rhetoric {
 
             auto exi_ret = create_path.GetExists();
             if (!exi_ret) {
-                return Failure(exi_ret.error());
+                return Failure(exi_ret);
             }
             if (exi_ret.value()) {
                 continue;
@@ -293,6 +295,40 @@ namespace rhetoric {
             }
         }
 
+        return Success(None());
+    }
+
+    Result<Ptr<FileStream>> FilePath::Open(const std::string & mode) const {
+        return FileStream::Open(*this, mode);
+    }
+
+    Result<Ptr<Data>> FilePath::Read() const {
+        auto stream_ret = Open("rb");
+        if (!stream_ret) {
+            return Failure(stream_ret);
+        }
+        auto stream = *stream_ret;
+
+        auto data_ret = stream->Read();
+        if (!data_ret) {
+            return Failure(data_ret);
+        }
+
+        return Success(*data_ret);
+    }
+
+    Result<None> FilePath::Write(const Ptr<const Data> & data) const {
+        auto stream_ret = Open("wb");
+        if (!stream_ret) {
+            return Failure(stream_ret);
+        }
+        auto stream = *stream_ret;
+
+        auto write_ret = stream->Write(data);
+        if (!write_ret) {
+            return Failure(write_ret);
+        }
+        
         return Success(None());
     }
 

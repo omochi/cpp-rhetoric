@@ -48,6 +48,9 @@ namespace rhetoric {
     Result<T> Success(const T & value);
 
     ResultFailure Failure(const Ptr<Error> & error);
+
+    template <typename T>
+    ResultFailure Failure(const Result<T> & result);
 }
 
 #include "./result_inline.h"
