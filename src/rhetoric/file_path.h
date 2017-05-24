@@ -42,6 +42,8 @@ namespace rhetoric {
 
         bool is_root() const;
         FilePath parent() const;
+
+        RHETORIC_NO_DISCARD
         Result<std::vector<FilePath>> GetChildren() const;
 
         FilePath basename() const;
@@ -58,10 +60,13 @@ namespace rhetoric {
         void Expand();
         FilePath Expanded() const;
 
+        RHETORIC_NO_DISCARD
         Result<bool> GetExists() const;
+        RHETORIC_NO_DISCARD
         Result<Optional<FileEntryType>> GetEntryType() const;
 
-        RHETORIC_NO_DISCARD Result<None> CreateDirectory(bool recursive = false) const;
+        RHETORIC_NO_DISCARD
+        Result<None> CreateDirectory(bool recursive = false) const;
 
         static std::string separator();
         static FilePath current();
@@ -79,6 +84,8 @@ namespace rhetoric {
         };
 
         GetStatResult GetStat() const;
+        
+        RHETORIC_NO_DISCARD
         Result<None> CreateDirectorySingle() const;
 
         static FilePath Parse(const std::string & string);

@@ -9,6 +9,7 @@
 #include "./error.h"
 #include "./fatal.h"
 #include "./file_path.h"
+#include "./file_stream.h"
 #include "./format.h"
 #include "./generic_error.h"
 #include "./macro.h"

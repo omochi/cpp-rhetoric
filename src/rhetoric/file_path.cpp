@@ -277,6 +277,14 @@ namespace rhetoric {
         for (auto element : path.elements_) {
             create_path.Append(FilePath(element));
 
+            auto exi_ret = create_path.GetExists();
+            if (!exi_ret) {
+                return Failure(exi_ret.error());
+            }
+            if (exi_ret.value()) {
+                continue;
+            }
+
             auto create_ret = create_path.CreateDirectorySingle();
             if (!create_ret) {
                 return Failure(GenericError::Create(create_ret.error(),
