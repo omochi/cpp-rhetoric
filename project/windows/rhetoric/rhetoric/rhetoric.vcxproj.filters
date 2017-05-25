@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="rhetoric">
+      <UniqueIdentifier>{1b4bc9f3-dda4-4d4f-baf4-29e1455b3f7d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\rhetoric\array_function.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\array_function_inline.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\array_macro.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\assert.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\attribute.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\data.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\defer.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\error.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\fatal.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\file_path.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\file_stream.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\format.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\generic_error.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\macro.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\none.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\optional.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\optional_inline.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\platform.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\posix_error.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\print.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\ptr.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\ptr_inline.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\result.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\result_inline.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\rhetoric.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\std_dependency.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\string_function.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\string_windows.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\unix_dependency.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\win32_error.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\windows_dependency.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\rhetoric\assert.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\data.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\defer.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\fatal.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\file_path.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\file_stream.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\format.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\generic_error.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\none.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\posix_error.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\print.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\result.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\string_function.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\string_windows.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\win32_error.cpp" />
+  </ItemGroup>
+</Project>

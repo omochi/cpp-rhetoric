@@ -481,8 +481,8 @@ namespace rhetoric {
                                                      elements.end()));
         }
 
-#if RHETORIC_WIDNOWS
-        if (IsEndWith(head, ":")) {
+#if RHETORIC_WINDOWS
+        if (CheckEndWith(head, ":")) {
             return FilePath(Type::Absolute,
                             Some(head.substr(0, head.size() - 1)),
                             std::vector<std::string>(elements.begin() + 1,

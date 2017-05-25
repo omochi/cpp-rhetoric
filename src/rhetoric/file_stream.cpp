@@ -14,7 +14,7 @@ namespace rhetoric {
     }
 
     bool FileStream::closed() const {
-        return handle_ != nullptr;
+        return handle_ == nullptr;
     }
 
     void FileStream::Close() {
