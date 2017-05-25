@@ -1,5 +1,7 @@
 #include "./win32_error.h"
 
+#if RHETORIC_WINDOWS
+
 namespace rhetoric {
 	Win32Error::Win32Error(DWORD code, const std::string & message) :
 		code_(code),
@@ -48,3 +50,5 @@ namespace rhetoric {
 		return WinStringToString(WinString(message), CP_UTF8);
 	}
 }
+
+#endif

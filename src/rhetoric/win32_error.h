@@ -8,6 +8,8 @@
 #include "./string_windows.h"
 #include "./windows_dependency.h"
 
+#if RHETORIC_WINDOWS
+
 namespace rhetoric {
 	class Win32Error : public Error {
 	public:
@@ -26,3 +28,5 @@ namespace rhetoric {
 
 	std::string GetWin32ErrorString(DWORD code);
 }
+
+#endif
