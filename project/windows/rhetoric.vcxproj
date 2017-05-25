@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\rhetoric\array_function.h" />
+    <ClInclude Include="..\..\src\rhetoric\array_function_inline.h" />
+    <ClInclude Include="..\..\src\rhetoric\array_macro.h" />
+    <ClInclude Include="..\..\src\rhetoric\assert.h" />
+    <ClInclude Include="..\..\src\rhetoric\attribute.h" />
+    <ClInclude Include="..\..\src\rhetoric\data.h" />
+    <ClInclude Include="..\..\src\rhetoric\defer.h" />
+    <ClInclude Include="..\..\src\rhetoric\error.h" />
+    <ClInclude Include="..\..\src\rhetoric\fatal.h" />
+    <ClInclude Include="..\..\src\rhetoric\file_path.h" />
+    <ClInclude Include="..\..\src\rhetoric\file_stream.h" />
+    <ClInclude Include="..\..\src\rhetoric\format.h" />
+    <ClInclude Include="..\..\src\rhetoric\generic_error.h" />
+    <ClInclude Include="..\..\src\rhetoric\macro.h" />
+    <ClInclude Include="..\..\src\rhetoric\none.h" />
+    <ClInclude Include="..\..\src\rhetoric\optional.h" />
+    <ClInclude Include="..\..\src\rhetoric\optional_inline.h" />
+    <ClInclude Include="..\..\src\rhetoric\platform.h" />
+    <ClInclude Include="..\..\src\rhetoric\posix_error.h" />
+    <ClInclude Include="..\..\src\rhetoric\print.h" />
+    <ClInclude Include="..\..\src\rhetoric\ptr.h" />
+    <ClInclude Include="..\..\src\rhetoric\ptr_inline.h" />
+    <ClInclude Include="..\..\src\rhetoric\result.h" />
+    <ClInclude Include="..\..\src\rhetoric\result_inline.h" />
+    <ClInclude Include="..\..\src\rhetoric\rhetoric.h" />
+    <ClInclude Include="..\..\src\rhetoric\std_dependency.h" />
+    <ClInclude Include="..\..\src\rhetoric\string_function.h" />
+    <ClInclude Include="..\..\src\rhetoric\string_windows.h" />
+    <ClInclude Include="..\..\src\rhetoric\unix_dependency.h" />
+    <ClInclude Include="..\..\src\rhetoric\win32_error.h" />
+    <ClInclude Include="..\..\src\rhetoric\windows_dependency.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\rhetoric\assert.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\data.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\defer.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\fatal.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\file_path.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\file_stream.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\format.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\generic_error.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\none.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\posix_error.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\print.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\result.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\string_function.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\string_windows.cpp" />
+    <ClCompile Include="..\..\src\rhetoric\win32_error.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{2E6FDC9D-F506-41C1-8AAD-D74F2D0E8BE5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>rhetoric</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

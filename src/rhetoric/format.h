@@ -4,6 +4,6 @@
 #include "./std_dependency.h"
 
 namespace rhetoric {
-    std::string Format(const char * format, ...) RHETORIC_PRINTF_LIKE(1, 2);
-    std::string FormatV(const char * format, va_list args) RHETORIC_PRINTF_LIKE(1, 0);
+    std::string Format(RHETORIC_PRINTF_FORMAT_ARG, ...) RHETORIC_PRINTF_LIKE(1, 2);
+    std::string FormatV(RHETORIC_PRINTF_FORMAT_ARG, va_list args) RHETORIC_PRINTF_LIKE(1, 0);
 }

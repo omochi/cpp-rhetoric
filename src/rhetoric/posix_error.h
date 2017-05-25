@@ -16,7 +16,7 @@ namespace rhetoric {
         std::string message() const;
 
         static Ptr<PosixError>
-        Create(int code, const char * format, ...) RHETORIC_PRINTF_LIKE(2, 3);
+        Create(int code, RHETORIC_PRINTF_FORMAT_ARG, ...) RHETORIC_PRINTF_LIKE(2, 3);
     private:
         int code_;
         std::string message_;

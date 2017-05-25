@@ -32,6 +32,12 @@ namespace rhetoric {
         return true;
     }
 
+	FindResult::FindResult() :
+		index(0), target_index(0) {}
+
+	FindResult::FindResult(int index, int target_index) :
+		index(index), target_index(target_index) {}
+
     Optional<FindResult>
     CheckStartWith(const std::string & string,
                    int start_index,
@@ -48,10 +54,7 @@ namespace rhetoric {
             }
             auto sub = string.substr(sub_index, target.size());
             if (sub == target) {
-                return Some(FindResult {
-                    .index = sub_index,
-                    .target_index = target_index
-                });
+				return Some(FindResult(sub_index, target_index));
             }
         }
         return None();
@@ -73,10 +76,7 @@ namespace rhetoric {
             }
             auto sub = string.substr(sub_index, target.size());
             if (sub == target) {
-                return Some(FindResult {
-                    .index = sub_index,
-                    .target_index = target_index
-                });
+				return Some(FindResult(sub_index, target_index));
             }
         }
         return None();
@@ -172,7 +172,7 @@ namespace rhetoric {
                               int start_index,
                               const std::vector<std::string> & targets)
     {
-        for (int index = start_index; index <= string.size(); index++) {
+        for (int index = start_index; index <= (int)string.size(); index++) {
             auto start_result = CheckStartWith(string, index, targets);
             if (start_result) {
                 return start_result;
@@ -243,7 +243,7 @@ namespace rhetoric {
 
         while (true) {
             if (limit) {
-                if (elements.size() >= *limit) {
+                if ((int)elements.size() >= *limit) {
                     break;
                 }
             }
@@ -303,7 +303,7 @@ namespace rhetoric {
 
         while (true) {
             if (limit) {
-                if (elements.size() >= *limit) {
+                if ((int)elements.size() >= *limit) {
                     break;
                 }
             }
@@ -348,7 +348,7 @@ namespace rhetoric {
         if (array.size() >= 1) {
             ret.append(array[0]);
         }
-        for (int i = 1; i < array.size(); i++) {
+        for (int i = 1; i < (int)array.size(); i++) {
             ret.append(glue);
             ret.append(array[i]);
         }

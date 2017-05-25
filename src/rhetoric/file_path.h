@@ -10,7 +10,10 @@
 #include "./result.h"
 #include "./std_dependency.h"
 #include "./string_function.h"
+#include "./string_windows.h"
 #include "./unix_dependency.h"
+#include "./win32_error.h"
+#include "./windows_dependency.h"
 
 namespace rhetoric {
     class FileStream;
@@ -82,7 +85,6 @@ namespace rhetoric {
 
         static std::string separator();
         static FilePath current();
-        static FilePath home();
     private:
         FilePath(Type type,
                  const Optional<std::string> & drive_letter,

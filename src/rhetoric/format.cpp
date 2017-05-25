@@ -20,7 +20,7 @@ namespace rhetoric {
             throw std::logic_error("vsnprintf");
         }
 
-        if (len + 1 > buf.size()) {
+        if (len + 1 > (int)buf.size()) {
             buf.resize(len + 1);
             int check_len = vsnprintf(buf.data(), buf.size(), format, args2);
             if (check_len != len) {

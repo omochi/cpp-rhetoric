@@ -20,11 +20,11 @@ namespace rhetoric {
         Ptr<Error> causer() const;
 
         static Ptr<GenericError>
-        Create(const char * format, ...) RHETORIC_PRINTF_LIKE(1, 2);
+        Create(RHETORIC_PRINTF_FORMAT_ARG, ...) RHETORIC_PRINTF_LIKE(1, 2);
 
         static Ptr<GenericError>
         Create(const Ptr<Error> & causer,
-               const char * format, ...) RHETORIC_PRINTF_LIKE(2, 3);
+			RHETORIC_PRINTF_FORMAT_ARG, ...) RHETORIC_PRINTF_LIKE(2, 3);
     private:
         std::string message_;
         Ptr<Error> causer_;

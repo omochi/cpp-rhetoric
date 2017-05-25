@@ -30,10 +30,6 @@ namespace rhetoric {
     }
 
     std::string GetPosixErrorString(int code) {
-        int size = strerror_r(code, nullptr, 0);
-        std::vector<char> buf(size);
-        int ret = strerror_r(code, buf.data(), buf.size());
-        RHETORIC_ASSERT(ret == 0);
-        return std::string(buf.data());
+		return std::string(strerror(code));
     }
 }

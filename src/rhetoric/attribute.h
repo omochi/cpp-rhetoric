@@ -12,16 +12,17 @@
 #   define RHETORIC_EXTERN_C
 #endif
 
+#define RHETORIC_NO_RETURN [[noreturn]]
+#define RHETORIC_NO_DISCARD [[nodiscard]]
+#define RHETORIC_UNUSED(x) (void)x
+
 #if RHETORIC_MACOS
-#   define RHETORIC_NO_RETURN [[noreturn]]
-#   define RHETORIC_NO_DISCARD [[nodiscard]]
-#   define RHETORIC_PRINTF_FORMAT
+#   define RHETORIC_PRINTF_FORMAT_ARG const char * format
 #   define RHETORIC_PRINTF_LIKE(f, a) __attribute__((__format__ (__printf__, f, a)))
-#   define RHETORIC_UNUSED(x) (void)x
 #endif
 
 #if RHETORIC_WINDOWS
-#   define RHETORIC_PRINTF_FORMAT _Printf_format_string_
+#   define RHETORIC_PRINTF_FORMAT_ARG _Printf_format_string_ const char * format
 #   define RHETORIC_PRINTF_LIKE(f, a)
 #endif
 

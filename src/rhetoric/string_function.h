@@ -21,6 +21,9 @@ namespace rhetoric {
     struct FindResult {
         int index;
         int target_index;
+
+		FindResult();
+		FindResult(int index, int target_index);
     };
 
     Optional<FindResult>
