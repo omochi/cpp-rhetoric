@@ -2,6 +2,7 @@
 
 #include "./attribute.h"
 #include "./defer.h"
+#include "./env.h"
 #include "./fatal.h"
 #include "./generic_error.h"
 #include "./optional.h"
@@ -22,6 +23,11 @@ namespace rhetoric {
         File = 1,
         Directory = 2,
         Other
+    };
+
+    struct SplitExtensionResult {
+        std::string name;
+        Optional<std::string> extension;
     };
 
     class FilePath {
@@ -56,7 +62,10 @@ namespace rhetoric {
         void set_basename(const FilePath & value);
 
         Optional<std::string> extension() const;
-        void set_extension(const Optional<std::string> & value);
+
+        SplitExtensionResult SplitExtension() const;
+        void ReplaceExtension(const std::string & extension);
+        void AppendExtension(const std::string & extension);
 
         void Append(const FilePath & path);
         FilePath operator+(const FilePath & other) const;
@@ -85,6 +94,10 @@ namespace rhetoric {
 
         static std::string separator();
         static FilePath current();
+
+#if RHETORIC_MACOS
+        static FilePath home();
+#endif
     private:
         FilePath(Type type,
                  const Optional<std::string> & drive_letter,

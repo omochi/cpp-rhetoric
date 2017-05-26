@@ -6,6 +6,7 @@
 #include "./attribute.h"
 #include "./data.h"
 #include "./defer.h"
+#include "./env.h"
 #include "./error.h"
 #include "./fatal.h"
 #include "./file_path.h"
