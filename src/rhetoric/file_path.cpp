@@ -219,9 +219,13 @@ namespace rhetoric {
         return ret;
     }
 
-    void FilePath::ReplaceExtension(const std::string & extension) {
+    void FilePath::ReplaceExtension(const Optional<std::string> & extension) {
         auto split_ret = SplitExtension();
-        set_basename(FilePath(split_ret.name + "." + extension));
+        std::string new_basename = split_ret.name;
+        if (extension) {
+            new_basename += "." + *extension;
+        }
+        set_basename(FilePath(new_basename));
     }
 
     void FilePath::AppendExtension(const std::string & extension) {

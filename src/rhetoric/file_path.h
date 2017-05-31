@@ -64,7 +64,7 @@ namespace rhetoric {
         Optional<std::string> extension() const;
 
         SplitExtensionResult SplitExtension() const;
-        void ReplaceExtension(const std::string & extension);
+        void ReplaceExtension(const Optional<std::string> & extension);
         void AppendExtension(const std::string & extension);
 
         void Append(const FilePath & path);
