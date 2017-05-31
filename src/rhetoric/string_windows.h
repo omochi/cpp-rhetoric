@@ -2,6 +2,7 @@
 
 #include "./assert.h"
 #include "./std_dependency.h"
+#include "./platform.h"
 #include "./windows_dependency.h"
 
 #if RHETORIC_WINDOWS

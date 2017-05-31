@@ -13,6 +13,7 @@
 #include "./file_stream.h"
 #include "./format.h"
 #include "./generic_error.h"
+#include "./macos_dependency.h"
 #include "./macro.h"
 #include "./none.h"
 #include "./optional.h"
@@ -23,6 +24,11 @@
 #include "./result.h"
 #include "./std_dependency.h"
 #include "./string_function.h"
+#include "./string_macos.h"
+#include "./string_windows.h"
 #include "./unix_dependency.h"
+#include "./win32_error.h"
+#include "./windows_dependency.h"
+
 
 
