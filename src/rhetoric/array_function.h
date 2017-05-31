@@ -22,6 +22,16 @@ namespace rhetoric {
     template <typename A>
     void
     ArrayRemoveAt(A & array, int index);
+
+    template <typename A, typename P>
+    bool
+    TestAll(const A & array,
+            const P & pred);
+
+    template <typename A, typename P>
+    bool
+    TestAny(const A & array,
+            const P & pred);
 }
 
 #include "./array_function_inline.h"

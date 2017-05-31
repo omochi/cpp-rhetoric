@@ -44,4 +44,20 @@ namespace rhetoric {
     {
         array.erase(array.begin() + index);
     }
+
+    template <typename A, typename P>
+    bool
+    TestAll(const A & array,
+            const P & pred)
+    {
+        return std::all_of(array.cbegin(), array.cend(), pred);
+    }
+
+    template <typename A, typename P>
+    bool
+    TestAny(const A & array,
+            const P & pred)
+    {
+        return std::any_of(array.cbegin(), array.cend(), pred);
+    }
 }
