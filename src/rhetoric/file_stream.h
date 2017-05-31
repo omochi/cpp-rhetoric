@@ -35,6 +35,12 @@ namespace rhetoric {
         Result<None> WriteFromBytes(const void * bytes, int size);
 
         RHETORIC_NO_DISCARD
+        Result<None> Seek(int64_t offset, int whence);
+
+        RHETORIC_NO_DISCARD
+        Result<int64_t> GetPosition();
+
+        RHETORIC_NO_DISCARD
         static Result<Ptr<FileStream>> Open(const FilePath & path,
                                             const std::string & mode);
 

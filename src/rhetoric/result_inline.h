@@ -30,7 +30,7 @@ namespace rhetoric {
                       typename std::enable_if<std::is_convertible<U, T>::value>::type * enabler)
     {
         if (other) {
-            value_ = other.value();
+            value_ = Some(other.value());
         } else {
             error_ = other.error();
         }

@@ -93,6 +93,35 @@ namespace rhetoric {
         return Success(None());
     }
 
+#if RHETORIC_MACOS
+    Result<None> FileStream::Seek(int64_t offset, int whence) {
+        RHETORIC_ASSERT(!closed());
+
+        int ret = fseek(handle_, offset, whence);
+        if (ret == -1) {
+            return Failure(PosixError::Create(errno, "fseek(%lld, %d): %s",
+                                              offset, whence,
+                                              path_.ToString().c_str()));
+        }
+
+        return Success(None());
+    }
+#endif
+
+#if RHETORIC_MACOS
+    Result<int64_t> FileStream::GetPosition() {
+        RHETORIC_ASSERT(!closed());
+
+        long pos = ftell(handle_);
+        if (pos == -1) {
+            return Failure(PosixError::Create(errno, "ftell: %s",
+                                              path_.ToString().c_str()));
+        }
+
+        return Success(pos);
+    }
+#endif
+
     Result<Ptr<FileStream>> FileStream::Open(const FilePath & path,
                                              const std::string & mode)
     {

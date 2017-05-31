@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D62AD00C1ED828C7009FF226 /* env.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D62AD00A1ED828C7009FF226 /* env.cpp */; };
+		D62AD00D1ED828C7009FF226 /* env.h in Headers */ = {isa = PBXBuildFile; fileRef = D62AD00B1ED828C7009FF226 /* env.h */; };
 		D65E83681ECEE43D00705DB0 /* print.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D65E83661ECEE43D00705DB0 /* print.cpp */; };
 		D65E83691ECEE43D00705DB0 /* print.h in Headers */ = {isa = PBXBuildFile; fileRef = D65E83671ECEE43D00705DB0 /* print.h */; };
 		D65E836D1ECEE66D00705DB0 /* format.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D65E836B1ECEE66D00705DB0 /* format.cpp */; };
@@ -43,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D62AD00A1ED828C7009FF226 /* env.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = env.cpp; sourceTree = "<group>"; };
+		D62AD00B1ED828C7009FF226 /* env.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = env.h; sourceTree = "<group>"; };
 		D65E83551ECEE11300705DB0 /* librhetoric.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = librhetoric.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65E83641ECEE3C800705DB0 /* std_dependency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = std_dependency.h; sourceTree = "<group>"; };
 		D65E83651ECEE3FB00705DB0 /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				D65E838A1ECEFCD700705DB0 /* data.h */,
 				D65E83A31ED28FC800705DB0 /* defer.cpp */,
 				D65E83A41ED28FC800705DB0 /* defer.h */,
+				D62AD00A1ED828C7009FF226 /* env.cpp */,
+				D62AD00B1ED828C7009FF226 /* env.h */,
 				D65E837A1ECEF1CB00705DB0 /* error.h */,
 				D65E83701ECEEA2E00705DB0 /* fatal.cpp */,
 				D65E83711ECEEA2E00705DB0 /* fatal.h */,
@@ -189,6 +195,7 @@
 				D65E83771ECEEADE00705DB0 /* assert.h in Headers */,
 				D6695F5D1ED6CE8E0009FF3B /* win32_error.h in Headers */,
 				D65E83731ECEEA2E00705DB0 /* fatal.h in Headers */,
+				D62AD00D1ED828C7009FF226 /* env.h in Headers */,
 				D65E83691ECEE43D00705DB0 /* print.h in Headers */,
 				D65E83831ECEF63C00705DB0 /* posix_error.h in Headers */,
 				D65E83911ED012BB00705DB0 /* optional.h in Headers */,
@@ -259,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D65E83A11ED27F4E00705DB0 /* file_path.cpp in Sources */,
+				D62AD00C1ED828C7009FF226 /* env.cpp in Sources */,
 				D65E83871ECEFB5600705DB0 /* generic_error.cpp in Sources */,
 				D65E83721ECEEA2E00705DB0 /* fatal.cpp in Sources */,
 				D65E83941ED0133500705DB0 /* none.cpp in Sources */,

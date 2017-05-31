@@ -207,23 +207,26 @@ namespace rhetoric {
 		return Some(strs[1]);
 	}
 
-	void FilePath::set_extension(const Optional<std::string> & value) {
-		auto strs = SplitR(basename().ToString(), ".", Some(2));
+    SplitExtensionResult FilePath::SplitExtension() const {
+        auto strs = SplitR(basename().ToString(), ".", Some(2));
+        SplitExtensionResult ret;
+        if (strs.size() == 2) {
+            ret.extension = Some(strs[1]);
+        }
+        if (strs.size() >= 1) {
+            ret.name = strs[0];
+        }
+        return ret;
+    }
 
-		std::string name;
-		if (strs.size() == 0) {
-			name = "";
-		}
-		else {
-			name = strs[0];
-		}
+    void FilePath::ReplaceExtension(const std::string & extension) {
+        auto split_ret = SplitExtension();
+        set_basename(FilePath(split_ret.name + "." + extension));
+    }
 
-		if (value) {
-			name += "." + *value;
-		}
-
-		set_basename(FilePath(name));
-	}
+    void FilePath::AppendExtension(const std::string & extension) {
+        set_basename(FilePath(basename().ToString() + "." + extension));
+    }
 
 	void FilePath::Append(const FilePath & path) {
 		RHETORIC_ASSERT(path.type_ == Type::Relative);
@@ -412,6 +415,16 @@ namespace rhetoric {
 		WinString str(buf.data());
 		return FilePath(WinStringToString(str, CP_UTF8));
 	}
+#endif
+
+#if RHETORIC_MACOS
+    FilePath FilePath::home() {
+        auto home = GetEnv("HOME");
+        if (!home) {
+            RHETORIC_FATAL("HOME is null");
+        }
+        return FilePath(*home);
+    }
 #endif
 
     FilePath::FilePath(Type type,
