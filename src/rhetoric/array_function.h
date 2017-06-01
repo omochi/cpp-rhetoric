@@ -9,15 +9,30 @@ namespace rhetoric {
     ArrayFind(const A & array,
               const P & pred);
 
+    template <typename A, typename E>
+    Optional<int>
+    ArrayFindEq(const A & array,
+                const E & item);
+
     template <typename A, typename P>
     Optional<int>
     ArrayFindR(const A & array,
                const P & pred);
 
+    template <typename A, typename E>
+    Optional<int>
+    ArrayFindEqR(const A & array,
+                 const E & item);
+
     template <typename A, typename P>
     void
     ArrayRemove(A & array,
                 const P & pred);
+
+    template <typename A, typename E>
+    void
+    ArrayRemoveEq(A & array,
+                  const E & item);
 
     template <typename A>
     void
@@ -25,13 +40,21 @@ namespace rhetoric {
 
     template <typename A, typename P>
     bool
-    TestAll(const A & array,
-            const P & pred);
+    ArrayTestAll(const A & array,
+                 const P & pred);
 
     template <typename A, typename P>
     bool
-    TestAny(const A & array,
-            const P & pred);
+    ArrayTestAny(const A & array,
+                 const P & pred);
+
+    template <typename A>
+    void
+    ArrayReverse(A & array);
+
+    template <typename A>
+    A
+    ArrayReversed(const A & array);
 }
 
 #include "./array_function_inline.h"
