@@ -92,6 +92,9 @@ namespace rhetoric {
            const Optional<int> limit = None(),
            bool keep_separator = false);
 
+    std::vector<std::string>
+    SplitLines(const std::string & string);
+
     std::string Join(const std::vector<std::string> & array,
                      const std::string & glue);
 

@@ -341,6 +341,13 @@ namespace rhetoric {
         return elements;
     }
 
+    std::vector<std::string> SplitLines(const std::string & string) {
+        return Split(string,
+                     std::vector<std::string> { "\r\n", "\n", "\r" },
+                     None(),
+                     true);
+    }
+
     std::string Join(const std::vector<std::string> & array,
                      const std::string & glue)
     {
