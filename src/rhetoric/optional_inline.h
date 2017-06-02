@@ -100,11 +100,6 @@ namespace rhetoric {
     }
 
     template <typename T>
-    bool Optional<T>::operator!=(const Optional<T> & other) const {
-        return !(*this == other);
-    }
-
-    template <typename T>
     Optional<T> Some(const T & value) {
         return Optional<T>(value, OptionalSomeTag());
     }

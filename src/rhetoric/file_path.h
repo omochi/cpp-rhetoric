@@ -3,6 +3,7 @@
 #include "./attribute.h"
 #include "./defer.h"
 #include "./env.h"
+#include "./equatable_macro.h"
 #include "./fatal.h"
 #include "./generic_error.h"
 #include "./optional.h"
@@ -50,7 +51,7 @@ namespace rhetoric {
         std::string ToString() const;
 
         bool operator==(const FilePath & other) const;
-        bool operator!=(const FilePath & other) const;
+        RHETORIC_EQUATABLE_DEFAULT(FilePath);
 
         bool is_root() const;
         FilePath parent() const;

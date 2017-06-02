@@ -4,8 +4,4 @@ namespace rhetoric {
     bool None::operator==(const None & other) const {
         return true;
     }
-
-    bool None::operator!=(const None & other) const {
-        return !(*this == other);
-    }
 }

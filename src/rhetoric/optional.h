@@ -2,6 +2,7 @@
 
 #include "./assert.h"
 #include "./attribute.h"
+#include "./equatable_macro.h"
 #include "./none.h"
 #include "./std_dependency.h"
 
@@ -37,7 +38,7 @@ namespace rhetoric {
         const T & operator*() const;
 
         bool operator==(const Optional<T> & other) const;
-        bool operator!=(const Optional<T> & other) const;
+        RHETORIC_EQUATABLE_DEFAULT(Optional<T>);
     private:
         T * value_;
     };

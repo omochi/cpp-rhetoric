@@ -55,10 +55,6 @@ namespace rhetoric {
 			elements_ == other.elements_);
 	}
 
-	bool FilePath::operator!=(const FilePath & other) const {
-		return !(*this == other);
-	}
-
 	bool FilePath::is_root() const {
 		if (type_ == Type::Absolute && elements_.size() == 0) {
 			return true;
