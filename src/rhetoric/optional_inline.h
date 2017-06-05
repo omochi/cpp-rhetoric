@@ -100,6 +100,14 @@ namespace rhetoric {
     }
 
     template <typename T>
+    T Optional<T>::GetValueOr(const T & alt) const {
+        if (*this) {
+            return value();
+        }
+        return alt;
+    }
+
+    template <typename T>
     Optional<T> Some(const T & value) {
         return Optional<T>(value, OptionalSomeTag());
     }

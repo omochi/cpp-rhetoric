@@ -39,6 +39,8 @@ namespace rhetoric {
 
         bool operator==(const Optional<T> & other) const;
         RHETORIC_EQUATABLE_DEFAULT(Optional<T>);
+
+        T GetValueOr(const T & alt) const;
     private:
         T * value_;
     };
