@@ -1,4 +1,8 @@
 namespace rhetoric {
+    template <typename T>
+    Result<T>::Result():
+    value_(Some(T()))
+    {}
 
     template <typename T>
     Result<T>::Result(const T & value, ResultSuccessTag tag):

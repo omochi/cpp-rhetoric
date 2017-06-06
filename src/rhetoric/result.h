@@ -16,6 +16,7 @@ namespace rhetoric {
     template <typename T>
     class Result {
     public:
+        Result();
         Result(const T & value, ResultSuccessTag tag);
         Result(const ResultFailure & failure);
 

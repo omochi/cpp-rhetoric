@@ -100,7 +100,7 @@ namespace rhetoric {
     }
 
     template <typename T>
-    T Optional<T>::GetValueOr(const T & alt) const {
+    T Optional<T>::GetOr(const T & alt) const {
         if (*this) {
             return value();
         }
