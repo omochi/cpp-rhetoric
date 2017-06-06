@@ -120,10 +120,12 @@ namespace rhetoric {
     }
 
     template <typename A>
-    A
+    std::vector<typename A::value_type>
     ArrayReversed(const A & array) {
-        A ret(array);
-        ArrayReverse(ret);
+        std::vector<typename A::value_type> ret;
+        for (auto it = array.crbegin(); it != array.crend(); it++) {
+            ret.push_back(*it);
+        }
         return ret;
     }
 }

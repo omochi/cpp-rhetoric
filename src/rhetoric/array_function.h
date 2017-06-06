@@ -64,7 +64,7 @@ namespace rhetoric {
     ArrayReverse(A & array);
 
     template <typename A>
-    A
+    std::vector<typename A::value_type>
     ArrayReversed(const A & array);
 }
 

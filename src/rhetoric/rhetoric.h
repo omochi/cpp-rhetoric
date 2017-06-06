@@ -23,6 +23,7 @@
 #include "./posix_error.h"
 #include "./print.h"
 #include "./ptr.h"
+#include "./range.h"
 #include "./result.h"
 #include "./std_dependency.h"
 #include "./string_function.h"
