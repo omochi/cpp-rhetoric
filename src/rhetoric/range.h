@@ -8,7 +8,6 @@ namespace rhetoric {
     template <typename T>
     class Range {
     public:
-
         class Iterator :
         public std::iterator<
         std::bidirectional_iterator_tag,
@@ -38,12 +37,13 @@ namespace rhetoric {
         };
 
         Range();
-        Range(const T & left, const T & right);
+        Range(const T & lower_bound, const T & upper_bound);
         Range(const Range<T> & other);
+        Range<T> & operator=(const Range<T> & other);
 
-        T left() const;
-        T right() const;
-        int count() const;
+        T lower_bound() const;
+        T upper_bound() const;
+        decltype(std::declval<T>() - std::declval<T>()) count() const;
 
         Iterator begin() const;
         Iterator end() const;
@@ -54,13 +54,16 @@ namespace rhetoric {
         std::reverse_iterator<Iterator> rend() const { return std::make_reverse_iterator(begin()); }
         std::reverse_iterator<Iterator> crbegin() const { return rbegin(); }
         std::reverse_iterator<Iterator> crend() const { return rend(); }
+
+        T Blend(double rate) const;
+        double GetRate(const T & value) const;
     private:
-        T left_;
-        T right_;
+        T lower_bound_;
+        T upper_bound_;
     };
 
     template <typename T>
-    Range<T> MakeRange(const T & left, const T & right);
+    Range<T> MakeRange(const T & lower_bound, const T & upper_bound);
 }
 
 #include "./range_inline.h"

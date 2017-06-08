@@ -2,7 +2,7 @@ namespace rhetoric {
     template <typename T>
     Range<T>::Iterator::Iterator():
     range_(nullptr),
-    value_(0)
+    value_()
     {}
 
     template <typename T>
@@ -26,7 +26,7 @@ namespace rhetoric {
 
     template <typename T>
     typename Range<T>::Iterator & Range<T>::Iterator::operator++() {
-        value_ = std::min(value_ + static_cast<T>(1), range_->right_);
+        value_ = std::min(value_ + static_cast<T>(1), range_->upper_bound_);
         return *this;
     }
 
@@ -39,7 +39,7 @@ namespace rhetoric {
 
     template <typename T>
     typename Range<T>::Iterator & Range<T>::Iterator::operator--() {
-        value_ = std::max(value_ - static_cast<T>(1), range_->left_);
+        value_ = std::max(value_ - static_cast<T>(1), range_->lower_bound_);
         return *this;
     }
 
@@ -68,50 +68,67 @@ namespace rhetoric {
 
     template <typename T>
     Range<T>::Range():
-    left_(0),
-    right_(0)
+    lower_bound_(),
+    upper_bound_()
     {}
 
     template <typename T>
-    Range<T>::Range(const T & left, const T & right):
-    left_(left),
-    right_(right)
+    Range<T>::Range(const T & lower_bound, const T & upper_bound):
+    lower_bound_(lower_bound),
+    upper_bound_(upper_bound)
     {}
 
     template <typename T>
-    Range<T>::Range(const Range<T> & other):
-    left_(other.left_),
-    right_(other.right_)
-    {}
-
-    template <typename T>
-    T Range<T>::left() const {
-        return left_;
+    Range<T>::Range(const Range<T> & other)
+    {
+        *this = other;
     }
 
     template <typename T>
-    T Range<T>::right() const {
-        return right_;
+    Range<T> & Range<T>::operator=(const Range<T> & other) {
+        lower_bound_ = other.lower_bound_;
+        upper_bound_ = other.upper_bound_;
+        return *this;
     }
 
     template <typename T>
-    int Range<T>::count() const {
-        return static_cast<int>(right_ - left_);
+    T Range<T>::lower_bound() const {
+        return lower_bound_;
+    }
+
+    template <typename T>
+    T Range<T>::upper_bound() const {
+        return upper_bound_;
+    }
+
+    template <typename T>
+    decltype(std::declval<T>() - std::declval<T>()) Range<T>::count() const {
+        return static_cast<int>(upper_bound_ - lower_bound_);
     }
 
     template <typename T>
     typename Range<T>::Iterator Range<T>::begin() const {
-        return Iterator(this, left_);
+        return Iterator(this, lower_bound_);
     }
 
     template <typename T>
     typename Range<T>::Iterator Range<T>::end() const {
-        return Iterator(this, right_);
+        return Iterator(this, upper_bound_);
     }
 
     template <typename T>
-    Range<T> MakeRange(const T & left, const T & right) {
-        return Range<T>(left, right);
+    T Range<T>::Blend(double rate) const {
+        return lower_bound_ + (upper_bound_ - lower_bound_) * rate;
+    }
+
+    template <typename T>
+    double Range<T>::GetRate(const T & value) const {
+        return static_cast<double>(value - lower_bound_) / (upper_bound_ - lower_bound_);
+    }
+
+    template <typename T>
+    Range<T> MakeRange(const T & lower_bound, const T & upper_bound) {
+        return Range<T>(lower_bound, upper_bound);
     }
 
 }
