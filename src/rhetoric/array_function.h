@@ -1,9 +1,15 @@
 #pragma once
 
+#include "./generic_error.h"
 #include "./optional.h"
+#include "./result.h"
 #include "./std_dependency.h"
 
 namespace rhetoric {
+    template <typename A>
+    Result<typename A::value_type>
+    ArrayGetAt(const A & array, int index);
+
     template <typename A, typename P>
     Optional<int>
     ArrayFind(const A & array,

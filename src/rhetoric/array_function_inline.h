@@ -1,4 +1,16 @@
 namespace rhetoric {
+    template <typename A>
+    Result<typename A::value_type>
+    ArrayGetAt(const A & array, int index)
+    {
+        if (!(0 <= index && index < (int)array.size())) {
+            return Failure(GenericError::Create("out of index: index=%d, count=%d",
+                                                index,
+                                                (int)array.size()));
+        }
+        return Success(array[index]);
+    }
+
     template <typename A, typename P>
     Optional<int>
     ArrayFind(const A & array,
