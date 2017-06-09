@@ -57,6 +57,7 @@ namespace rhetoric {
 
         T Blend(double rate) const;
         double GetRate(const T & value) const;
+        T Clamp(const T & value) const;
     private:
         T lower_bound_;
         T upper_bound_;

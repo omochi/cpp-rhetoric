@@ -127,6 +127,11 @@ namespace rhetoric {
     }
 
     template <typename T>
+    T Range<T>::Clamp(const T & value) const {
+        return std::max(lower_bound_, std::min(value, upper_bound_));
+    }
+
+    template <typename T>
     Range<T> MakeRange(const T & lower_bound, const T & upper_bound) {
         return Range<T>(lower_bound, upper_bound);
     }
