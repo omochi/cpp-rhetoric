@@ -105,6 +105,7 @@
 		D6695F5B1ED6CE8E0009FF3B /* windows_dependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = windows_dependency.h; sourceTree = "<group>"; };
 		D6E5AF241ED427E600718686 /* file_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_stream.cpp; sourceTree = "<group>"; };
 		D6E5AF251ED427E600718686 /* file_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_stream.h; sourceTree = "<group>"; };
+		D6F4FD1F1EEAA23F001CE2C0 /* try_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = try_macro.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +190,7 @@
 				D645EE231EDEAB2A0082A84F /* string_macos.mm */,
 				D6695F551ED5417C0009FF3B /* string_windows.cpp */,
 				D6695F561ED5417C0009FF3B /* string_windows.h */,
+				D6F4FD1F1EEAA23F001CE2C0 /* try_macro.h */,
 				D65E83A71ED2902C00705DB0 /* unix_dependency.h */,
 				D6695F591ED6CE8E0009FF3B /* win32_error.cpp */,
 				D6695F5A1ED6CE8E0009FF3B /* win32_error.h */,

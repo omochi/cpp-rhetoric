@@ -29,6 +29,7 @@
 #include "./string_function.h"
 #include "./string_macos.h"
 #include "./string_windows.h"
+#include "./try_macro.h"
 #include "./unix_dependency.h"
 #include "./win32_error.h"
 #include "./windows_dependency.h"
