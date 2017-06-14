@@ -1,5 +1,7 @@
 #pragma once
 
+#include "./assert.h"
+#include "./function_trait.h"
 #include "./generic_error.h"
 #include "./optional.h"
 #include "./result.h"
@@ -34,7 +36,7 @@ namespace rhetoric {
     auto
     ArrayMap(const A & array,
              F && f)
-    -> std::vector<decltype(f(std::declval<typename A::value_type>()))>;
+    -> std::vector<  typename FunctionTrait<F>::ReturnType  >;
 
     template <typename A, typename P>
     std::vector<typename A::value_type>
@@ -43,17 +45,17 @@ namespace rhetoric {
 
     template <typename A, typename P>
     void
-    ArrayRemove(A & array,
+    ArrayRemove(A * array,
                 P && pred);
 
     template <typename A>
     void
-    ArrayRemoveEq(A & array,
+    ArrayRemoveEq(A * array,
                   const typename A::value_type & item);
 
     template <typename A>
     void
-    ArrayRemoveAt(A & array, int index);
+    ArrayRemoveAt(A * array, int index);
 
     template <typename A, typename P>
     bool
@@ -67,7 +69,7 @@ namespace rhetoric {
 
     template <typename A>
     void
-    ArrayReverse(A & array);
+    ArrayReverse(A * array);
 
     template <typename A>
     std::vector<typename A::value_type>

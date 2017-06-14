@@ -12,6 +12,8 @@ namespace rhetoric {
     template <typename T>
     class Optional {
     public:
+        using ValueType = T;
+        
         Optional();
         
         Optional(const T & value, OptionalSomeTag tag);

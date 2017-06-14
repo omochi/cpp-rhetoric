@@ -61,9 +61,9 @@ namespace rhetoric {
     auto
     ArrayMap(const A & array,
              F && f)
-    -> std::vector<decltype(f(std::declval<typename A::value_type>()))>
+    -> std::vector<  typename FunctionTrait<F>::ReturnType  >
     {
-        std::vector<decltype(f(std::declval<typename A::value_type>()))> ret;
+        std::vector<  typename FunctionTrait<F>::ReturnType  > ret;
         for (auto & x : array) {
             auto y = f(x);
             ret.push_back(y);
@@ -87,16 +87,17 @@ namespace rhetoric {
 
     template <typename A, typename P>
     void
-    ArrayRemove(A & array,
+    ArrayRemove(A * array,
                 P && pred)
     {
-        auto new_end = std::remove_if(array.begin(), array.end(), pred);
-        array.erase(new_end, array.end());
+        RHETORIC_ASSERT(array != nullptr);
+        auto new_end = std::remove_if(array->begin(), array->end(), pred);
+        array->erase(new_end, array->end());
     }
 
     template <typename A>
     void
-    ArrayRemoveEq(A & array,
+    ArrayRemoveEq(A * array,
                   const typename A::value_type & item)
     {
         ArrayRemove(array, [item](auto x) { return x == item; });
@@ -104,9 +105,9 @@ namespace rhetoric {
 
     template <typename A>
     void
-    ArrayRemoveAt(A & array, int index)
+    ArrayRemoveAt(A * array, int index)
     {
-        array.erase(array.begin() + index);
+        array->erase(array->begin() + index);
     }
 
     template <typename A, typename P>
@@ -127,8 +128,8 @@ namespace rhetoric {
 
     template <typename A>
     void
-    ArrayReverse(A & array) {
-        std::reverse(array.begin(), array.end());
+    ArrayReverse(A * array) {
+        std::reverse(array->begin(), array->end());
     }
 
     template <typename A>
