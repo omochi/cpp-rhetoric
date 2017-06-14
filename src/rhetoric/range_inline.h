@@ -133,7 +133,7 @@ namespace rhetoric {
 
     template <typename T>
     Range<T> MakeRange(const T & lower_bound, const T & upper_bound) {
-        return Range<T>(lower_bound, upper_bound);
+        return Range<T>(lower_bound, std::max(lower_bound, upper_bound));
     }
 
 }

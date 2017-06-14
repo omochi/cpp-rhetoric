@@ -13,24 +13,44 @@ namespace rhetoric {
     ArrayGetAt(const A & array, int index);
 
     template <typename A, typename P>
-    Optional<int>
+    Optional<typename A::value_type>
     ArrayFind(const A & array,
               P && pred);
 
     template <typename A>
-    Optional<int>
+    Optional<typename A::value_type>
     ArrayFindEq(const A & array,
                 const typename A::value_type & item);
 
     template <typename A, typename P>
-    Optional<int>
+    Optional<typename A::value_type>
     ArrayFindR(const A & array,
                P && pred);
 
     template <typename A>
-    Optional<int>
+    Optional<typename A::value_type>
     ArrayFindEqR(const A & array,
                  const typename A::value_type & item);
+
+    template <typename A, typename P>
+    Optional<int>
+    ArrayFindIndex(const A & array,
+                   P && pred);
+
+    template <typename A>
+    Optional<int>
+    ArrayFindIndexEq(const A & array,
+                     const typename A::value_type & item);
+
+    template <typename A, typename P>
+    Optional<int>
+    ArrayFindIndexR(const A & array,
+                    P && pred);
+
+    template <typename A>
+    Optional<int>
+    ArrayFindIndexEqR(const A & array,
+                      const typename A::value_type & item);
 
     template <typename A, typename F>
     auto

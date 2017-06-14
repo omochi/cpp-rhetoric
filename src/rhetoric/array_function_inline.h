@@ -12,9 +12,53 @@ namespace rhetoric {
     }
 
     template <typename A, typename P>
-    Optional<int>
+    Optional<typename A::value_type>
     ArrayFind(const A & array,
               P && pred)
+    {
+        auto begin = array.cbegin();
+        auto end = array.cend();
+        auto iter = std::find_if(begin, end, pred);
+        if (iter == end) {
+            return None();
+        }
+        return Some(*iter);
+    }
+
+    template <typename A>
+    Optional<typename A::value_type>
+    ArrayFindEq(const A & array,
+                const typename A::value_type & item)
+    {
+        return ArrayFind(array, [=](auto x){ return x == item; });
+    }
+
+    template <typename A, typename P>
+    Optional<typename A::value_type>
+    ArrayFindR(const A & array,
+               P && pred)
+    {
+        auto begin = array.crbegin();
+        auto end = array.crend();
+        auto iter = std::find_if(begin, end, pred);
+        if (iter == end) {
+            return None();
+        }
+        return Some(*iter);
+    }
+
+    template <typename A>
+    Optional<typename A::value_type>
+    ArrayFindEqR(const A & array,
+                 const typename A::value_type & item)
+    {
+        return ArrayFindR(array, [=](auto x){ return x == item; });
+    }
+
+    template <typename A, typename P>
+    Optional<int>
+    ArrayFindIndex(const A & array,
+                   P && pred)
     {
         auto begin = array.cbegin();
         auto end = array.cend();
@@ -28,19 +72,19 @@ namespace rhetoric {
 
     template <typename A>
     Optional<int>
-    ArrayFindEq(const A & array,
-                const typename A::value_type & item)
+    ArrayFindIndexEq(const A & array,
+                     const typename A::value_type & item)
     {
-        return ArrayFind(array, [=](auto x) { return x == item; });
+        return ArrayFindIndex(array, [=](auto x) { return x == item; });
     }
 
     template <typename A, typename P>
     Optional<int>
-    ArrayFindR(const A & array,
-               P && pred)
+    ArrayFindIndexR(const A & array,
+                    P && pred)
     {
-        auto begin = array.cbegin();
-        auto end = array.cend();
+        auto begin = array.crbegin();
+        auto end = array.crend();
         auto iter = std::find_if(begin, end, pred);
         if (iter == end) {
             return None();
@@ -51,10 +95,10 @@ namespace rhetoric {
 
     template <typename A>
     Optional<int>
-    ArrayFindEqR(const A & array,
-                 const typename A::value_type & item)
+    ArrayFindIndexEqR(const A & array,
+                      const typename A::value_type & item)
     {
-        return ArrayFindR(array, [=](auto x) { return x == item; });
+        return ArrayFindIndexR(array, [=](auto x) { return x == item; });
     }
 
     template <typename A, typename F>

@@ -351,12 +351,21 @@ namespace rhetoric {
     std::string Join(const std::vector<std::string> & array,
                      const std::string & glue)
     {
-        std::string ret;
-        if (array.size() >= 1) {
-            ret.append(array[0]);
+        int ret_size = 0;
+        for (int i = 0; i < (int)array.size(); i++) {
+            if (i > 0) {
+                ret_size += glue.length();
+            }
+            ret_size += array[i].length();
         }
-        for (int i = 1; i < (int)array.size(); i++) {
-            ret.append(glue);
+
+        std::string ret;
+        ret.reserve(ret_size);
+
+        for (int i = 0; i < (int)array.size(); i++) {
+            if (i > 0) {
+                ret.append(glue);
+            }
             ret.append(array[i]);
         }
         return ret;
