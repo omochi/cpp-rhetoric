@@ -107,6 +107,7 @@ namespace rhetoric {
     void
     ArrayRemoveAt(A * array, int index)
     {
+        RHETORIC_ASSERT(array != nullptr);
         array->erase(array->begin() + index);
     }
 
@@ -129,6 +130,7 @@ namespace rhetoric {
     template <typename A>
     void
     ArrayReverse(A * array) {
+        RHETORIC_ASSERT(array != nullptr);
         std::reverse(array->begin(), array->end());
     }
 
