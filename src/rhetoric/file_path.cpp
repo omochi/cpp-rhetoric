@@ -289,36 +289,30 @@ namespace rhetoric {
 
 	Result<bool> FilePath::GetExists() const {
 		auto st = GetStat();
-		if (st.err == ENOENT) {
-			return Success(false);
-		}
-		if (st.err != 0) {
-			return Failure(PosixError::Create(st.err, "stat(%s)", ToString().c_str()));
-		}
+        if (!st) {
+            auto perr = std::dynamic_pointer_cast<PosixError>(st.error());
+            if (perr && perr->code() == ENOENT) {
+                return Success(false);
+            }
+            return Failure(st);
+        }
 		return Success(true);
 	}
 
-	Result<Optional<FileEntryType>> FilePath::GetEntryType() const {
-		auto st = GetStatResult();
-		if (st.err == ENOENT) {
-			return Success(None());
-		}
-		if (st.err != 0) {
-			return Failure(PosixError::Create(st.err, "stat(%s)", ToString().c_str()));
+	Result<FileEntryType> FilePath::GetEntryType() const {
+        RHETORIC_TRY_ASSIGN(auto st, GetStat())
+
+        FileEntryType ret;
+
+		if (S_ISREG(st.st_mode)) {
+			ret = FileEntryType::File;
+		} else if (S_ISDIR(st.st_mode)) {
+			ret = FileEntryType::Directory;
+		} else {
+			ret = FileEntryType::Other;
 		}
 
-		FileEntryType entry_type;
-
-		if (S_ISREG(st.st.st_mode)) {
-			entry_type = FileEntryType::File;
-		}
-		else if (S_ISDIR(st.st.st_mode)) {
-			entry_type = FileEntryType::Directory;
-		}
-		else {
-			entry_type = FileEntryType::Other;
-		}
-		return Success(Some(entry_type));
+        return Success(ret);
 	}
 
 	Result<None> FilePath::CreateDirectory(bool recursive) const {
@@ -333,19 +327,16 @@ namespace rhetoric {
 		for (auto element : path.elements_) {
 			create_path.Append(FilePath(element));
 
-			auto exi_ret = create_path.GetExists();
-			if (!exi_ret) {
-				return Failure(exi_ret);
-			}
-			if (exi_ret.value()) {
+            RHETORIC_TRY_ASSIGN(auto exi, create_path.GetExists());
+			if (exi) {
 				continue;
 			}
 
 			auto create_ret = create_path.CreateDirectorySingle();
 			if (!create_ret) {
-				return Failure(GenericError::Create(create_ret.error(),
-					"CreateDirectorySingle: path=%s",
-					ToString().c_str()));
+                return Failure(GenericError::Create(create_ret.error(),
+                                                    "CreateDirectorySingle: path=%s",
+                                                    ToString().c_str()));
 			}
 		}
 
@@ -357,32 +348,14 @@ namespace rhetoric {
 	}
 
 	Result<Ptr<Data>> FilePath::Read() const {
-		auto stream_ret = Open("rb");
-		if (!stream_ret) {
-			return Failure(stream_ret);
-		}
-		auto stream = *stream_ret;
-
-		auto data_ret = stream->Read();
-		if (!data_ret) {
-			return Failure(data_ret);
-		}
-
-		return Success(*data_ret);
+        RHETORIC_TRY_ASSIGN(auto stream, Open("rb"))
+        RHETORIC_TRY_ASSIGN(auto data, stream->Read())
+		return Success(data);
 	}
 
 	Result<None> FilePath::Write(const Ptr<const Data> & data) const {
-		auto stream_ret = Open("wb");
-		if (!stream_ret) {
-			return Failure(stream_ret);
-		}
-		auto stream = *stream_ret;
-
-		auto write_ret = stream->Write(data);
-		if (!write_ret) {
-			return Failure(write_ret);
-		}
-
+        RHETORIC_TRY_ASSIGN(auto stream, Open("wb"))
+        RHETORIC_TRY_VOID(stream->Write(data))
 		return Success(None());
 	}
 
@@ -436,19 +409,19 @@ namespace rhetoric {
     {
     }
 
-    FilePath::GetStatResult::GetStatResult() {
-        memset(&st, 0, sizeof(st));
-        err = 0;
-    }
+    Result<struct stat> FilePath::GetStat() const {
+        auto str = ToString();
 
-    FilePath::GetStatResult FilePath::GetStat() const {
-        GetStatResult ret;
-        int x = stat(ToString().c_str(), &ret.st);
+        struct stat st;
+        memset(&st, 0, sizeof(st));
+
+        int x = stat(str.c_str(), &st);
         if (x == -1) {
-            ret.err = errno;
-            return ret;
+            return Failure(PosixError::Create(errno,
+                                              "stat(%s)",
+                                              str.c_str()));
         }
-        return ret;
+        return Success(st);
     }
 
 #if RHETORIC_MACOS

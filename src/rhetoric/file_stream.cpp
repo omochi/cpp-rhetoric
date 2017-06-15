@@ -21,7 +21,9 @@ namespace rhetoric {
         if (handle_) {
             int t = fclose(handle_);
             if (t) {
-                RHETORIC_FATAL(PosixError::Create(errno, "fclose: %s", path_.ToString().c_str())->ToString());
+                RHETORIC_FATAL(PosixError::Create(errno,
+                                                  "fclose: %s",
+                                                  path_.ToString().c_str())->ToString());
             }
             handle_ = nullptr;
         }
@@ -31,11 +33,7 @@ namespace rhetoric {
         auto data = New<Data>();
 
         while (true) {
-            auto chunk_ret = Read(1024);
-            if (!chunk_ret) {
-                return Failure(chunk_ret);
-            }
-            auto chunk = *chunk_ret;
+            RHETORIC_TRY_ASSIGN(auto chunk, Read(1024))
             if (chunk->size() == 0) {
                 break;
             }
@@ -48,12 +46,10 @@ namespace rhetoric {
     Result<Ptr<Data>> FileStream::Read(int size) {
         Ptr<Data> data = New<Data>(size);
 
-        auto read_ret = ReadToBytes(data->bytes(), data->size());
-        if (!read_ret) {
-            return Failure(read_ret);
-        }
+        RHETORIC_TRY_ASSIGN(int read_size,
+                            ReadToBytes(data->bytes(), data->size()))
 
-        data->set_size(*read_ret);
+        data->set_size(read_size);
 
         return Success(data);
     }
@@ -99,8 +95,10 @@ namespace rhetoric {
 
         int ret = fseek(handle_, offset, whence);
         if (ret == -1) {
-            return Failure(PosixError::Create(errno, "fseek(%lld, %d): %s",
-                                              offset, whence,
+            return Failure(PosixError::Create(errno,
+                                              "fseek(%lld, %d): %s",
+                                              offset,
+                                              whence,
                                               path_.ToString().c_str()));
         }
 
@@ -114,7 +112,8 @@ namespace rhetoric {
 
         long pos = ftell(handle_);
         if (pos == -1) {
-            return Failure(PosixError::Create(errno, "ftell: %s",
+            return Failure(PosixError::Create(errno,
+                                              "ftell: %s",
                                               path_.ToString().c_str()));
         }
 
@@ -129,7 +128,9 @@ namespace rhetoric {
         FILE * handle = fopen(path_str.c_str(), mode.c_str());
         if (!handle) {
             return Failure(PosixError::Create(errno,
-                                              "fopen(%s, %s)", path_str.c_str(), mode.c_str()));
+                                              "fopen(%s, %s)",
+                                              path_str.c_str(),
+                                              mode.c_str()));
         }
         return Success(Ptr<FileStream>(new FileStream(handle, path)));
     }

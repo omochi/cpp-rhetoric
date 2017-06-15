@@ -5,6 +5,7 @@
 #include "./ptr.h"
 #include "./result.h"
 #include "./std_dependency.h"
+#include "./try_macro.h"
 #include "./unix_dependency.h"
 
 namespace rhetoric {

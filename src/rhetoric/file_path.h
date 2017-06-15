@@ -13,6 +13,7 @@
 #include "./std_dependency.h"
 #include "./string_function.h"
 #include "./string_windows.h"
+#include "./try_macro.h"
 #include "./unix_dependency.h"
 #include "./win32_error.h"
 #include "./windows_dependency.h"
@@ -79,7 +80,7 @@ namespace rhetoric {
         RHETORIC_NO_DISCARD
         Result<bool> GetExists() const;
         RHETORIC_NO_DISCARD
-        Result<Optional<FileEntryType>> GetEntryType() const;
+        Result<FileEntryType> GetEntryType() const;
 
         RHETORIC_NO_DISCARD
         Result<None> CreateDirectory(bool recursive = false) const;
@@ -104,14 +105,7 @@ namespace rhetoric {
                  const Optional<std::string> & drive_letter,
                  const std::vector<std::string> & elements);
 
-        struct GetStatResult {
-            struct stat st;
-            int err;
-
-            GetStatResult();
-        };
-
-        GetStatResult GetStat() const;
+        Result<struct stat> GetStat() const;
         
         RHETORIC_NO_DISCARD
         Result<None> CreateDirectorySingle() const;
