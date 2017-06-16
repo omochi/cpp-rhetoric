@@ -171,6 +171,20 @@ namespace rhetoric {
         return std::any_of(array.cbegin(), array.cend(), pred);
     }
 
+    template <typename A, typename P>
+    int
+    ArrayCount(const A & array,
+               P && pred)
+    {
+        int c = 0;
+        for (auto it = array.cbegin(); it != array.cend(); it++) {
+            if (pred(*it)) {
+                c += 1;
+            }
+        }
+        return c;
+    }
+
     template <typename A>
     void
     ArrayReverse(A * array) {

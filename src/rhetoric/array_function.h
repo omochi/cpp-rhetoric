@@ -87,6 +87,11 @@ namespace rhetoric {
     ArrayTestAny(const A & array,
                  P && pred);
 
+    template <typename A, typename P>
+    int
+    ArrayCount(const A & array,
+               P && pred);
+
     template <typename A>
     void
     ArrayReverse(A * array);
