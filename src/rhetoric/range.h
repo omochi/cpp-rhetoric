@@ -8,6 +8,8 @@ namespace rhetoric {
     template <typename T>
     class Range {
     public:
+        using DistanceType = decltype(std::declval<T>() - std::declval<T>());
+
         class Iterator :
         public std::iterator<
         std::bidirectional_iterator_tag,
@@ -43,7 +45,7 @@ namespace rhetoric {
 
         T lower_bound() const;
         T upper_bound() const;
-        decltype(std::declval<T>() - std::declval<T>()) count() const;
+        DistanceType count() const;
 
         Iterator begin() const;
         Iterator end() const;
@@ -58,6 +60,12 @@ namespace rhetoric {
         T Blend(double rate) const;
         double GetRate(const T & value) const;
         T Clamp(const T & value) const;
+
+        template <typename F>
+        auto Map(F && f) const
+        -> Range<decltype(f(std::declval<T>()))>;
+
+        bool Contains(const T & value) const;
     private:
         T lower_bound_;
         T upper_bound_;

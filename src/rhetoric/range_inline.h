@@ -102,8 +102,8 @@ namespace rhetoric {
     }
 
     template <typename T>
-    decltype(std::declval<T>() - std::declval<T>()) Range<T>::count() const {
-        return static_cast<int>(upper_bound_ - lower_bound_);
+    typename Range<T>::DistanceType Range<T>::count() const {
+        return upper_bound_ - lower_bound_;
     }
 
     template <typename T>
@@ -118,17 +118,30 @@ namespace rhetoric {
 
     template <typename T>
     T Range<T>::Blend(double rate) const {
-        return lower_bound_ + (upper_bound_ - lower_bound_) * rate;
+        return lower_bound_ + static_cast<DistanceType>(static_cast<double>(count()) * rate);
     }
 
     template <typename T>
     double Range<T>::GetRate(const T & value) const {
-        return static_cast<double>(value - lower_bound_) / (upper_bound_ - lower_bound_);
+        return static_cast<double>(value - lower_bound_) / static_cast<double>(count());
     }
 
     template <typename T>
     T Range<T>::Clamp(const T & value) const {
         return std::max(lower_bound_, std::min(value, upper_bound_));
+    }
+
+    template <typename T>
+    template <typename F>
+    auto Range<T>::Map(F && f) const
+    -> Range<decltype(f(std::declval<T>()))>
+    {
+        return MakeRange(f(lower_bound_), f(upper_bound_));
+    }
+
+    template <typename T>
+    bool Range<T>::Contains(const T & value) const {
+        return lower_bound_ <= value && value < upper_bound_;
     }
 
     template <typename T>
