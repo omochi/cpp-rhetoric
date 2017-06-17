@@ -1,7 +1,6 @@
 #pragma once
 
 #include "./assert.h"
-#include "./function_trait.h"
 #include "./generic_error.h"
 #include "./optional.h"
 #include "./result.h"
