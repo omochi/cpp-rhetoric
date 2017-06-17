@@ -106,6 +106,8 @@ namespace rhetoric {
                  const std::vector<std::string> & elements);
 
         Result<struct stat> GetStat() const;
+
+        Ptr<PosixError> CreateStatError(int err) const;
         
         RHETORIC_NO_DISCARD
         Result<None> CreateDirectorySingle() const;

@@ -103,7 +103,6 @@
 		D6695F591ED6CE8E0009FF3B /* win32_error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = win32_error.cpp; sourceTree = "<group>"; };
 		D6695F5A1ED6CE8E0009FF3B /* win32_error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = win32_error.h; sourceTree = "<group>"; };
 		D6695F5B1ED6CE8E0009FF3B /* windows_dependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = windows_dependency.h; sourceTree = "<group>"; };
-		D6E0AE9E1EF0D9AB001ABB2A /* function_trait.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = function_trait.h; sourceTree = "<group>"; };
 		D6E0AE9F1EF11DB4001ABB2A /* accessor_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = accessor_macro.h; sourceTree = "<group>"; };
 		D6E5AF241ED427E600718686 /* file_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_stream.cpp; sourceTree = "<group>"; };
 		D6E5AF251ED427E600718686 /* file_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_stream.h; sourceTree = "<group>"; };
@@ -164,7 +163,6 @@
 				D6E5AF251ED427E600718686 /* file_stream.h */,
 				D65E836B1ECEE66D00705DB0 /* format.cpp */,
 				D65E836C1ECEE66D00705DB0 /* format.h */,
-				D6E0AE9E1EF0D9AB001ABB2A /* function_trait.h */,
 				D65E83851ECEFB5600705DB0 /* generic_error.cpp */,
 				D65E83861ECEFB5600705DB0 /* generic_error.h */,
 				D645EE221EDEAA950082A84F /* macos_dependency.h */,

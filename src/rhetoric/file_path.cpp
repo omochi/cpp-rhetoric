@@ -288,15 +288,15 @@ namespace rhetoric {
 	}
 
 	Result<bool> FilePath::GetExists() const {
-		auto st = GetStat();
-        if (!st) {
-            auto perr = std::dynamic_pointer_cast<PosixError>(st.error());
-            if (perr && perr->code() == ENOENT) {
+        struct stat st;
+        int x = stat(ToString().c_str(), &st);
+        if (x == -1) {
+            if (errno == ENOENT) {
                 return Success(false);
             }
-            return Failure(st);
+            return Failure(CreateStatError(errno));
         }
-		return Success(true);
+        return Success(true);
 	}
 
 	Result<FileEntryType> FilePath::GetEntryType() const {
@@ -413,15 +413,18 @@ namespace rhetoric {
         auto str = ToString();
 
         struct stat st;
-        memset(&st, 0, sizeof(st));
-
         int x = stat(str.c_str(), &st);
         if (x == -1) {
-            return Failure(PosixError::Create(errno,
-                                              "stat(%s)",
-                                              str.c_str()));
+            return Failure(CreateStatError(errno));
         }
+
         return Success(st);
+    }
+
+    Ptr<PosixError> FilePath::CreateStatError(int err) const {
+        return PosixError::Create(err,
+                                  "stat(%s)",
+                                  ToString().c_str());
     }
 
 #if RHETORIC_MACOS
