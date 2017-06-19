@@ -18,3 +18,7 @@ RHETORIC_SETTER_TRIVIAL_DECL(type, name) { RHETORIC_PROPERTY_NAME(name) = value;
 RHETORIC_GETTER(type, name) \
 RHETORIC_SETTER(type, name)
 
+#define RHETORIC_ACCESSOR_TRIVIAL(type, name) \
+RHETORIC_GETTER(type, name) \
+RHETORIC_SETTER_TRIVIAL(type, name)
+

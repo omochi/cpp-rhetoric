@@ -107,6 +107,12 @@ namespace rhetoric {
     }
 
     template <typename T>
+    bool Range<T>::operator==(const Range<T> & other) const {
+        return (lower_bound_ == other.lower_bound_) &&
+        (upper_bound_ == other.upper_bound_);
+    }
+
+    template <typename T>
     typename Range<T>::Iterator Range<T>::begin() const {
         return Iterator(this, lower_bound_);
     }

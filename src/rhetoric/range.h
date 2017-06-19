@@ -47,6 +47,9 @@ namespace rhetoric {
         T upper_bound() const;
         DistanceType count() const;
 
+        bool operator==(const Range<T> & other) const;
+        RHETORIC_EQUATABLE_DEFAULT(Range<T>)
+
         Iterator begin() const;
         Iterator end() const;
         Iterator cbegin() const { return begin(); }
