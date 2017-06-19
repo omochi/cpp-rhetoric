@@ -1,14 +1,31 @@
 namespace rhetoric {
     template <typename A>
+    bool
+    ArrayCheckIndex(const A & array, int index)
+    {
+        return (0 <= index && index < (int)array.size());
+    }
+
+    template <typename A>
     Result<typename A::value_type>
     ArrayGetAt(const A & array, int index)
     {
-        if (!(0 <= index && index < (int)array.size())) {
+        if (!ArrayCheckIndex(array, index)) {
             return Failure(GenericError::Create("out of index: index=%d, count=%d",
                                                 index,
                                                 (int)array.size()));
         }
         return Success(array[index]);
+    }
+
+    template <typename A>
+    Optional<typename A::value_type>
+    ArrayGetAtOrNone(const A & array, int index)
+    {
+        if (!ArrayCheckIndex(array, index)) {
+            return None();
+        }
+        return Some(array[index]);
     }
 
     template <typename A, typename P>
@@ -105,9 +122,9 @@ namespace rhetoric {
     auto
     ArrayMap(const A & array,
              F && f)
-    -> std::vector<  typename FunctionTrait<F>::ReturnType  >
+    -> std::vector<  decltype(f(std::declval<  typename A::value_type  >()))  >
     {
-        std::vector<  typename FunctionTrait<F>::ReturnType  > ret;
+        std::vector<  decltype(f(std::declval<  typename A::value_type  >()))  > ret;
         for (auto & x : array) {
             auto y = f(x);
             ret.push_back(y);

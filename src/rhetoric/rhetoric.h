@@ -15,7 +15,6 @@
 #include "./file_path.h"
 #include "./file_stream.h"
 #include "./format.h"
-#include "./function_trait.h"
 #include "./generic_error.h"
 #include "./macos_dependency.h"
 #include "./macro.h"

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "./assert.h"
-#include "./function_trait.h"
 #include "./generic_error.h"
 #include "./optional.h"
 #include "./result.h"
@@ -9,8 +8,17 @@
 
 namespace rhetoric {
     template <typename A>
+    bool
+    ArrayCheckIndex(const A & array, int index);
+
+
+    template <typename A>
     Result<typename A::value_type>
     ArrayGetAt(const A & array, int index);
+
+    template <typename A>
+    Optional<typename A::value_type>
+    ArrayGetAtOrNone(const A & array, int index);
 
     template <typename A, typename P>
     Optional<typename A::value_type>
@@ -56,7 +64,7 @@ namespace rhetoric {
     auto
     ArrayMap(const A & array,
              F && f)
-    -> std::vector<  typename FunctionTrait<F>::ReturnType  >;
+    -> std::vector<  decltype(f(std::declval<  typename A::value_type  >()))  >;
 
     template <typename A, typename P>
     std::vector<typename A::value_type>
