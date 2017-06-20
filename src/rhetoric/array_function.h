@@ -70,6 +70,18 @@ namespace rhetoric {
     std::vector<typename A::value_type>
     ArrayFilter(const A & array,
                 P && pred);
+    
+    template <typename A, typename F>
+    auto
+    ArrayFlatMap(const A & array,
+                 F && f)
+    -> std::vector<  typename decltype(f(std::declval< typename A::value_type >()))::value_type  >;
+    
+    template <typename A, typename F>
+    auto
+    ArrayFlatMapOptional(const A & array,
+                         F && f)
+    -> std::vector<  typename decltype(f(std::declval< typename A::value_type >()))::ValueType  >;
 
     template <typename A, typename P>
     void
