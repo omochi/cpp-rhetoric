@@ -48,6 +48,7 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\ptr_inline.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\range.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\range_inline.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\range_iterator_inline.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\result.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\result_inline.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\rhetoric.h" />
@@ -73,6 +74,9 @@
     <ClCompile Include="..\..\..\..\src\rhetoric\none.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\posix_error.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\print.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\range_iterator.h">
+      <FileType>CppHeader</FileType>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\src\rhetoric\result.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\string_function.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\string_macos.cpp" />
@@ -164,6 +168,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -208,6 +213,7 @@
       <LanguageStandard>stdcpp14</LanguageStandard>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

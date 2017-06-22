@@ -25,6 +25,7 @@
 #include "./print.h"
 #include "./ptr.h"
 #include "./range.h"
+#include "./range_iterator.h"
 #include "./result.h"
 #include "./std_dependency.h"
 #include "./string_function.h"

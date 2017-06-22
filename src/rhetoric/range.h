@@ -1,7 +1,7 @@
 #pragma once
 
-#include "./comparable_macro.h"
 #include "./equatable_macro.h"
+#include "./range_iterator.h"
 #include "./std_dependency.h"
 
 namespace rhetoric {
@@ -9,34 +9,6 @@ namespace rhetoric {
     class Range {
     public:
         using DistanceType = decltype(std::declval<T>() - std::declval<T>());
-
-        class Iterator :
-        public std::iterator<
-        std::bidirectional_iterator_tag,
-        T,
-        std::ptrdiff_t,
-        const T *,
-        const T &>
-        {
-        public:
-            Iterator();
-            Iterator(const Range<T> * range, T value);
-            Iterator(const Iterator & other);
-
-            Iterator & operator=(const Iterator & other);
-
-            Iterator & operator++();
-            Iterator operator++(int);
-            Iterator & operator--();
-            Iterator operator--(int);
-            const T & operator*() const;
-            const T * operator->() const;
-            bool operator==(const typename Range<T>::Iterator & other) const;
-            RHETORIC_EQUATABLE_DEFAULT(typename Range<T>::Iterator)
-        private:
-            const Range<T> * range_;
-            T value_;
-        };
 
         Range();
         Range(const T & lower_bound, const T & upper_bound);
@@ -50,15 +22,15 @@ namespace rhetoric {
         bool operator==(const Range<T> & other) const;
         RHETORIC_EQUATABLE_DEFAULT(Range<T>)
 
-        Iterator begin() const;
-        Iterator end() const;
-        Iterator cbegin() const { return begin(); }
-        Iterator cend() const { return end(); }
+        RangeIterator<T> begin() const;
+		RangeIterator<T> end() const;
+		RangeIterator<T> cbegin() const { return begin(); }
+		RangeIterator<T> cend() const { return end(); }
 
-        std::reverse_iterator<Iterator> rbegin() const { return std::make_reverse_iterator(end()); }
-        std::reverse_iterator<Iterator> rend() const { return std::make_reverse_iterator(begin()); }
-        std::reverse_iterator<Iterator> crbegin() const { return rbegin(); }
-        std::reverse_iterator<Iterator> crend() const { return rend(); }
+		RangeIterator<T> rbegin() const;
+		RangeIterator<T> rend() const;
+		RangeIterator<T> crbegin() const { return rbegin(); }
+		RangeIterator<T> crend() const { return rend(); }
 
         T Blend(double rate) const;
         double GetRate(const T & value) const;
