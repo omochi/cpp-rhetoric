@@ -354,9 +354,9 @@ namespace rhetoric {
         int ret_size = 0;
         for (int i = 0; i < (int)array.size(); i++) {
             if (i > 0) {
-                ret_size += glue.length();
+                ret_size += (int)glue.length();
             }
-            ret_size += array[i].length();
+            ret_size += (int)array[i].length();
         }
 
         std::string ret;

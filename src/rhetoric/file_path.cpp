@@ -381,7 +381,7 @@ namespace rhetoric {
 #if RHETORIC_WINDOWS
 	FilePath FilePath::current() {
 		std::vector<TCHAR> buf(MAX_PATH);
-		int ret = GetCurrentDirectory(buf.size(), buf.data());
+		int ret = GetCurrentDirectory((int)buf.size(), buf.data());
 		if (ret == 0) {
 			RHETORIC_FATAL(Win32Error::Create(GetLastError(), "GetCurrentDirectory")->ToString());
 		}

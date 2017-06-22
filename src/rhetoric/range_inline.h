@@ -18,7 +18,7 @@ namespace rhetoric {
     }
 
     template <typename T>
-    typename Range<T>::Iterator & Range<T>::Iterator::operator=(const Range<T>::Iterator & other) {
+    typename Range<T>::Iterator & Range<T>::Iterator::operator=(const typename Range<T>::Iterator & other) {
         range_ = other.range_;
         value_ = other.value_;
         return *this;
@@ -61,7 +61,7 @@ namespace rhetoric {
     }
 
     template <typename T>
-    bool Range<T>::Iterator::operator==(const Range<T>::Iterator & other)
+    bool Range<T>::Iterator::operator==(const typename Range<T>::Iterator & other)
     const {
         return value_ == other.value_;
     }

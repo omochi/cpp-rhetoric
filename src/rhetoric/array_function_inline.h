@@ -150,9 +150,9 @@ namespace rhetoric {
     auto
     ArrayFlatMap(const A & array,
                  F && f)
-    -> std::vector<  typename decltype(f(std::declval< typename A::value_type >()))::value_type  >
+    -> std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::value_type  >
     {
-        std::vector<  typename decltype(f(std::declval< typename A::value_type >()))::value_type  > ret;
+		std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))>::value_type  > ret;
         for (auto & x : array) {
             auto items = f(x);
             for (auto & item : items) {
@@ -166,9 +166,9 @@ namespace rhetoric {
     auto
     ArrayFlatMapOptional(const A & array,
                          F && f)
-    -> std::vector<  typename decltype(f(std::declval< typename A::value_type >()))::ValueType  >
+    -> std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::ValueType  >
     {
-        std::vector<  typename decltype(f(std::declval< typename A::value_type >()))::ValueType  > ret;
+        std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::ValueType  > ret;
         for (auto & x : array) {
             auto item_opt = f(x);
             if (item_opt) {

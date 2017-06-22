@@ -2,6 +2,7 @@
 
 #include "./assert.h"
 #include "./generic_error.h"
+#include "./macro.h"
 #include "./optional.h"
 #include "./result.h"
 #include "./std_dependency.h"
@@ -75,13 +76,13 @@ namespace rhetoric {
     auto
     ArrayFlatMap(const A & array,
                  F && f)
-    -> std::vector<  typename decltype(f(std::declval< typename A::value_type >()))::value_type  >;
+    -> std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::value_type  >;
     
     template <typename A, typename F>
     auto
     ArrayFlatMapOptional(const A & array,
                          F && f)
-    -> std::vector<  typename decltype(f(std::declval< typename A::value_type >()))::ValueType  >;
+    -> std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::ValueType  >;
 
     template <typename A, typename P>
     void
