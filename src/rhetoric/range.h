@@ -31,8 +31,8 @@ namespace rhetoric {
             Iterator operator--(int);
             const T & operator*() const;
             const T * operator->() const;
-            bool operator==(const Range<T>::Iterator & other) const;
-            RHETORIC_EQUATABLE_DEFAULT(Range<T>::Iterator)
+            bool operator==(const typename Range<T>::Iterator & other) const;
+            RHETORIC_EQUATABLE_DEFAULT(typename Range<T>::Iterator)
         private:
             const Range<T> * range_;
             T value_;
