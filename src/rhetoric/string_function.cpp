@@ -163,7 +163,7 @@ namespace rhetoric {
                         int start_index,
                         const std::string & target)
     {
-        auto ret = FindR(string, (int)string.size(), std::vector<std::string>{ target });
+        auto ret = FindR(string, start_index, std::vector<std::string>{ target });
         if (!ret) { return None(); }
         return Some(ret->index);
     }

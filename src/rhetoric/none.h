@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./attribute.h"
 #include "./equatable_macro.h"
 
 namespace rhetoric {

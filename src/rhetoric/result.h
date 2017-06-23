@@ -19,7 +19,7 @@ namespace rhetoric {
         using ValueType = T;
 
         Result();
-        Result(const T & value, ResultSuccessTag tag);
+        Result(const T & value, ResultSuccessTag);
         Result(const ResultFailure & failure);
 
         Result(const Result<T> & other);
@@ -27,7 +27,7 @@ namespace rhetoric {
 
         template <typename U>
         Result(const Result<U> & other,
-               typename std::enable_if<std::is_convertible<U, T>::value>::type * enabler = nullptr);
+               typename std::enable_if<std::is_convertible<U, T>::value>::type * = nullptr);
         
         ~Result();
 

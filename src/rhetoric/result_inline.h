@@ -5,7 +5,7 @@ namespace rhetoric {
     {}
 
     template <typename T>
-    Result<T>::Result(const T & value, ResultSuccessTag tag):
+    Result<T>::Result(const T & value, ResultSuccessTag):
     value_(Some(value))
     {}
 
@@ -31,7 +31,7 @@ namespace rhetoric {
     template <typename T>
     template <typename U>
     Result<T>::Result(const Result<U> & other,
-                      typename std::enable_if<std::is_convertible<U, T>::value>::type * enabler)
+                      typename std::enable_if<std::is_convertible<U, T>::value>::type *)
     {
         if (other) {
             value_ = Some(other.value());

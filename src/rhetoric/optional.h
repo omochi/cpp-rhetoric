@@ -16,16 +16,16 @@ namespace rhetoric {
         
         Optional();
         
-        Optional(const T & value, OptionalSomeTag tag);
+        Optional(const T & value, OptionalSomeTag);
 
-        Optional(const None & null);
+        Optional(const None &);
 
         Optional(const Optional<T> & other);
         Optional<T> & operator=(const Optional<T> & other);
 
         template <typename U>
         Optional(const Optional<U> & other,
-                 typename std::enable_if<std::is_convertible<U, T>::value>::type * enabler = nullptr);
+                 typename std::enable_if<std::is_convertible<U, T>::value>::type * = nullptr);
 
         ~Optional();
 

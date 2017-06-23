@@ -3,14 +3,13 @@ namespace rhetoric {
     Optional<T>::Optional():Optional(None()){}
     
     template <typename T>
-    Optional<T>::Optional(const T & value, OptionalSomeTag tag):
+    Optional<T>::Optional(const T & value, OptionalSomeTag):
     value_(new T(value))
     {
-        RHETORIC_UNUSED(tag);
     }
 
     template <typename T>
-    Optional<T>::Optional(const None & none):
+    Optional<T>::Optional(const None &):
     value_(nullptr)
     {}
 
@@ -34,7 +33,7 @@ namespace rhetoric {
     template <typename T>
     template <typename U>
     Optional<T>::Optional(const Optional<U> & other,
-                          typename std::enable_if<std::is_convertible<U, T>::value>::type * enabler):
+                          typename std::enable_if<std::is_convertible<U, T>::value>::type *):
     value_(nullptr)
     {
         if (other) {
