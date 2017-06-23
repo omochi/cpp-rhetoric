@@ -26,8 +26,8 @@ namespace rhetoric {
 		RangeIterator<T> operator++(int);
 		RangeIterator<T> & operator--();
 		RangeIterator<T> operator--(int);
-		reference operator*() const;
-		pointer operator->() const;
+        const T & operator*() const;
+        const T * operator->() const;
 		bool operator==(const RangeIterator<T> & other) const;
 		RHETORIC_EQUATABLE_DEFAULT(RangeIterator<T>)
 	private:

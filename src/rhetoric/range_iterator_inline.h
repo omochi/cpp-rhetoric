@@ -47,12 +47,12 @@ namespace rhetoric {
 	}
 
 	template <typename T>
-	typename RangeIterator<T>::reference RangeIterator<T>::operator*() const {
+	const T & RangeIterator<T>::operator*() const {
 		return value_;
 	}
 
 	template <typename T>
-	typename RangeIterator<T>::pointer RangeIterator<T>::operator->() const {
+	const T * RangeIterator<T>::operator->() const {
 		return &value_;
 	}
 

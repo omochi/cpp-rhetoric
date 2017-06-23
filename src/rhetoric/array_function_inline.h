@@ -147,12 +147,11 @@ namespace rhetoric {
     }
     
     template <typename A, typename F>
-    auto
+    ArrayFlatMapResult<A, F>
     ArrayFlatMap(const A & array,
                  F && f)
-    -> std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::value_type  >
     {
-		std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))>::value_type  > ret;
+		ArrayFlatMapResult<A, F> ret;
         for (auto & x : array) {
             auto items = f(x);
             for (auto & item : items) {
@@ -163,12 +162,11 @@ namespace rhetoric {
     }
     
     template <typename A, typename F>
-    auto
+    ArrayFlatMapOptionalResult<A, F>
     ArrayFlatMapOptional(const A & array,
                          F && f)
-    -> std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::ValueType  >
     {
-        std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::ValueType  > ret;
+        ArrayFlatMapOptionalResult<A, F> ret;
         for (auto & x : array) {
             auto item_opt = f(x);
             if (item_opt) {

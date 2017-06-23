@@ -73,17 +73,21 @@ namespace rhetoric {
                 P && pred);
     
     template <typename A, typename F>
-    auto
-    ArrayFlatMap(const A & array,
-                 F && f)
-    -> std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::value_type  >;
+    using ArrayFlatMapResult = std::vector<  typename std::result_of< F(typename A::value_type) >::type::value_type  >;
     
     template <typename A, typename F>
-    auto
+    ArrayFlatMapResult<A, F>
+    ArrayFlatMap(const A & array,
+                 F && f);
+    
+    template <typename A, typename F>
+    using ArrayFlatMapOptionalResult = std::vector<  typename std::result_of< F(typename A::value_type) >::type::ValueType  >;
+    
+    template <typename A, typename F>
+    ArrayFlatMapOptionalResult<A, F>
     ArrayFlatMapOptional(const A & array,
-                         F && f)
-    -> std::vector<  typename RHETORIC_DECLTYPE(f(std::declval< typename A::value_type >()))::ValueType  >;
-
+                         F && f);
+    
     template <typename A, typename P>
     void
     ArrayRemove(A * array,
