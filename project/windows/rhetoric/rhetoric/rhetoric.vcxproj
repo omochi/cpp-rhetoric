@@ -26,6 +26,7 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\assert.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\attribute.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\comparable_macro.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\crt.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\data.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\defer.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\env.h" />
@@ -63,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\rhetoric\assert.cpp" />
+    <ClCompile Include="..\..\..\..\src\rhetoric\crt.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\data.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\defer.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\env.cpp" />

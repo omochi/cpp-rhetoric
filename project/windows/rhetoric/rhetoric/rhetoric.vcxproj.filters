@@ -129,6 +129,9 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\range_iterator_inline.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\crt.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\rhetoric\assert.cpp">
@@ -183,6 +186,9 @@
       <Filter>rhetoric</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\rhetoric\range_iterator.h">
+      <Filter>rhetoric</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\rhetoric\crt.cpp">
       <Filter>rhetoric</Filter>
     </ClCompile>
   </ItemGroup>

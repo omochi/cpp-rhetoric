@@ -6,6 +6,7 @@
 #include "./assert.h"
 #include "./attribute.h"
 #include "./comparable_macro.h"
+#include "./crt.h"
 #include "./data.h"
 #include "./defer.h"
 #include "./env.h"

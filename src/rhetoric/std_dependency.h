@@ -2,10 +2,6 @@
 
 #include "./platform.h"
 
-#if RHETORIC_WINDOWS
-#	define _CRT_SECURE_NO_WARNINGS
-#endif
-
 #include <cstdlib>
 #include <cstdarg>
 #include <string>

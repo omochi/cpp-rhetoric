@@ -5,4 +5,5 @@
 #if RHETORIC_WINDOWS
 #	define NOMINMAX
 #	include <Windows.h>
+#   include <tchar.h>
 #endif

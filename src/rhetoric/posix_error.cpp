@@ -30,6 +30,13 @@ namespace rhetoric {
     }
 
     std::string GetPosixErrorString(int code) {
+#if RHETORIC_WINDOWS
+        std::vector<TCHAR> buf(100);
+        auto err = _tcserror_s(buf.data(), buf.size(), code);
+        if (err) { return "(_tcserror_s error)"; }
+        return WinStringToString(WinString(buf.data()), CP_UTF8);
+#else
 		return std::string(strerror(code));
+#endif
     }
 }

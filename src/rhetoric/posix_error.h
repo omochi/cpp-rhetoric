@@ -2,9 +2,12 @@
 
 #include "./assert.h"
 #include "./attribute.h"
+#include "./defer.h"
 #include "./error.h"
 #include "./format.h"
 #include "./ptr.h"
+#include "./string_windows.h"
+#include "./windows_dependency.h"
 
 namespace rhetoric {
     class PosixError : public Error {
