@@ -36,6 +36,7 @@ namespace rhetoric {
                  const std::vector<std::string> & targets);
 
     std::vector<std::string> white_chars();
+    std::vector<std::string> newline_chars();
 
     std::string StripL(const std::string & string);
     std::string StripR(const std::string & string);
