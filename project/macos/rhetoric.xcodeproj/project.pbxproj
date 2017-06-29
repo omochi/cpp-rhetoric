@@ -45,6 +45,8 @@
 		D6695F5E1ED6CE8E0009FF3B /* windows_dependency.h in Headers */ = {isa = PBXBuildFile; fileRef = D6695F5B1ED6CE8E0009FF3B /* windows_dependency.h */; };
 		D6E5AF261ED427E600718686 /* file_stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6E5AF241ED427E600718686 /* file_stream.cpp */; };
 		D6E5AF271ED427E600718686 /* file_stream.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E5AF251ED427E600718686 /* file_stream.h */; };
+		D6F1F1051F04E23000A61981 /* crt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1F1031F04E23000A61981 /* crt.cpp */; };
+		D6F1F1061F04E23000A61981 /* crt.h in Headers */ = {isa = PBXBuildFile; fileRef = D6F1F1041F04E23000A61981 /* crt.h */; };
 		D6FEB4F91EFD1E7D00AB43E8 /* range_iterator_inline.h in Headers */ = {isa = PBXBuildFile; fileRef = D6FEB4F71EFD1E7D00AB43E8 /* range_iterator_inline.h */; };
 		D6FEB4FA1EFD1E7D00AB43E8 /* range_iterator.h in Headers */ = {isa = PBXBuildFile; fileRef = D6FEB4F81EFD1E7D00AB43E8 /* range_iterator.h */; };
 /* End PBXBuildFile section */
@@ -108,6 +110,8 @@
 		D6E0AE9F1EF11DB4001ABB2A /* accessor_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = accessor_macro.h; sourceTree = "<group>"; };
 		D6E5AF241ED427E600718686 /* file_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_stream.cpp; sourceTree = "<group>"; };
 		D6E5AF251ED427E600718686 /* file_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_stream.h; sourceTree = "<group>"; };
+		D6F1F1031F04E23000A61981 /* crt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = crt.cpp; sourceTree = "<group>"; };
+		D6F1F1041F04E23000A61981 /* crt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crt.h; sourceTree = "<group>"; };
 		D6F4FD1F1EEAA23F001CE2C0 /* try_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = try_macro.h; sourceTree = "<group>"; };
 		D6FEB4F71EFD1E7D00AB43E8 /* range_iterator_inline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = range_iterator_inline.h; sourceTree = "<group>"; };
 		D6FEB4F81EFD1E7D00AB43E8 /* range_iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = range_iterator.h; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				D65E83751ECEEADE00705DB0 /* assert.h */,
 				D65E836F1ECEE6FE00705DB0 /* attribute.h */,
 				D634F7491EE1752E00F8EFBD /* comparable_macro.h */,
+				D6F1F1031F04E23000A61981 /* crt.cpp */,
+				D6F1F1041F04E23000A61981 /* crt.h */,
 				D65E83891ECEFCD700705DB0 /* data.cpp */,
 				D65E838A1ECEFCD700705DB0 /* data.h */,
 				D65E83A31ED28FC800705DB0 /* defer.cpp */,
@@ -220,6 +226,7 @@
 				D6695F581ED5417C0009FF3B /* string_windows.h in Headers */,
 				D65E839D1ED2788200705DB0 /* result.h in Headers */,
 				D6FEB4FA1EFD1E7D00AB43E8 /* range_iterator.h in Headers */,
+				D6F1F1061F04E23000A61981 /* crt.h in Headers */,
 				D65E83A61ED28FC800705DB0 /* defer.h in Headers */,
 				D6E5AF271ED427E600718686 /* file_stream.h in Headers */,
 				D65E83771ECEEADE00705DB0 /* assert.h in Headers */,
@@ -305,6 +312,7 @@
 				D65E83941ED0133500705DB0 /* none.cpp in Sources */,
 				D65E83A51ED28FC800705DB0 /* defer.cpp in Sources */,
 				D6695F571ED5417C0009FF3B /* string_windows.cpp in Sources */,
+				D6F1F1051F04E23000A61981 /* crt.cpp in Sources */,
 				D645EE251EDEAFD90082A84F /* string_macos.cpp in Sources */,
 				D65E83761ECEEADE00705DB0 /* assert.cpp in Sources */,
 				D65E839C1ED2788200705DB0 /* result.cpp in Sources */,
