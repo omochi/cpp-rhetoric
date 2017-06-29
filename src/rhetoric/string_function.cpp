@@ -87,6 +87,10 @@ namespace rhetoric {
         return { "\r", "\n", " ", "\t" };
     }
 
+    std::vector<std::string> newline_chars() {
+        return { "\r\n", "\r", "\n" };
+    }
+    
     std::string
     StripL(const std::string & string) {
         return StripL(string, white_chars());
@@ -343,7 +347,7 @@ namespace rhetoric {
 
     std::vector<std::string> SplitLines(const std::string & string) {
         return Split(string,
-                     std::vector<std::string> { "\r\n", "\n", "\r" },
+                     newline_chars(),
                      None(),
                      true);
     }
