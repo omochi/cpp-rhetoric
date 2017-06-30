@@ -9,6 +9,7 @@
 #include "./crt.h"
 #include "./data.h"
 #include "./defer.h"
+#include "./either.h"
 #include "./env.h"
 #include "./error.h"
 #include "./equatable_macro.h"
