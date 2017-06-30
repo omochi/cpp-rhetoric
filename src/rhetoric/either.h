@@ -23,11 +23,12 @@ namespace rhetoric {
         /* implicit */ Either2(const EitherCaseWrapper<1, T1> & value);
         Either2(const Either2<T0, T1> & other);
         template <typename U0, typename U1>
-        Either2(const Either2<U0, U1> & other,
-                typename std::enable_if<
-                    std::is_convertible<U0, T0>::value &&
-                    std::is_convertible<U1, T1>::value
-                >::type * = nullptr);
+        Either2(
+        	const Either2<U0, U1> & other,
+            typename std::enable_if<
+                std::is_convertible<U0, T0>::value &&
+                std::is_convertible<U1, T1>::value
+            >::type * = nullptr);
         Either2<T0, T1> & operator= (const Either2<T0, T1> & other);
         ~Either2();
         
@@ -66,12 +67,13 @@ namespace rhetoric {
         /* implicit */ Either3(const EitherCaseWrapper<2, T2> & value);
         Either3(const Either3<T0, T1, T2> & other);
         template <typename U0, typename U1, typename U2>
-        Either3(const Either3<U0, U1, U2> & other,
-                typename std::enable_if<
-                    std::is_convertible<U0, T0>::value &&
-                    std::is_convertible<U1, T1>::value &&
-                    std::is_convertible<U2, T2>::value
-                >::type * = nullptr);
+        Either3(
+        	const Either3<U0, U1, U2> & other,
+            typename std::enable_if<
+                std::is_convertible<U0, T0>::value &&
+                std::is_convertible<U1, T1>::value &&
+                std::is_convertible<U2, T2>::value
+            >::type * = nullptr);
         Either3<T0, T1, T2> & operator= (const Either3<T0, T1, T2> & other);
         ~Either3();
         
@@ -115,13 +117,14 @@ namespace rhetoric {
         /* implicit */ Either4(const EitherCaseWrapper<3, T3> & value);
         Either4(const Either4<T0, T1, T2, T3> & other);
         template <typename U0, typename U1, typename U2, typename U3>
-        Either4(const Either4<U0, U1, U2, U3> & other,
-                typename std::enable_if<
-                    std::is_convertible<U0, T0>::value &&
-                    std::is_convertible<U1, T1>::value &&
-                    std::is_convertible<U2, T2>::value &&
-                    std::is_convertible<U3, T3>::value
-                >::type * = nullptr);
+        Either4(
+        	const Either4<U0, U1, U2, U3> & other,
+            typename std::enable_if<
+                std::is_convertible<U0, T0>::value &&
+                std::is_convertible<U1, T1>::value &&
+                std::is_convertible<U2, T2>::value &&
+                std::is_convertible<U3, T3>::value
+            >::type * = nullptr);
         Either4<T0, T1, T2, T3> & operator= (const Either4<T0, T1, T2, T3> & other);
         ~Either4();
         
@@ -170,14 +173,15 @@ namespace rhetoric {
         /* implicit */ Either5(const EitherCaseWrapper<4, T4> & value);
         Either5(const Either5<T0, T1, T2, T3, T4> & other);
         template <typename U0, typename U1, typename U2, typename U3, typename U4>
-        Either5(const Either5<U0, U1, U2, U3, U4> & other,
-                typename std::enable_if<
-                    std::is_convertible<U0, T0>::value &&
-                    std::is_convertible<U1, T1>::value &&
-                    std::is_convertible<U2, T2>::value &&
-                    std::is_convertible<U3, T3>::value &&
-                    std::is_convertible<U4, T4>::value
-                >::type * = nullptr);
+        Either5(
+        	const Either5<U0, U1, U2, U3, U4> & other,
+            typename std::enable_if<
+                std::is_convertible<U0, T0>::value &&
+                std::is_convertible<U1, T1>::value &&
+                std::is_convertible<U2, T2>::value &&
+                std::is_convertible<U3, T3>::value &&
+                std::is_convertible<U4, T4>::value
+            >::type * = nullptr);
         Either5<T0, T1, T2, T3, T4> & operator= (const Either5<T0, T1, T2, T3, T4> & other);
         ~Either5();
         

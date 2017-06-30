@@ -116,6 +116,7 @@
 		D6F1F10C1F061CC800A61981 /* either.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = either.h; sourceTree = "<group>"; };
 		D6F1F10F1F061CE300A61981 /* either_inline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = either_inline.h; sourceTree = "<group>"; };
 		D6F1F1101F06439300A61981 /* either.h.gyb */ = {isa = PBXFileReference; lastKnownFileType = text; path = either.h.gyb; sourceTree = "<group>"; };
+		D6F1F1111F06531100A61981 /* either_inline.h.gyb */ = {isa = PBXFileReference; lastKnownFileType = text; path = either_inline.h.gyb; sourceTree = "<group>"; };
 		D6F4FD1F1EEAA23F001CE2C0 /* try_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = try_macro.h; sourceTree = "<group>"; };
 		D6FEB4F71EFD1E7D00AB43E8 /* range_iterator_inline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = range_iterator_inline.h; sourceTree = "<group>"; };
 		D6FEB4F81EFD1E7D00AB43E8 /* range_iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = range_iterator.h; sourceTree = "<group>"; };
@@ -168,6 +169,7 @@
 				D6F1F10C1F061CC800A61981 /* either.h */,
 				D6F1F1101F06439300A61981 /* either.h.gyb */,
 				D6F1F10F1F061CE300A61981 /* either_inline.h */,
+				D6F1F1111F06531100A61981 /* either_inline.h.gyb */,
 				D62AD00A1ED828C7009FF226 /* env.cpp */,
 				D62AD00B1ED828C7009FF226 /* env.h */,
 				D65E837A1ECEF1CB00705DB0 /* error.h */,

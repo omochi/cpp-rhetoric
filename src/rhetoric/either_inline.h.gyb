@@ -1,0 +1,145 @@
+%{
+def join(xs, j=", "):
+  return j.join(xs)
+def ifx(c, y, n):
+  if c:
+    return y
+  else:
+    return n
+def either(n):
+  return "Either{}".format(n)
+def either_ts(n, t):
+  return "{}<{}>".format(either(n), join(t_vars(t, n)))
+def t_vars(t, n):
+  return ["{}{}".format(t, i) for i in range(n)]
+def typename_t_vars(t, n):
+  return ["typename {}{}".format(t, i) for i in range(n)]
+
+n_list = [2, 3, 4, 5]
+}%
+namespace rhetoric {
+    template <int C, typename T>
+    EitherCaseWrapper<C, T> EitherCase(const T & value) {
+        return EitherCaseWrapper<C, T>(value);
+    }
+    
+% for n in n_list:
+%   for i in range(n):
+    template <${join(typename_t_vars("T", n))}>
+    ${either_ts(n, "T")}::
+    ${either(n)}(const EitherCaseWrapper<${i}, T${i}> & value) {
+        InitValue${i}(value.value);
+    }
+
+%   end    
+    template <${join(typename_t_vars("T", n))}>
+    ${either_ts(n, "T")}::
+    ${either(n)}(const ${either_ts(n, "T")} & other) {
+        switch (other.tag()) {
+%   for i in range(n):
+            case Tag::Case${i}:
+                InitValue${i}(other.AsCase${i}());
+                break;
+%   end
+        }
+        RHETORIC_FATAL("never");
+    }
+    
+    template <${join(typename_t_vars("T", n))}>
+    template <${join(typename_t_vars("U", n))}>
+    ${either_ts(n, "T")}::
+    ${either(n)}(
+        const ${either_ts(n, "U")} & other,
+        typename std::enable_if<
+%   for i in range(n):
+            std::is_convertible<U${i}, T${i}>::value${ifx(i < n-1, " &&", "")}
+%   end
+        >::type *)
+    {
+        switch (other.tag()) {
+%   for i in range(n):
+            case Tag::Case${i}:
+                InitValue${i}(static_cast<T${i}>(other.AsCase${i}()));
+                break;
+%   end
+        }
+        RHETORIC_FATAL("never");
+    }
+    
+    template <${join(typename_t_vars("T", n))}>
+    ${either_ts(n, "T")} & 
+    ${either_ts(n, "T")}::
+    operator= (const ${either_ts(n, "T")} & other) {
+        Deinit();
+        
+        switch (other.tag()) {
+%   for i in range(n):
+            case Tag::Case${i}:
+                InitValue${i}(other.AsCase${i}());
+                break;
+%   end
+        }
+        RHETORIC_FATAL("never");
+    }
+    
+    template <${join(typename_t_vars("T", n))}>
+    ${either_ts(n, "T")}::~${either(n)}() {
+        Deinit();
+    }
+    
+    template <${join(typename_t_vars("T", n))}>
+    typename ${either_ts(n, "T")}::Tag 
+    ${either_ts(n, "T")}::
+    tag() const {
+        return tag_;
+    }
+    
+%   for i in range(n):
+    template <${join(typename_t_vars("T", n))}>
+    const T${i} & 
+    ${either_ts(n, "T")}::
+    AsCase${i}() const {
+        RHETORIC_ASSERT(tag_ == Tag::Case${i});
+        return storage_.value${i};
+    }
+    
+% end
+    template <${join(typename_t_vars("T", n))}>
+    ${either_ts(n, "T")}::
+    Storage::Storage() {}
+
+    template <${join(typename_t_vars("T", n))}>
+    ${either_ts(n, "T")}::
+    Storage::~Storage() {}
+    
+%   for i in range(n):
+    template <${join(typename_t_vars("T", n))}>
+    void
+    ${either_ts(n, "T")}::
+    InitValue${i}(const T${i} & value) {
+        new (&storage_.value${i}) T${i}(value);
+        tag_ = Tag::Case${i};
+    }
+    
+%end
+    template <${join(typename_t_vars("T", n))}>
+    void 
+    ${either_ts(n, "T")}::
+    Deinit() {
+        switch (tag_) {
+%   for i in range(n):
+            case Tag::Case${i}:
+                storage_.value${i}.~T${i}();
+                break;
+%   end
+        }
+        RHETORIC_FATAL("never");
+    }
+    
+% end
+    template <int C, typename T>
+    EitherCaseWrapper<C, T>::EitherCaseWrapper(const T & value):
+    value(value)
+    {}
+    
+}

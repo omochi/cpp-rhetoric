@@ -1,15 +1,21 @@
 %{
-
-def join(xs, j):
+def join(xs, j=", "):
   return j.join(xs)
 def ifx(c, y, n):
   if c:
     return y
   else:
     return n
+def either(n):
+  return "Either{}".format(n)
+def either_ts(n, t):
+  return "{}<{}>".format(either(n), join(t_vars(t, n)))
+def t_vars(t, n):
+  return ["{}{}".format(t, i) for i in range(n)]
+def typename_t_vars(t, n):
+  return ["typename {}{}".format(t, i) for i in range(n)]
 
 n_list = [2, 3, 4, 5]
-
 }%
 #pragma once
 
@@ -24,19 +30,8 @@ namespace rhetoric {
     EitherCaseWrapper<C, T> EitherCase(const T & value);
     
 % for n in n_list:
-%{
-    class_name = "Either{}".format(n)
-
-    t_vars = ["T{}".format(i) for i in range(n)]
-    typename_t_vars = ["typename {}".format(t) for t in t_vars]
-    
-    class_name_ts = "{}<{}>".format(class_name, join(t_vars, ", "))
-    
-    u_vars = ["U{}".format(i) for i in range(n)]
-    typename_u_vars = ["typename {}".format(u) for u in u_vars]
-}%
-    template <${join(typename_t_vars, ", ")}>
-    class ${class_name} {
+    template <${join(typename_t_vars("T", n))}>
+    class ${either(n)} {
     public:
         enum class Tag : int8_t {
 %   for i in range(n):
@@ -44,20 +39,21 @@ namespace rhetoric {
 %   end
         };
         
-        ${class_name}() = delete;
+        ${either(n)}() = delete;
 %   for i in range(n):
-        /* implicit */ ${class_name}(const EitherCaseWrapper<${i}, ${t_vars[i]}> & value);
+        /* implicit */ ${either(n)}(const EitherCaseWrapper<${i}, T${i}> & value);
 %   end
-        ${class_name}(const ${class_name_ts} & other);
-        template <${join(typename_u_vars, ", ")}>
-        ${class_name}(const ${class_name}<${join(u_vars, ", ")}> & other,
-                typename std::enable_if<
+        ${either(n)}(const ${either_ts(n, "T")} & other);
+        template <${join(typename_t_vars("U", n))}>
+        ${either(n)}(
+        	const ${either_ts(n, "U")} & other,
+            typename std::enable_if<
 %   for i in range(n):
-                    std::is_convertible<U${i}, T${i}>::value${ifx(i < n-1, " &&", "")}
+                std::is_convertible<U${i}, T${i}>::value${ifx(i < n-1, " &&", "")}
 %   end
-                >::type * = nullptr);
-        ${class_name_ts} & operator= (const ${class_name_ts} & other);
-        ~${class_name}();
+            >::type * = nullptr);
+        ${either_ts(n, "T")} & operator= (const ${either_ts(n, "T")} & other);
+        ~${either(n)}();
         
         Tag tag() const;
 %   for i in range(n):
