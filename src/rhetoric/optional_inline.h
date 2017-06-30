@@ -1,58 +1,61 @@
 namespace rhetoric {
     template <typename T>
-    Optional<T>::Optional():Optional(None()){}
+    Optional<T>::Optional()
+    {
+        InitNone();
+    }
     
     template <typename T>
-    Optional<T>::Optional(const T & value, OptionalSomeTag):
-    value_(new T(value))
+    Optional<T>::Optional(const T & value, OptionalSomeTag)
     {
+        InitValue(value);
     }
 
     template <typename T>
-    Optional<T>::Optional(const None &):
-    value_(nullptr)
-    {}
+    Optional<T>::Optional(const None &)
+    {
+        InitNone();
+    }
 
     template <typename T>
-    Optional<T>::Optional(const Optional<T> & other):
-    value_(nullptr)
+    Optional<T>::Optional(const Optional<T> & other)
     {
         if (other) {
-            value_ = new T(*other);
+            InitValue(other.value());
+        } else {
+            InitNone();
         }
     }
 
     template <typename T>
     Optional<T> & Optional<T>::operator=(const Optional<T> & other)
     {
-        Optional<T> temp(other);
-        Swap(temp);
+        DeinitStorage();
+        
+        if (other) {
+            InitValue(other.value());
+        } else {
+            InitNone();
+        }
         return *this;
     }
 
     template <typename T>
     template <typename U>
     Optional<T>::Optional(const Optional<U> & other,
-                          typename std::enable_if<std::is_convertible<U, T>::value>::type *):
-    value_(nullptr)
+                          typename std::enable_if<std::is_convertible<U, T>::value>::type *)
     {
         if (other) {
-            value_ = new T(static_cast<T>(*other));
+            InitValue(static_cast<T>(other.value()));
+        } else {
+            InitNone();
         }
     }
 
     template <typename T>
     Optional<T>::~Optional()
     {
-        if (value_) {
-            delete value_;
-            value_ = nullptr;
-        }
-    }
-
-    template <typename T>
-    void Optional<T>::Swap(Optional<T> & other) {
-        std::swap(value_, other.value_);
+        DeinitStorage();
     }
 
     template <typename T>
@@ -62,7 +65,7 @@ namespace rhetoric {
 
     template <typename T>
     Optional<T>::operator bool() const {
-        return value_ != nullptr;
+        return presented_;
     }
 
     template <typename T>
@@ -72,8 +75,8 @@ namespace rhetoric {
 
     template <typename T>
     const T * Optional<T>::operator->() const {
-        RHETORIC_ASSERT(value_ != nullptr);
-        return value_;
+        RHETORIC_ASSERT(presented());
+        return &storage_.value_;
     }
 
     template <typename T>
@@ -83,9 +86,9 @@ namespace rhetoric {
 
     template <typename T>
     bool Optional<T>::operator==(const Optional<T> & other) const {
-        if (*this) {
+        if (presented()) {
             if (other) {
-                return *value_ == *other.value_;
+                return value() == other.value();
             } else {
                 return false;
             }
@@ -104,6 +107,33 @@ namespace rhetoric {
             return value();
         }
         return alt;
+    }
+    
+    template <typename T>
+    Optional<T>::Storage::Storage()
+    {}
+    
+    template <typename T>
+    Optional<T>::Storage::~Storage()
+    {}
+    
+    template <typename T>
+    void Optional<T>::InitNone() {
+        presented_ = false;
+    }
+    
+    template <typename T>
+    void Optional<T>::InitValue(const T & value) {
+        new (&storage_.value_) T (value);
+        presented_ = true;
+    }
+    
+    template <typename T>
+    void Optional<T>::DeinitStorage() {
+        if (presented()) {
+            storage_.value_.~T();
+            presented_ = false;
+        }
     }
 
     template <typename T>

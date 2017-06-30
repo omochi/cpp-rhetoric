@@ -29,8 +29,6 @@ namespace rhetoric {
 
         ~Optional();
 
-        void Swap(Optional<T> & other);
-
         bool presented() const;
         explicit operator bool() const;
 
@@ -44,7 +42,20 @@ namespace rhetoric {
 
         T GetOr(const T & alt) const;
     private:
-        T * value_;
+        union Storage {
+            T value_;
+            
+            Storage();
+            ~Storage();
+        };
+        
+        void InitNone();
+        void InitValue(const T & value);
+        
+        void DeinitStorage();
+        
+        Storage storage_;
+        bool presented_;
     };
 
     template <typename T>
