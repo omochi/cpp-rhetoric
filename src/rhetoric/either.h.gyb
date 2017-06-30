@@ -1,12 +1,12 @@
 %{
 
 def join(xs, j):
-	return j.join(xs)
+  return j.join(xs)
 def ifx(c, y, n):
-	if c:
-		return y
-	else:
-		return n
+  if c:
+    return y
+  else:
+    return n
 
 n_list = [2, 3, 4, 5]
 
