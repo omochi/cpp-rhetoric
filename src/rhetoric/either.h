@@ -5,14 +5,10 @@
 #include "./std_dependency.h"
 
 namespace rhetoric {
-    template <typename T> class EitherCase0Wrapper;
-    template <typename T> class EitherCase1Wrapper;
+    template <int C, typename T> class EitherCaseWrapper;
     
-    template <typename T>
-    EitherCase0Wrapper<T> EitherCase0(const T & value);
-
-    template <typename T>
-    EitherCase1Wrapper<T> EitherCase1(const T & value);
+    template <int C, typename T>
+    EitherCaseWrapper<C, T> EitherCase(const T & value);
     
     template <typename T0, typename T1>
     class Either2 {
@@ -23,8 +19,8 @@ namespace rhetoric {
         };
         
         Either2() = delete;
-        /* implicit */ Either2(const EitherCase0Wrapper<T0> & value);
-        /* implicit */ Either2(const EitherCase1Wrapper<T1> & value);
+        /* implicit */ Either2(const EitherCaseWrapper<0, T0> & value);
+        /* implicit */ Either2(const EitherCaseWrapper<1, T1> & value);
         Either2(const Either2<T0, T1> & other);
         template <typename U0, typename U1>
         Either2(const Either2<U0, U1> & other,
@@ -55,16 +51,10 @@ namespace rhetoric {
         Tag tag_;
     };
     
-    template <typename T>
-    struct EitherCase0Wrapper {
+    template <int C, typename T>
+    struct EitherCaseWrapper {
         T value;
-        EitherCase0Wrapper(const T & value);
-    };
-    
-    template <typename T>
-    struct EitherCase1Wrapper {
-        T value;
-        EitherCase1Wrapper(const T & value);
+        EitherCaseWrapper(const T & value);
     };
     
 }

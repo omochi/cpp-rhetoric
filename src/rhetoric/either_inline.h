@@ -1,21 +1,16 @@
 namespace rhetoric {
-    template <typename T>
-    EitherCase0Wrapper<T> EitherCase0(const T & value) {
-        return EitherCase0Wrapper<T>(value);
-    }
-    
-    template <typename T>
-    EitherCase1Wrapper<T> EitherCase1(const T & value) {
-        return EitherCase1Wrapper<T>(value);
+    template <int C, typename T>
+    EitherCaseWrapper<C, T> EitherCase(const T & value) {
+        return EitherCaseWrapper<C, T>(value);
     }
     
     template <typename T0, typename T1>
-    Either2<T0, T1>::Either2(const EitherCase0Wrapper<T0> & value) {
+    Either2<T0, T1>::Either2(const EitherCaseWrapper<0, T0> & value) {
         InitValue0(value.value);
     }
     
     template <typename T0, typename T1>
-    Either2<T0, T1>::Either2(const EitherCase1Wrapper<T1> & value) {
+    Either2<T0, T1>::Either2(const EitherCaseWrapper<1, T1> & value) {
         InitValue1(value.value);
     }
     
@@ -119,14 +114,8 @@ namespace rhetoric {
         RHETORIC_FATAL("never");
     }
     
-    
-    template <typename T>
-    EitherCase0Wrapper<T>::EitherCase0Wrapper(const T & value):
-    value(value)
-    {}
-    
-    template <typename T>
-    EitherCase1Wrapper<T>::EitherCase1Wrapper(const T & value):
+    template <int C, typename T>
+    EitherCaseWrapper<C, T>::EitherCaseWrapper(const T & value):
     value(value)
     {}
     
