@@ -1,44 +1,41 @@
 namespace rhetoric {
     template <typename T>
     Result<T>::Result():
-    value_(Some(T()))
+    either_(EitherCase<1>(T()))
     {}
 
+    template <typename T>
+    Result<T>::Result(const ResultFailure & failure):
+    either_(EitherCase<0>(failure.error))
+    {
+        RHETORIC_ASSERT(failure.error != nullptr);
+    }
+    
     template <typename T>
     Result<T>::Result(const T & value, ResultSuccessTag):
-    value_(Some(value))
+    either_(EitherCase<1>(value))
     {}
 
     template <typename T>
-    Result<T>::Result(const ResultFailure & failure) {
-        RHETORIC_ASSERT(failure.error != nullptr);
-        error_ = failure.error;
-    }
-
-    template <typename T>
-    Result<T>::Result(const Result<T> & other)
-    {
-        *this = other;
-    }
+    Result<T>::Result(const Result<T> & other):
+    either_(other.either_)
+    {}
 
     template <typename T>
     Result<T> & Result<T>::operator=(const Result<T> & other) {
-        value_ = other.value_;
-        error_ = other.error_;
+        either_ = other.either_;
         return *this;
     }
 
     template <typename T>
     template <typename U>
     Result<T>::Result(const Result<U> & other,
-                      typename std::enable_if<std::is_convertible<U, T>::value>::type *)
-    {
-        if (other) {
-            value_ = Some(other.value());
-        } else {
-            error_ = other.error();
-        }
-    }
+                      typename std::enable_if<std::is_convertible<U, T>::value>::type *):
+    either_(other.succeeded() ?
+            Either2<Ptr<Error>, T>(EitherCase<1>(static_cast<T>(other.value()))) :
+            Either2<Ptr<Error>, T>(EitherCase<0>(other.error()))
+            )
+    {}
 
     template <typename T>
     Result<T>::~Result()
@@ -51,7 +48,7 @@ namespace rhetoric {
 
     template <typename T>
     Result<T>::operator bool() const {
-        return value_.presented();
+        return either_.tag() == Either2<Ptr<Error>, T>::Tag::Case1;
     }
 
     template <typename T>
@@ -61,26 +58,25 @@ namespace rhetoric {
 
     template <typename T>
     const Ptr<Error> & Result<T>::error() const {
-        RHETORIC_ASSERT(error_ != nullptr);
-        return error_;
+        return either_.AsCase0();
     }
 
     template <typename T>
     const T * Result<T>::operator->() const {
-        return value_.operator->();
+        return &operator*();
     }
 
     template <typename T>
     const T & Result<T>::operator*() const {
-        return *operator->();
+        return either_.AsCase1();
     }
 
     template <typename T>
     T Result<T>::Recover(const T & recovery_value) const {
-        if (!succeeded()) {
-            return recovery_value;
+        if (succeeded()) {
+            return value();
         }
-        return value();
+        return recovery_value;
     }
 
     template <typename T>

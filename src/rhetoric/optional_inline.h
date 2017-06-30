@@ -1,62 +1,43 @@
 namespace rhetoric {
     template <typename T>
-    Optional<T>::Optional()
-    {
-        InitNone();
-    }
+    Optional<T>::Optional():Optional(None())
+    {}
     
     template <typename T>
-    Optional<T>::Optional(const T & value, OptionalSomeTag)
-    {
-        InitValue(value);
-    }
+    Optional<T>::Optional(const None &):
+    either_(EitherCase<0>(None()))
+    {}
 
     template <typename T>
-    Optional<T>::Optional(const None &)
-    {
-        InitNone();
-    }
+    Optional<T>::Optional(const T & value, OptionalSomeTag):
+    either_(EitherCase<1>(value))
+    {}
 
     template <typename T>
-    Optional<T>::Optional(const Optional<T> & other)
-    {
-        if (other) {
-            InitValue(other.value());
-        } else {
-            InitNone();
-        }
-    }
+    Optional<T>::Optional(const Optional<T> & other):
+    either_(other.either_)
+    {}
 
     template <typename T>
     Optional<T> & Optional<T>::operator=(const Optional<T> & other)
     {
-        DeinitStorage();
-        
-        if (other) {
-            InitValue(other.value());
-        } else {
-            InitNone();
-        }
+        either_ = other.either_;
         return *this;
     }
 
     template <typename T>
     template <typename U>
     Optional<T>::Optional(const Optional<U> & other,
-                          typename std::enable_if<std::is_convertible<U, T>::value>::type *)
-    {
-        if (other) {
-            InitValue(static_cast<T>(other.value()));
-        } else {
-            InitNone();
-        }
-    }
+                          typename std::enable_if<std::is_convertible<U, T>::value>::type *):
+    either_(other.presented() ?
+            Either2<None, T>(EitherCase<1>(static_cast<T>(other.value()))) :
+            Either2<None, T>(EitherCase<0>(None()))
+            )
+    {}
 
     template <typename T>
     Optional<T>::~Optional()
-    {
-        DeinitStorage();
-    }
+    {}
 
     template <typename T>
     bool Optional<T>::presented() const {
@@ -65,7 +46,7 @@ namespace rhetoric {
 
     template <typename T>
     Optional<T>::operator bool() const {
-        return presented_;
+        return either_.tag() == Either2<None, T>::Tag::Case1;
     }
 
     template <typename T>
@@ -75,13 +56,12 @@ namespace rhetoric {
 
     template <typename T>
     const T * Optional<T>::operator->() const {
-        RHETORIC_ASSERT(presented());
-        return &storage_.value_;
+        return &operator*();
     }
 
     template <typename T>
     const T & Optional<T>::operator*() const {
-        return *operator->();
+        return either_.AsCase1();
     }
 
     template <typename T>
@@ -102,40 +82,13 @@ namespace rhetoric {
     }
 
     template <typename T>
-    T Optional<T>::GetOr(const T & alt) const {
-        if (*this) {
+    T Optional<T>::GetOr(const T & default_value) const {
+        if (presented()) {
             return value();
         }
-        return alt;
+        return default_value;
     }
     
-    template <typename T>
-    Optional<T>::Storage::Storage()
-    {}
-    
-    template <typename T>
-    Optional<T>::Storage::~Storage()
-    {}
-    
-    template <typename T>
-    void Optional<T>::InitNone() {
-        presented_ = false;
-    }
-    
-    template <typename T>
-    void Optional<T>::InitValue(const T & value) {
-        new (&storage_.value_) T (value);
-        presented_ = true;
-    }
-    
-    template <typename T>
-    void Optional<T>::DeinitStorage() {
-        if (presented()) {
-            storage_.value_.~T();
-            presented_ = false;
-        }
-    }
-
     template <typename T>
     Optional<T> Some(const T & value) {
         return Optional<T>(value, OptionalSomeTag());

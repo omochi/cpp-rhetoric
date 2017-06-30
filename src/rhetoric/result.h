@@ -2,6 +2,7 @@
 
 #include "./assert.h"
 #include "./attribute.h"
+#include "./either.h"
 #include "./error.h"
 #include "./optional.h"
 #include "./ptr.h"
@@ -19,8 +20,9 @@ namespace rhetoric {
         using ValueType = T;
 
         Result();
-        Result(const T & value, ResultSuccessTag);
         Result(const ResultFailure & failure);
+        Result(const T & value, ResultSuccessTag);
+
 
         Result(const Result<T> & other);
         Result<T> & operator=(const Result<T> & other);
@@ -43,8 +45,7 @@ namespace rhetoric {
         T Recover(const T & recovery_value) const;
 
     private:
-        Optional<T> value_;
-        Ptr<Error> error_;
+        Either2<Ptr<Error>, T> either_;
     };
 
     template <typename T>

@@ -2,6 +2,7 @@
 
 #include "./assert.h"
 #include "./attribute.h"
+#include "./either.h"
 #include "./equatable_macro.h"
 #include "./none.h"
 #include "./std_dependency.h"
@@ -15,11 +16,8 @@ namespace rhetoric {
         using ValueType = T;
         
         Optional();
-        
-        Optional(const T & value, OptionalSomeTag);
-
         Optional(const None &);
-
+        Optional(const T & value, OptionalSomeTag);
         Optional(const Optional<T> & other);
         Optional<T> & operator=(const Optional<T> & other);
 
@@ -40,22 +38,9 @@ namespace rhetoric {
         bool operator==(const Optional<T> & other) const;
         RHETORIC_EQUATABLE_DEFAULT(Optional<T>);
 
-        T GetOr(const T & alt) const;
+        T GetOr(const T & default_value) const;
     private:
-        union Storage {
-            T value_;
-            
-            Storage();
-            ~Storage();
-        };
-        
-        void InitNone();
-        void InitValue(const T & value);
-        
-        void DeinitStorage();
-        
-        Storage storage_;
-        bool presented_;
+        Either2<None, T> either_;
     };
 
     template <typename T>

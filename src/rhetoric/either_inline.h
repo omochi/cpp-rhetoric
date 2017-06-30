@@ -27,7 +27,6 @@ namespace rhetoric {
                 InitValue1(other.AsCase1());
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1>
@@ -48,7 +47,6 @@ namespace rhetoric {
                 InitValue1(static_cast<T1>(other.AsCase1()));
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1>
@@ -65,7 +63,8 @@ namespace rhetoric {
                 InitValue1(other.AsCase1());
                 break;
         }
-        RHETORIC_FATAL("never");
+
+        return *this;
     }
     
     template <typename T0, typename T1>
@@ -132,7 +131,6 @@ namespace rhetoric {
                 storage_.value1.~T1();
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2>
@@ -167,7 +165,6 @@ namespace rhetoric {
                 InitValue2(other.AsCase2());
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2>
@@ -192,7 +189,6 @@ namespace rhetoric {
                 InitValue2(static_cast<T2>(other.AsCase2()));
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2>
@@ -212,7 +208,8 @@ namespace rhetoric {
                 InitValue2(other.AsCase2());
                 break;
         }
-        RHETORIC_FATAL("never");
+
+        return *this;
     }
     
     template <typename T0, typename T1, typename T2>
@@ -298,7 +295,6 @@ namespace rhetoric {
                 storage_.value2.~T2();
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2, typename T3>
@@ -342,7 +338,6 @@ namespace rhetoric {
                 InitValue3(other.AsCase3());
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2, typename T3>
@@ -371,7 +366,6 @@ namespace rhetoric {
                 InitValue3(static_cast<T3>(other.AsCase3()));
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2, typename T3>
@@ -394,7 +388,8 @@ namespace rhetoric {
                 InitValue3(other.AsCase3());
                 break;
         }
-        RHETORIC_FATAL("never");
+
+        return *this;
     }
     
     template <typename T0, typename T1, typename T2, typename T3>
@@ -499,7 +494,6 @@ namespace rhetoric {
                 storage_.value3.~T3();
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2, typename T3, typename T4>
@@ -552,7 +546,6 @@ namespace rhetoric {
                 InitValue4(other.AsCase4());
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2, typename T3, typename T4>
@@ -585,7 +578,6 @@ namespace rhetoric {
                 InitValue4(static_cast<T4>(other.AsCase4()));
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <typename T0, typename T1, typename T2, typename T3, typename T4>
@@ -611,7 +603,8 @@ namespace rhetoric {
                 InitValue4(other.AsCase4());
                 break;
         }
-        RHETORIC_FATAL("never");
+
+        return *this;
     }
     
     template <typename T0, typename T1, typename T2, typename T3, typename T4>
@@ -735,7 +728,6 @@ namespace rhetoric {
                 storage_.value4.~T4();
                 break;
         }
-        RHETORIC_FATAL("never");
     }
     
     template <int C, typename T>
