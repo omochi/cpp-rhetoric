@@ -38,11 +38,11 @@ namespace rhetoric {
         const T1 & AsCase1() const;
 
         template <Either2Tag G>
-        const T0 & AsCase(std::enable_if_t<  G == Either2Tag::Case0  > * = nullptr) const 
+        const T0 & AsCase(std::enable_if_t<  G == Either2Tag::Case0  > * = nullptr) const
         { return AsCase0(); }
-        
+
         template <Either2Tag G>
-        const T1 & AsCase(std::enable_if_t<  G == Either2Tag::Case1  > * = nullptr) const 
+        const T1 & AsCase(std::enable_if_t<  G == Either2Tag::Case1  > * = nullptr) const
         { return AsCase1(); }
         
     private:
