@@ -8,28 +8,31 @@
 #include "./ptr.h"
 
 namespace rhetoric {
-    struct ResultSuccessTag {};
-
     struct ResultFailure {
         Ptr<Error> error;
     };
 
+    constexpr Either2Tag ErrorTag = Either2Tag::Case0;
+    constexpr Either2Tag SuccessTag = Either2Tag::Case1;
+    
     template <typename T>
     class Result {
     public:
         using ValueType = T;
 
         Result();
-        Result(const ResultFailure & failure);
-        Result(const T & value, ResultSuccessTag);
-
+        /* implicit */ Result(const ResultFailure & failure);
+        
+        template <Either2Tag G>
+        Result(const T & value,
+               std::enable_if_t<G == SuccessTag> * = nullptr);
 
         Result(const Result<T> & other);
         Result<T> & operator=(const Result<T> & other);
 
         template <typename U>
         Result(const Result<U> & other,
-               typename std::enable_if<std::is_convertible<U, T>::value>::type * = nullptr);
+               std::enable_if_t<std::is_convertible<U, T>::value> * = nullptr);
         
         ~Result();
 

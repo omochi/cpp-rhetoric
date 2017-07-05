@@ -1,11 +1,8 @@
 %{
 def join(xs, j=", "):
   return j.join(xs)
-def ifx(c, y, n):
-  if c:
-    return y
-  else:
-    return n
+def ifx(c, y, n=""):
+  return y if c else n
 def either(n):
   return "Either{}".format(n)
 def either_ts(n, t):
@@ -15,19 +12,20 @@ def t_vars(t, n):
 def typename_t_vars(t, n):
   return ["typename {}{}".format(t, i) for i in range(n)]
 
-n_list = [2, 3, 4, 5]
+n_list = [2, 3, 4, 5, 6, 7, 8]
 }%
 namespace rhetoric {
-    template <int C, typename T>
-    EitherCaseWrapper<C, T> EitherCase(const T & value) {
-        return EitherCaseWrapper<C, T>(value);
-    }
-    
 % for n in n_list:
+    template <${either(n)}Tag G, typename T>
+    ${either(n)}CaseWrapper<G, T>
+    ${either(n)}Case(const T & value) {
+        return ${either(n)}CaseWrapper<G, T>(value);
+    }
+
 %   for i in range(n):
     template <${join(typename_t_vars("T", n))}>
     ${either_ts(n, "T")}::
-    ${either(n)}(const EitherCaseWrapper<${i}, T${i}> & value) {
+    ${either(n)}(const ${either(n)}CaseWrapper<${either(n)}Tag::Case${i}, T${i}> & value) {
         InitValue${i}(value.value);
     }
 
@@ -37,7 +35,7 @@ namespace rhetoric {
     ${either(n)}(const ${either_ts(n, "T")} & other) {
         switch (other.tag()) {
 %   for i in range(n):
-            case Tag::Case${i}:
+            case ${either(n)}Tag::Case${i}:
                 InitValue${i}(other.AsCase${i}());
                 break;
 %   end
@@ -49,15 +47,15 @@ namespace rhetoric {
     ${either_ts(n, "T")}::
     ${either(n)}(
         const ${either_ts(n, "U")} & other,
-        typename std::enable_if<
+        std::enable_if_t<
 %   for i in range(n):
             std::is_convertible<U${i}, T${i}>::value${ifx(i < n-1, " &&", "")}
 %   end
-        >::type *)
+        > *)
     {
         switch (other.tag()) {
 %   for i in range(n):
-            case Tag::Case${i}:
+            case ${either(n)}Tag::Case${i}:
                 InitValue${i}(static_cast<T${i}>(other.AsCase${i}()));
                 break;
 %   end
@@ -72,7 +70,7 @@ namespace rhetoric {
         
         switch (other.tag()) {
 %   for i in range(n):
-            case Tag::Case${i}:
+            case ${either(n)}Tag::Case${i}:
                 InitValue${i}(other.AsCase${i}());
                 break;
 %   end
@@ -87,7 +85,7 @@ namespace rhetoric {
     }
     
     template <${join(typename_t_vars("T", n))}>
-    typename ${either_ts(n, "T")}::Tag 
+    ${either(n)}Tag
     ${either_ts(n, "T")}::
     tag() const {
         return tag_;
@@ -98,7 +96,7 @@ namespace rhetoric {
     const T${i} & 
     ${either_ts(n, "T")}::
     AsCase${i}() const {
-        RHETORIC_ASSERT(tag_ == Tag::Case${i});
+        RHETORIC_ASSERT(tag_ == ${either(n)}Tag::Case${i});
         return storage_.value${i};
     }
     
@@ -117,7 +115,7 @@ namespace rhetoric {
     ${either_ts(n, "T")}::
     InitValue${i}(const T${i} & value) {
         new (&storage_.value${i}) T${i}(value);
-        tag_ = Tag::Case${i};
+        tag_ = ${either(n)}Tag::Case${i};
     }
     
 %end
@@ -127,17 +125,17 @@ namespace rhetoric {
     Deinit() {
         switch (tag_) {
 %   for i in range(n):
-            case Tag::Case${i}:
+            case ${either(n)}Tag::Case${i}:
                 storage_.value${i}.~T${i}();
                 break;
 %   end
         }
     }
     
-% end
-    template <int C, typename T>
-    EitherCaseWrapper<C, T>::EitherCaseWrapper(const T & value):
+    template <${either(n)}Tag G, typename T>
+    ${either(n)}CaseWrapper<G, T>::${either(n)}CaseWrapper(const T & value):
     value(value)
     {}
-    
+
+% end
 }

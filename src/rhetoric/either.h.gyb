@@ -1,11 +1,8 @@
 %{
 def join(xs, j=", "):
   return j.join(xs)
-def ifx(c, y, n):
-  if c:
-    return y
-  else:
-    return n
+def ifx(c, y, n=""):
+  return y if c else n
 def either(n):
   return "Either{}".format(n)
 def either_ts(n, t):
@@ -15,7 +12,7 @@ def t_vars(t, n):
 def typename_t_vars(t, n):
   return ["typename {}{}".format(t, i) for i in range(n)]
 
-n_list = [2, 3, 4, 5]
+n_list = [2, 3, 4, 5, 6, 7, 8]
 }%
 #pragma once
 
@@ -24,40 +21,48 @@ n_list = [2, 3, 4, 5]
 #include "./std_dependency.h"
 
 namespace rhetoric {
-    template <int C, typename T> class EitherCaseWrapper;
-    
-    template <int C, typename T>
-    EitherCaseWrapper<C, T> EitherCase(const T & value);
-    
 % for n in n_list:
+    enum class ${either(n)}Tag : int8_t {
+%   for i in range(n):
+        Case${i}${ifx(i < n-1, ",")}
+%   end
+    };
+
+    template <${either(n)}Tag G, typename T> struct ${either(n)}CaseWrapper;
+
+    template <${either(n)}Tag G, typename T>
+    ${either(n)}CaseWrapper<G, T>
+    ${either(n)}Case(const T & value);
+
     template <${join(typename_t_vars("T", n))}>
     class ${either(n)} {
     public:
-        enum class Tag : int8_t {
-%   for i in range(n):
-            Case${i}${ifx(i < n-1, ",", "")}
-%   end
-        };
-        
         ${either(n)}() = delete;
 %   for i in range(n):
-        /* implicit */ ${either(n)}(const EitherCaseWrapper<${i}, T${i}> & value);
+        /* implicit */ ${either(n)}(const ${either(n)}CaseWrapper<${either(n)}Tag::Case${i}, T${i}> & value);
 %   end
         ${either(n)}(const ${either_ts(n, "T")} & other);
         template <${join(typename_t_vars("U", n))}>
         ${either(n)}(
         	const ${either_ts(n, "U")} & other,
-            typename std::enable_if<
+            std::enable_if_t<
 %   for i in range(n):
                 std::is_convertible<U${i}, T${i}>::value${ifx(i < n-1, " &&", "")}
 %   end
-            >::type * = nullptr);
+            > * = nullptr);
         ${either_ts(n, "T")} & operator= (const ${either_ts(n, "T")} & other);
         ~${either(n)}();
         
-        Tag tag() const;
+        ${either(n)}Tag tag() const;
 %   for i in range(n):
         const T${i} & AsCase${i}() const;
+%   end
+
+%   for i in range(n):
+        template <${either(n)}Tag G>
+        const T${i} & AsCase(std::enable_if_t<  G == ${either(n)}Tag::Case${i}  > * = nullptr) const 
+        { return AsCase${i}(); }
+        
 %   end
     private:
         union Storage {
@@ -75,16 +80,16 @@ namespace rhetoric {
         void Deinit();
         
         Storage storage_;
-        Tag tag_;
+        ${either(n)}Tag tag_;
     };
 
-% end
-    template <int C, typename T>
-    struct EitherCaseWrapper {
+    template <${either(n)}Tag G, typename T>
+    struct ${either(n)}CaseWrapper {
         T value;
-        EitherCaseWrapper(const T & value);
+        ${either(n)}CaseWrapper(const T & value);
     };
-    
+
+% end    
 }
 
 #include "./either_inline.h"
