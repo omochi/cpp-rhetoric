@@ -5,7 +5,7 @@ namespace rhetoric {
     
     template <typename T>
     Optional<T>::Optional(const None &):
-    either_(Either2Case<NoneTag>(None()))
+    either_(EitherCase<NoneTag>(None()))
     {}
     
     template <typename T>
@@ -30,8 +30,8 @@ namespace rhetoric {
     Optional<T>::Optional(const Optional<U> & other,
                           typename std::enable_if<std::is_convertible<U, T>::value>::type *):
     either_(other.presented() ?
-            Either2<None, T>(Either2Case<SomeTag>(static_cast<T>(other.value()))) :
-            Either2<None, T>(Either2Case<NoneTag>(None()))
+            Either2<None, T>(EitherCase<SomeTag>(static_cast<T>(other.value()))) :
+            Either2<None, T>(EitherCase<NoneTag>(None()))
             )
     {}
 
@@ -91,7 +91,7 @@ namespace rhetoric {
     
     template <typename T>
     Optional<T> Some(const T & value) {
-        return Optional<T>(Either2Case<SomeTag>(value));
+        return Optional<T>(EitherCase<SomeTag>(value));
     }
     
 }

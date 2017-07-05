@@ -32,7 +32,7 @@ namespace rhetoric {
 
     template <${either(n)}Tag G, typename T>
     ${either(n)}CaseWrapper<G, T>
-    ${either(n)}Case(const T & value);
+    EitherCase(const T & value);
 
     template <${join(typename_t_vars("T", n))}>
     class ${either(n)} {
