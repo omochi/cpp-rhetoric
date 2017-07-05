@@ -1,19 +1,19 @@
 namespace rhetoric {
     template <typename T>
     Result<T>::Result():
-    either_(EitherCase<1>(T()))
+    either_(Either2Case<SuccessTag>(T()))
     {}
 
     template <typename T>
     Result<T>::Result(const ResultFailure & failure):
-    either_(EitherCase<0>(failure.error))
+    either_(Either2Case<FailureTag>(failure.error))
     {
         RHETORIC_ASSERT(failure.error != nullptr);
     }
     
     template <typename T>
-    Result<T>::Result(const T & value, ResultSuccessTag):
-    either_(EitherCase<1>(value))
+    Result<T>::Result(const Either2CaseWrapper<SuccessTag, T> & value):
+    either_(value)
     {}
 
     template <typename T>
@@ -30,10 +30,10 @@ namespace rhetoric {
     template <typename T>
     template <typename U>
     Result<T>::Result(const Result<U> & other,
-                      typename std::enable_if<std::is_convertible<U, T>::value>::type *):
+                      typename std::enable_if_t<std::is_convertible<U, T>::value> *):
     either_(other.succeeded() ?
-            Either2<Ptr<Error>, T>(EitherCase<1>(static_cast<T>(other.value()))) :
-            Either2<Ptr<Error>, T>(EitherCase<0>(other.error()))
+            Either2<Ptr<Error>, T>(Either2Case<SuccessTag>(static_cast<T>(other.value()))) :
+            Either2<Ptr<Error>, T>(Either2Case<FailureTag>(other.error()))
             )
     {}
 
@@ -48,7 +48,7 @@ namespace rhetoric {
 
     template <typename T>
     Result<T>::operator bool() const {
-        return either_.tag() == Either2<Ptr<Error>, T>::Tag::Case1;
+        return either_.tag() == SuccessTag;
     }
 
     template <typename T>
@@ -81,7 +81,7 @@ namespace rhetoric {
 
     template <typename T>
     Result<T> Success(const T & value) {
-        return Result<T>(value, ResultSuccessTag());
+        return Result<T>(Either2Case<SuccessTag>(value));
     }
 
     template <typename T>

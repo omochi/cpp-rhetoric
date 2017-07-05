@@ -8,22 +8,25 @@
 #include "./std_dependency.h"
 
 namespace rhetoric {
-    struct OptionalSomeTag {};
-
+    
+    constexpr Either2Tag NoneTag = Either2Tag::Case0;
+    constexpr Either2Tag SomeTag = Either2Tag::Case1;
+    
     template <typename T>
     class Optional {
     public:
         using ValueType = T;
         
         Optional();
-        Optional(const None &);
-        Optional(const T & value, OptionalSomeTag);
+        /* implicit */ Optional(const None &);
+        explicit Optional(const Either2CaseWrapper<SomeTag, T> & value);
+        
         Optional(const Optional<T> & other);
         Optional<T> & operator=(const Optional<T> & other);
 
         template <typename U>
         Optional(const Optional<U> & other,
-                 typename std::enable_if<std::is_convertible<U, T>::value>::type * = nullptr);
+                 typename std::enable_if_t<std::is_convertible<U, T>::value> * = nullptr);
 
         ~Optional();
 
