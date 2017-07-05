@@ -18,11 +18,8 @@ namespace rhetoric {
         using ValueType = T;
         
         Optional();
-        
         /* implicit */ Optional(const None &);
-        
-        template <Either2Tag G>
-        Optional(const T & value, std::enable_if_t<G == SomeTag> * = nullptr);
+        explicit Optional(const Either2CaseWrapper<SomeTag, T> & value);
         
         Optional(const Optional<T> & other);
         Optional<T> & operator=(const Optional<T> & other);

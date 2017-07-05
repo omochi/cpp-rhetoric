@@ -12,7 +12,7 @@ namespace rhetoric {
         Ptr<Error> error;
     };
 
-    constexpr Either2Tag ErrorTag = Either2Tag::Case0;
+    constexpr Either2Tag FailureTag = Either2Tag::Case0;
     constexpr Either2Tag SuccessTag = Either2Tag::Case1;
     
     template <typename T>
@@ -22,10 +22,7 @@ namespace rhetoric {
 
         Result();
         /* implicit */ Result(const ResultFailure & failure);
-        
-        template <Either2Tag G>
-        Result(const T & value,
-               std::enable_if_t<G == SuccessTag> * = nullptr);
+        explicit Result(const Either2CaseWrapper<SuccessTag, T> & value);
 
         Result(const Result<T> & other);
         Result<T> & operator=(const Result<T> & other);

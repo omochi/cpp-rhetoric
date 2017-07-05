@@ -14,7 +14,8 @@ namespace rhetoric {
 
     template <Either2Tag G, typename T>
     Either2CaseWrapper<G, T>
-    Either2Case(const T & value);
+
+    EitherCase(const T & value);
 
     template <typename T0, typename T1>
     class Either2 {
@@ -78,7 +79,8 @@ namespace rhetoric {
 
     template <Either3Tag G, typename T>
     Either3CaseWrapper<G, T>
-    Either3Case(const T & value);
+
+    EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2>
     class Either3 {
@@ -152,7 +154,8 @@ namespace rhetoric {
 
     template <Either4Tag G, typename T>
     Either4CaseWrapper<G, T>
-    Either4Case(const T & value);
+
+    EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3>
     class Either4 {
@@ -236,7 +239,8 @@ namespace rhetoric {
 
     template <Either5Tag G, typename T>
     Either5CaseWrapper<G, T>
-    Either5Case(const T & value);
+
+    EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3, typename T4>
     class Either5 {
@@ -330,7 +334,8 @@ namespace rhetoric {
 
     template <Either6Tag G, typename T>
     Either6CaseWrapper<G, T>
-    Either6Case(const T & value);
+
+    EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
     class Either6 {
@@ -434,7 +439,8 @@ namespace rhetoric {
 
     template <Either7Tag G, typename T>
     Either7CaseWrapper<G, T>
-    Either7Case(const T & value);
+
+    EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
     class Either7 {
@@ -548,7 +554,8 @@ namespace rhetoric {
 
     template <Either8Tag G, typename T>
     Either8CaseWrapper<G, T>
-    Either8Case(const T & value);
+
+    EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
     class Either8 {

@@ -18,7 +18,8 @@ namespace rhetoric {
 % for n in n_list:
     template <${either(n)}Tag G, typename T>
     ${either(n)}CaseWrapper<G, T>
-    ${either(n)}Case(const T & value) {
+
+    EitherCase(const T & value) {
         return ${either(n)}CaseWrapper<G, T>(value);
     }
 
