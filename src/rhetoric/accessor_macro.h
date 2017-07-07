@@ -8,6 +8,9 @@
 #define RHETORIC_GETTER(type, name) \
 RHETORIC_GETTER_DECL(type, name) { return RHETORIC_PROPERTY_NAME(name); }
 
+#define RHETORIC_GETTER_WEAK(type, name) \
+RHETORIC_GETTER_DECL(type, name) { return RHETORIC_PROPERTY_NAME(name).lock(); }
+
 #define RHETORIC_SETTER(type, name) \
 RHETORIC_SETTER_DECL(type, name) { RHETORIC_PROPERTY_NAME(name) = value; }
 
@@ -22,3 +25,6 @@ RHETORIC_SETTER(type, name)
 RHETORIC_GETTER(type, name) \
 RHETORIC_SETTER_TRIVIAL(type, name)
 
+#define RHETORIC_ACCESSOR_WEAK(type, name) \
+RHETORIC_GETTER_WEAK(type, name) \
+RHETORIC_SETTER(type, name)

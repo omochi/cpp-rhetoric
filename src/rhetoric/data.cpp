@@ -22,6 +22,7 @@ namespace rhetoric {
                 bytes_ = malloc(size);
                 RHETORIC_ASSERT(bytes_ != nullptr);
                 if (bytes) {
+                    RHETORIC_ASSERT(bytes != nullptr);
                     memcpy(bytes_, bytes, size);
                 }
             } else {
@@ -101,6 +102,7 @@ namespace rhetoric {
             RHETORIC_ASSERT(new_bytes != nullptr);
 
             if (new_size > 0) {
+                RHETORIC_ASSERT(bytes_ != nullptr);
                 memcpy(new_bytes, bytes_, new_size);
             }
         }

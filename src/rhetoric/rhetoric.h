@@ -18,6 +18,7 @@
 #include "./file_stream.h"
 #include "./format.h"
 #include "./generic_error.h"
+#include "./let.h"
 #include "./macos_dependency.h"
 #include "./macro.h"
 #include "./none.h"
