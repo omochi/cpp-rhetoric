@@ -228,58 +228,13 @@ namespace rhetoric {
           const Optional<int> limit,
           bool keep_separator)
     {
-        if (limit) {
-            RHETORIC_ASSERT(*limit >= 0);
-        }
-
-        if (string.size() == 0) {
-            return {};
-        }
-
-        if (limit) {
-            if (*limit == 0) {
-                return {};
-            }
-        }
-
-        std::vector<std::string> elements;
-        int pos = 0;
-
-        while (true) {
-            if (limit) {
-                if ((int)elements.size() >= *limit) {
-                    break;
-                }
-            }
-
-            auto find_ret = Find(string,
-                                 pos,
-                                 separators);
-            if (!find_ret) {
-                break;
-            }
-            auto found_pos = find_ret->index;
-            auto & found_separator = separators[find_ret->target_index];
-
-            int next_pos = found_pos + (int)found_separator.size();
-
-            int element_end_index;
-            if (keep_separator) {
-                element_end_index = next_pos;
-            } else {
-                element_end_index = found_pos;
-            }
-
-            auto element = string.substr(pos, element_end_index - pos);
-            elements.push_back(element);
-
-            pos = next_pos;
-        }
-
-        auto last_element = string.substr(pos, string.size() - pos);
-        elements.push_back(last_element);
-
-        return elements;
+        std::vector<std::string> ret;
+        SplitIterate(string,
+                     separators,
+                     limit,
+                     keep_separator,
+                     [&](auto x) { ret.push_back(x); });
+        return ret;
     }
 
     std::vector<std::string>
@@ -288,61 +243,139 @@ namespace rhetoric {
            const Optional<int> limit,
            bool keep_separator)
     {
+        std::vector<std::string> ret;
+        SplitRIterate(string,
+                      separators,
+                      limit,
+                      keep_separator,
+                      [&](auto x) { ret.push_back(x); });
+        std::reverse(ret.begin(), ret.end());
+        return ret;
+    }
+    
+    void SplitIterate(const std::string & string,
+                      const std::vector<std::string> & separators,
+                      const Optional<int> limit,
+                      bool keep_separator,
+                      const std::function<void(const std::string &)> & yield)
+    {
         if (limit) {
             RHETORIC_ASSERT(*limit >= 0);
         }
-
+        
         if (string.size() == 0) {
-            return {};
+            return;
         }
-
+        
         if (limit) {
             if (*limit == 0) {
-                return {};
+                return;
             }
         }
-
-        std::vector<std::string> elements;
-        int pos = (int)string.size();
-
+        
+        int count = 0;
+        int element_start_pos = 0;
+        
         while (true) {
             if (limit) {
-                if ((int)elements.size() >= *limit) {
+                if (count + 1 >= *limit) {
                     break;
                 }
             }
-
+            
+            auto find_ret = Find(string,
+                                 element_start_pos,
+                                 separators);
+            if (!find_ret) {
+                break;
+            }
+            auto found_pos = find_ret->index;
+            auto & found_separator = separators[find_ret->target_index];
+            
+            int element_end_pos;
+            if (keep_separator) {
+                element_end_pos = found_pos + (int)found_separator.size();
+            } else {
+                element_end_pos = found_pos;
+            }
+            
+            auto element = string.substr(element_start_pos, element_end_pos - element_start_pos);
+            yield(element);
+            count += 1;
+            
+            element_start_pos = found_pos + (int)found_separator.size();
+        }
+        
+        auto last_element = string.substr(element_start_pos, string.size() - element_start_pos);
+        yield(last_element);
+        count += 1;
+        
+        if (limit) {
+            RHETORIC_ASSERT(count <= *limit);
+        }
+    }
+    
+    void SplitRIterate(const std::string & string,
+                       const std::vector<std::string> & separators,
+                       const Optional<int> limit,
+                       bool keep_separator,
+                       const std::function<void(const std::string &)> & yield)
+    {
+        if (limit) {
+            RHETORIC_ASSERT(*limit >= 0);
+        }
+        
+        if (string.size() == 0) {
+            return;
+        }
+        
+        if (limit) {
+            if (*limit == 0) {
+                return;
+            }
+        }
+        
+        int count = 0;
+        int find_start_pos = (int)string.size();
+        int element_end_pos = (int)string.size();
+        
+        while (true) {
+            if (limit) {
+                if (count + 1 >= *limit) {
+                    break;
+                }
+            }
+            
             auto find_ret = FindR(string,
-                                  pos,
+                                  find_start_pos,
                                   separators);
             if (!find_ret) {
                 break;
             }
             auto found_pos = find_ret->index;
             auto & found_separator = separators[find_ret->target_index];
-
-            int next_pos = found_pos;
-
-            int element_start_index;
+            
+            int element_start_pos = found_pos + (int)found_separator.size();
+            
+            auto element = string.substr(element_start_pos, element_end_pos - element_start_pos);
+            yield(element);
+            count += 1;
+            
+            find_start_pos = found_pos;
             if (keep_separator) {
-                element_start_index = next_pos;
+                element_end_pos = element_start_pos;
             } else {
-                element_start_index = found_pos + (int)found_separator.size();
+                element_end_pos = found_pos;
             }
-
-            auto element = string.substr(element_start_index,
-                                         pos - element_start_index);
-            elements.push_back(element);
-
-            pos = next_pos;
         }
-
-        auto last_element = string.substr(0, pos);
-        elements.push_back(last_element);
-
-        std::reverse(elements.begin(), elements.end());
         
-        return elements;
+        auto last_element = string.substr(0, element_end_pos);
+        yield(last_element);
+        count += 1;
+        
+        if (limit) {
+            RHETORIC_ASSERT(count <= *limit);
+        }
     }
 
     std::vector<std::string> SplitLines(const std::string & string) {
@@ -351,30 +384,16 @@ namespace rhetoric {
                      None(),
                      true);
     }
-
-    std::string Join(const std::vector<std::string> & array,
-                     const std::string & glue)
-    {
-        int ret_size = 0;
-        for (int i = 0; i < (int)array.size(); i++) {
-            if (i > 0) {
-                ret_size += (int)glue.length();
-            }
-            ret_size += (int)array[i].length();
-        }
-
-        std::string ret;
-        ret.reserve(ret_size);
-
-        for (int i = 0; i < (int)array.size(); i++) {
-            if (i > 0) {
-                ret.append(glue);
-            }
-            ret.append(array[i]);
-        }
-        return ret;
+    
+    void SplitLinesIterate(const std::string & string,
+                           const std::function<void(const std::string &)> & yield) {
+        return SplitIterate(string,
+                            newline_chars(),
+                            None(),
+                            true,
+                            yield);
     }
-
+    
     Ptr<Data> StringToData(const std::string & string) {
         return New<Data>(string.c_str(), (int)string.size());
     }

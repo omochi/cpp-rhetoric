@@ -93,13 +93,37 @@ namespace rhetoric {
            const Optional<int> limit = None(),
            bool keep_separator = false);
 
+    void SplitIterate(const std::string & string,
+                      const std::vector<std::string> & separators,
+                      const Optional<int> limit,
+                      bool keep_separator,
+                      const std::function<void(const std::string &)> & yield);
+    void SplitRIterate(const std::string & string,
+                       const std::vector<std::string> & separators,
+                       const Optional<int> limit,
+                       bool keep_separator,
+                       const std::function<void(const std::string &)> & yield);
+    
+    
     std::vector<std::string>
     SplitLines(const std::string & string);
+    
+    void SplitLinesIterate(const std::string & string,
+                           const std::function<void(const std::string &)> & yield);
 
-    std::string Join(const std::vector<std::string> & array,
+    template <typename A>
+    std::string Join(const A & array,
                      const std::string & glue);
 
+    template <typename A, typename F>
+    std::string JoinMap(const A & array,
+                        const std::string & glue,
+                        F && to_str);
+    
     Ptr<Data> StringToData(const std::string & string);
 }
+
+#include "./string_function_inline.h"
+
 
 

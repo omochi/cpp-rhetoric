@@ -24,16 +24,14 @@ namespace rhetoric {
 % for n in n_list:
     enum class ${either(n)}Tag : int8_t {
 %   for i in range(n):
-        Case${i}${ifx(i < n-1, ",")}
+        Case${i} = ${i}${ifx(i < n-1, ",")}
 %   end
     };
 
     template <${either(n)}Tag G, typename T> struct ${either(n)}CaseWrapper;
 
     template <${either(n)}Tag G, typename T>
-    ${either(n)}CaseWrapper<G, T>
-
-    EitherCase(const T & value);
+    ${either(n)}CaseWrapper<G, T> EitherCase(const T & value);
 
     template <${join(typename_t_vars("T", n))}>
     class ${either(n)} {

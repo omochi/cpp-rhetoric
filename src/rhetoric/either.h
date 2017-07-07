@@ -6,16 +6,14 @@
 
 namespace rhetoric {
     enum class Either2Tag : int8_t {
-        Case0,
-        Case1
+        Case0 = 0,
+        Case1 = 1
     };
 
     template <Either2Tag G, typename T> struct Either2CaseWrapper;
 
     template <Either2Tag G, typename T>
-    Either2CaseWrapper<G, T>
-
-    EitherCase(const T & value);
+    Either2CaseWrapper<G, T> EitherCase(const T & value);
 
     template <typename T0, typename T1>
     class Either2 {
@@ -70,17 +68,15 @@ namespace rhetoric {
     };
 
     enum class Either3Tag : int8_t {
-        Case0,
-        Case1,
-        Case2
+        Case0 = 0,
+        Case1 = 1,
+        Case2 = 2
     };
 
     template <Either3Tag G, typename T> struct Either3CaseWrapper;
 
     template <Either3Tag G, typename T>
-    Either3CaseWrapper<G, T>
-
-    EitherCase(const T & value);
+    Either3CaseWrapper<G, T> EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2>
     class Either3 {
@@ -144,18 +140,16 @@ namespace rhetoric {
     };
 
     enum class Either4Tag : int8_t {
-        Case0,
-        Case1,
-        Case2,
-        Case3
+        Case0 = 0,
+        Case1 = 1,
+        Case2 = 2,
+        Case3 = 3
     };
 
     template <Either4Tag G, typename T> struct Either4CaseWrapper;
 
     template <Either4Tag G, typename T>
-    Either4CaseWrapper<G, T>
-
-    EitherCase(const T & value);
+    Either4CaseWrapper<G, T> EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3>
     class Either4 {
@@ -228,19 +222,17 @@ namespace rhetoric {
     };
 
     enum class Either5Tag : int8_t {
-        Case0,
-        Case1,
-        Case2,
-        Case3,
-        Case4
+        Case0 = 0,
+        Case1 = 1,
+        Case2 = 2,
+        Case3 = 3,
+        Case4 = 4
     };
 
     template <Either5Tag G, typename T> struct Either5CaseWrapper;
 
     template <Either5Tag G, typename T>
-    Either5CaseWrapper<G, T>
-
-    EitherCase(const T & value);
+    Either5CaseWrapper<G, T> EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3, typename T4>
     class Either5 {
@@ -322,20 +314,18 @@ namespace rhetoric {
     };
 
     enum class Either6Tag : int8_t {
-        Case0,
-        Case1,
-        Case2,
-        Case3,
-        Case4,
-        Case5
+        Case0 = 0,
+        Case1 = 1,
+        Case2 = 2,
+        Case3 = 3,
+        Case4 = 4,
+        Case5 = 5
     };
 
     template <Either6Tag G, typename T> struct Either6CaseWrapper;
 
     template <Either6Tag G, typename T>
-    Either6CaseWrapper<G, T>
-
-    EitherCase(const T & value);
+    Either6CaseWrapper<G, T> EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
     class Either6 {
@@ -426,21 +416,19 @@ namespace rhetoric {
     };
 
     enum class Either7Tag : int8_t {
-        Case0,
-        Case1,
-        Case2,
-        Case3,
-        Case4,
-        Case5,
-        Case6
+        Case0 = 0,
+        Case1 = 1,
+        Case2 = 2,
+        Case3 = 3,
+        Case4 = 4,
+        Case5 = 5,
+        Case6 = 6
     };
 
     template <Either7Tag G, typename T> struct Either7CaseWrapper;
 
     template <Either7Tag G, typename T>
-    Either7CaseWrapper<G, T>
-
-    EitherCase(const T & value);
+    Either7CaseWrapper<G, T> EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
     class Either7 {
@@ -540,22 +528,20 @@ namespace rhetoric {
     };
 
     enum class Either8Tag : int8_t {
-        Case0,
-        Case1,
-        Case2,
-        Case3,
-        Case4,
-        Case5,
-        Case6,
-        Case7
+        Case0 = 0,
+        Case1 = 1,
+        Case2 = 2,
+        Case3 = 3,
+        Case4 = 4,
+        Case5 = 5,
+        Case6 = 6,
+        Case7 = 7
     };
 
     template <Either8Tag G, typename T> struct Either8CaseWrapper;
 
     template <Either8Tag G, typename T>
-    Either8CaseWrapper<G, T>
-
-    EitherCase(const T & value);
+    Either8CaseWrapper<G, T> EitherCase(const T & value);
 
     template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
     class Either8 {
