@@ -35,6 +35,7 @@
 		D634F7491EE1752E00F8EFBD /* comparable_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = comparable_macro.h; sourceTree = "<group>"; };
 		D634F74A1EE6418300F8EFBD /* range.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = range.h; sourceTree = "<group>"; };
 		D634F74B1EE6420000F8EFBD /* range_inline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = range_inline.h; sourceTree = "<group>"; };
+		D639A0571F0E9D610059B6BA /* let.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = let.h; sourceTree = "<group>"; };
 		D645EE1E1EDEAA260082A84F /* string_macos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = string_macos.cpp; sourceTree = "<group>"; };
 		D645EE1F1EDEAA260082A84F /* string_macos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_macos.h; sourceTree = "<group>"; };
 		D645EE221EDEAA950082A84F /* macos_dependency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macos_dependency.h; sourceTree = "<group>"; };
@@ -160,6 +161,7 @@
 				D65E836C1ECEE66D00705DB0 /* format.h */,
 				D65E83851ECEFB5600705DB0 /* generic_error.cpp */,
 				D65E83861ECEFB5600705DB0 /* generic_error.h */,
+				D639A0571F0E9D610059B6BA /* let.h */,
 				D645EE221EDEAA950082A84F /* macos_dependency.h */,
 				D65E83781ECEEB2300705DB0 /* macro.h */,
 				D65E83921ED0133500705DB0 /* none.cpp */,
