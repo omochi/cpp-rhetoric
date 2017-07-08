@@ -1,11 +1,12 @@
 #pragma once
 
+#include "./std_dependency.h"
+
 #include "./assert.h"
 #include "./attribute.h"
 #include "./either.h"
 #include "./equatable_macro.h"
 #include "./none.h"
-#include "./std_dependency.h"
 
 namespace rhetoric {
     

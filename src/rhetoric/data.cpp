@@ -4,16 +4,14 @@ namespace rhetoric {
     Data::Data():Data(nullptr, 0, true, true)
     {}
 
-    Data::Data(int size):Data(nullptr, size, true, true)
+    Data::Data(size_t size): Data(nullptr, size, true, true)
     {}
 
     Data::Data(const void * bytes,
-               int size,
+               size_t size,
                bool copy,
                bool free_when_done)
     {
-        RHETORIC_ASSERT(size >= 0);
-
         if (copy) {
             RHETORIC_ASSERT(free_when_done);
             free_when_done_ = true;
@@ -58,11 +56,7 @@ namespace rhetoric {
         return bytes_;
     }
 
-    int Data::size() const {
-        return size_;
-    }
-
-    void Data::set_size(int value) {
+    void Data::set_size(size_t value) {
         if (value > capacity_) {
             ReserveCapacity(value);
         }
@@ -75,7 +69,7 @@ namespace rhetoric {
             return;
         }
 
-        int new_size = size_ + data->size_;
+        size_t new_size = size_ + data->size_;
         if (new_size > capacity_) {
             if (new_size <= capacity_ * 2) {
                 ReserveCapacity(capacity_ * 2);
@@ -88,11 +82,11 @@ namespace rhetoric {
         size_ = new_size;
     }
 
-    void Data::ReserveCapacity(int capacity) {
+    void Data::ReserveCapacity(size_t capacity) {
         RHETORIC_ASSERT(capacity > 0);
 
         void * new_bytes;
-        int new_size = std::min(size_, capacity);
+        size_t new_size = std::min(size_, capacity);
 
         if (free_when_done_) {
             new_bytes = realloc(bytes_, capacity);

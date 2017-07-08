@@ -1,26 +1,26 @@
 namespace rhetoric {
     template <typename A>
     bool
-    ArrayCheckIndex(const A & array, int index)
+    ArrayCheckIndex(const A & array, const typename A::size_type & index)
     {
-        return (0 <= index && index < (int)array.size());
+        return index < array.size();
     }
 
     template <typename A>
     Result<typename A::value_type>
-    ArrayGetAt(const A & array, int index)
+    ArrayGetAt(const A & array, size_t index)
     {
         if (!ArrayCheckIndex(array, index)) {
-            return Failure(GenericError::Create("out of index: index=%d, count=%d",
+            return Failure(GenericError::Create("index is out of range: index=%" PRIdS ", count=%" PRIdS,
                                                 index,
-                                                (int)array.size()));
+                                                (size_t)array.size()));
         }
         return Success(array[index]);
     }
 
     template <typename A>
     Optional<typename A::value_type>
-    ArrayGetAtOrNone(const A & array, int index)
+    ArrayGetAtOrNone(const A & array, size_t index)
     {
         if (!ArrayCheckIndex(array, index)) {
             return None();
@@ -73,7 +73,7 @@ namespace rhetoric {
     }
 
     template <typename A, typename P>
-    Optional<int>
+    Optional<size_t>
     ArrayFindIndex(const A & array,
                    P && pred)
     {
@@ -83,12 +83,12 @@ namespace rhetoric {
         if (iter == end) {
             return None();
         }
-        auto offset = (int)(iter - begin);
+        size_t offset = iter - begin;
         return Some(offset);
     }
 
     template <typename A>
-    Optional<int>
+    Optional<size_t>
     ArrayFindIndexEq(const A & array,
                      const typename A::value_type & item)
     {
@@ -96,7 +96,7 @@ namespace rhetoric {
     }
 
     template <typename A, typename P>
-    Optional<int>
+    Optional<size_t>
     ArrayFindIndexR(const A & array,
                     P && pred)
     {
@@ -106,12 +106,12 @@ namespace rhetoric {
         if (iter == end) {
             return None();
         }
-        auto offset = (int)(iter - begin);
-        return Some((int)array.size() - 1 - offset);
+        size_t offset = ToUnsigned(iter - begin);
+        return Some(array.size() - 1 - offset);
     }
 
     template <typename A>
-    Optional<int>
+    Optional<size_t>
     ArrayFindIndexEqR(const A & array,
                       const typename A::value_type & item)
     {
@@ -196,10 +196,10 @@ namespace rhetoric {
 
     template <typename A>
     void
-    ArrayRemoveAt(A * array, int index)
+    ArrayRemoveAt(A * array, size_t index)
     {
         RHETORIC_ASSERT(array != nullptr);
-        array->erase(array->begin() + index);
+        array->erase(array->begin() + ToSigned(index));
     }
 
     template <typename A, typename P>

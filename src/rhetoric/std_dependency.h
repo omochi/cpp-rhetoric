@@ -4,6 +4,7 @@
 
 #include <cstdlib>
 #include <cstdarg>
+#include <cinttypes>
 #include <string>
 #include <vector>
 #include <tuple>

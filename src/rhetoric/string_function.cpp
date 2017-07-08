@@ -1,82 +1,72 @@
 #include "./string_function.h"
 
 namespace rhetoric {
-
+    FindResult::FindResult(size_t index, size_t target_index):
+    index(index),
+    target_index(target_index)
+    {}
+    
     bool CheckStartWith(const std::string & string,
                         const std::string & target)
     {
         return CheckStartWith(string, 0, target);
     }
-
+    
     bool CheckEndWith(const std::string & string,
                       const std::string & target)
     {
-        return CheckEndWith(string, (int)string.size(), target);
+        return CheckEndWith(string, 0, target);
     }
-
+    
     bool CheckStartWith(const std::string & string,
-                        int start_index,
+                        size_t check_index,
                         const std::string & target)
     {
-        auto ret = CheckStartWith(string, start_index, std::vector<std::string> { target });
-        if (!ret) { return false; }
-        return true;
+        if (string.size() < check_index + target.size()) {
+            return false;
+        }
+        size_t slice_start = check_index;
+        std::string sub = string.substr(slice_start, target.size());
+        return sub == target;
     }
-
+    
     bool CheckEndWith(const std::string & string,
-                      int start_index,
+                      size_t check_index,
                       const std::string & target)
     {
-        auto ret = CheckEndWith(string, start_index, std::vector<std::string> { target });
-        if (!ret) { return false; }
-        return true;
+        if (check_index < target.size()) {
+            return false;
+        }
+        size_t slice_start = check_index - target.size();
+        std::string sub = string.substr(slice_start, target.size());
+        return sub == target;
     }
-
-	FindResult::FindResult() :
-		index(0), target_index(0) {}
-
-	FindResult::FindResult(int index, int target_index) :
-		index(index), target_index(target_index) {}
-
+    
     Optional<FindResult>
     CheckStartWith(const std::string & string,
-                   int start_index,
+                   size_t check_index,
                    const std::vector<std::string> & targets)
     {
-        for (int target_index = 0;
-             target_index < (int)targets.size();
-             target_index++)
-        {
+        for (size_t target_index = 0; target_index < targets.size(); target_index++) {
             auto & target = targets[target_index];
-            int sub_index = start_index;
-            if (sub_index + target.size() > string.size()) {
-                continue;
-            }
-            auto sub = string.substr(sub_index, target.size());
-            if (sub == target) {
-				return Some(FindResult(sub_index, target_index));
+            
+            if (CheckStartWith(string, check_index, target)) {
+                return Some(FindResult(check_index, target_index));
             }
         }
         return None();
     }
-
+    
     Optional<FindResult>
     CheckEndWith(const std::string & string,
-                 int start_index,
+                 size_t check_index,
                  const std::vector<std::string> & targets)
     {
-        for (int target_index = 0;
-             target_index < (int)targets.size();
-             target_index++)
-        {
+        for (size_t target_index = 0; target_index < targets.size(); target_index++) {
             auto & target = targets[target_index];
-            int sub_index = start_index - (int)target.size();
-            if (sub_index < 0) {
-                continue;
-            }
-            auto sub = string.substr(sub_index, target.size());
-            if (sub == target) {
-				return Some(FindResult(sub_index, target_index));
+            
+            if (CheckEndWith(string, check_index, target)) {
+                return Some(FindResult(check_index - target.size(), target_index));
             }
         }
         return None();
@@ -103,96 +93,99 @@ namespace rhetoric {
     std::string Strip(const std::string & string) {
         return Strip(string, white_chars());
     }
-
-    std::string
-    StripL(const std::string & string_,
-           const std::vector<std::string> & targets)
+    
+    std::string StripL(const std::string & string_,
+                       const std::vector<std::string> & targets)
     {
         std::string string = string_;
         while (true) {
             auto ret = CheckStartWith(string, 0, targets);
             if (!ret) {
-                return string;
+                break;
             }
-            string = string.substr(ret->index, (int)string.size() - ret->index);
+            size_t target_end = ret->index + targets[ret->target_index].size();
+            string = string.substr(target_end, string.size() - target_end);
         }
+        return string;
     }
-
-    std::string
-    StripR(const std::string & string_,
-           const std::vector<std::string> & targets)
+    
+    std::string StripR(const std::string & string_,
+                       const std::vector<std::string> & targets)
     {
         std::string string = string_;
         while (true) {
-            auto ret =  CheckEndWith(string, (int)string.size(), targets);
+            auto ret = CheckEndWith(string, string.size(), targets);
             if (!ret) {
-                return string;
+                break;
             }
             string = string.substr(0, ret->index);
         }
-    }
-
-    std::string
-    Strip(const std::string & string_,
-          const std::vector<std::string> & targets)
-    {
-        std::string string = string_;
-        string = StripR(string, targets);
-        string = StripL(string, targets);
         return string;
     }
-
-    Optional<int> Find(const std::string & string,
-                       const std::string & target)
+    
+    std::string Strip(const std::string & string,
+                      const std::vector<std::string> & targets)
+    {
+        auto s = string;
+        s = StripR(s, targets);
+        s = StripL(s, targets);
+        return s;
+    }
+    
+    Optional<size_t> Find(const std::string & string,
+                          const std::string & target)
     {
         return Find(string, 0, target);
     }
-
-    Optional<int> FindR(const std::string & string,
-                        const std::string & target)
+    
+    Optional<size_t> FindR(const std::string & string,
+                           const std::string & target)
     {
-        return FindR(string, (int)string.size(), target);
+        return FindR(string, string.size(), target);
     }
-
-    Optional<int> Find(const std::string & string,
-                       int start_index,
-                       const std::string & target)
+    
+    Optional<size_t> Find(const std::string & string,
+                          size_t start_index,
+                          const std::string & target)
     {
-        auto ret = Find(string, start_index, std::vector<std::string>{ target });
+        auto ret = Find(string, start_index,
+                        std::vector<std::string>{ target });
         if (!ret) { return None(); }
         return Some(ret->index);
     }
-
-    Optional<int> FindR(const std::string & string,
-                        int start_index,
-                        const std::string & target)
+    
+    Optional<size_t> FindR(const std::string & string,
+                           size_t start_index,
+                           const std::string & target)
     {
-        auto ret = FindR(string, start_index, std::vector<std::string>{ target });
+        auto ret = FindR(string, start_index,
+                         std::vector<std::string>{ target });
         if (!ret) { return None(); }
         return Some(ret->index);
     }
-
+    
     Optional<FindResult> Find(const std::string & string,
-                              int start_index,
+                              size_t start_index,
                               const std::vector<std::string> & targets)
     {
-        for (int index = start_index; index <= (int)string.size(); index++) {
-            auto start_result = CheckStartWith(string, index, targets);
-            if (start_result) {
-                return start_result;
+        for (size_t index = start_index; index <= string.size(); index++) {
+            auto ret = CheckStartWith(string, index, targets);
+            if (ret) {
+                return ret;
             }
         }
         return None();
     }
-
+    
     Optional<FindResult> FindR(const std::string & string,
-                               int start_index,
+                               size_t start_index,
                                const std::vector<std::string> & targets)
     {
-        for (int right_index = start_index; right_index >= 0; right_index--) {
-            auto end_result = CheckEndWith(string, right_index, targets);
-            if (end_result) {
-                return end_result;
+        for (size_t i = 0; i < start_index; i++) {
+            size_t index = start_index - i;
+            auto ret = CheckEndWith(string, index, targets);
+            if (ret) {
+                return ret;
             }
         }
         return None();
@@ -201,7 +194,7 @@ namespace rhetoric {
     std::vector<std::string>
     Split(const std::string & string,
           const std::string & separator,
-          const Optional<int> limit,
+          const Optional<size_t> & limit,
           bool keep_separator)
     {
         return Split(string,
@@ -209,11 +202,11 @@ namespace rhetoric {
                      limit,
                      keep_separator);
     }
-
+    
     std::vector<std::string>
     SplitR(const std::string & string,
            const std::string & separator,
-           const Optional<int> limit,
+           const Optional<size_t> & limit,
            bool keep_separator)
     {
         return SplitR(string,
@@ -221,11 +214,11 @@ namespace rhetoric {
                       limit,
                       keep_separator);
     }
-
+    
     std::vector<std::string>
     Split(const std::string & string,
           const std::vector<std::string> & separators,
-          const Optional<int> limit,
+          const Optional<size_t> & limit,
           bool keep_separator)
     {
         std::vector<std::string> ret;
@@ -236,15 +229,15 @@ namespace rhetoric {
                      [&](auto x) { ret.push_back(x); });
         return ret;
     }
-
+    
     std::vector<std::string>
     SplitR(const std::string & string,
            const std::vector<std::string> & separators,
-           const Optional<int> limit,
+           const Optional<size_t> & limit,
            bool keep_separator)
     {
         std::vector<std::string> ret;
-        SplitRIterate(string,
+        SplitIterateR(string,
                       separators,
                       limit,
                       keep_separator,
@@ -255,14 +248,10 @@ namespace rhetoric {
     
     void SplitIterate(const std::string & string,
                       const std::vector<std::string> & separators,
-                      const Optional<int> limit,
+                      const Optional<size_t> & limit,
                       bool keep_separator,
                       const std::function<void(const std::string &)> & yield)
     {
-        if (limit) {
-            RHETORIC_ASSERT(*limit >= 0);
-        }
-        
         if (string.size() == 0) {
             return;
         }
@@ -273,58 +262,50 @@ namespace rhetoric {
             }
         }
         
-        int count = 0;
-        int element_start_pos = 0;
+        size_t element_num = 0;
+        size_t element_start = 0;
+        size_t element_end = 0;
         
         while (true) {
             if (limit) {
-                if (count + 1 >= *limit) {
+                if (element_num + 1 >= *limit) {
                     break;
                 }
             }
             
-            auto find_ret = Find(string,
-                                 element_start_pos,
-                                 separators);
+            auto find_ret = Find(string, element_start, separators);
             if (!find_ret) {
                 break;
             }
-            auto found_pos = find_ret->index;
-            auto & found_separator = separators[find_ret->target_index];
+            auto separator_start = find_ret->index;
+            auto & separator = separators[find_ret->target_index];
+            auto separator_end = separator_start + separator.size();
             
-            int element_end_pos;
             if (keep_separator) {
-                element_end_pos = found_pos + (int)found_separator.size();
+                element_end = separator_start + separator.size();
             } else {
-                element_end_pos = found_pos;
+                element_end = separator_start;
             }
             
-            auto element = string.substr(element_start_pos, element_end_pos - element_start_pos);
+            auto element = string.substr(element_start, element_end - element_start);
             yield(element);
-            count += 1;
+            element_num += 1;
             
-            element_start_pos = found_pos + (int)found_separator.size();
+            element_start = separator_end;
         }
         
-        auto last_element = string.substr(element_start_pos, string.size() - element_start_pos);
-        yield(last_element);
-        count += 1;
-        
-        if (limit) {
-            RHETORIC_ASSERT(count <= *limit);
-        }
+        element_end = string.size();
+        auto element = string.substr(element_start, element_end - element_start);
+        yield(element);
+        element_num += 1;
     }
     
-    void SplitRIterate(const std::string & string,
+    void SplitIterateR(const std::string & string,
                        const std::vector<std::string> & separators,
-                       const Optional<int> limit,
+                       const Optional<size_t> & limit,
                        bool keep_separator,
                        const std::function<void(const std::string &)> & yield)
     {
-        if (limit) {
-            RHETORIC_ASSERT(*limit >= 0);
-        }
-        
         if (string.size() == 0) {
             return;
         }
@@ -335,47 +316,46 @@ namespace rhetoric {
             }
         }
         
-        int count = 0;
-        int find_start_pos = (int)string.size();
-        int element_end_pos = (int)string.size();
+        size_t element_num = 0;
+        size_t find_start = string.size();
+        
+        size_t element_start = 0;
+        size_t element_end = string.size();
         
         while (true) {
             if (limit) {
-                if (count + 1 >= *limit) {
+                if (element_num + 1 >= *limit) {
                     break;
                 }
             }
             
-            auto find_ret = FindR(string,
-                                  find_start_pos,
-                                  separators);
+            auto find_ret = FindR(string, find_start, separators);
             if (!find_ret) {
                 break;
             }
-            auto found_pos = find_ret->index;
-            auto & found_separator = separators[find_ret->target_index];
+            auto separator_start = find_ret->index;
+            auto & separator = separators[find_ret->target_index];
+            auto separator_end = separator_start + separator.size();
             
-            int element_start_pos = found_pos + (int)found_separator.size();
+            element_start = separator_end;
             
-            auto element = string.substr(element_start_pos, element_end_pos - element_start_pos);
+            auto element = string.substr(element_start, element_end - element_start);
             yield(element);
-            count += 1;
+            element_num += 1;
             
-            find_start_pos = found_pos;
+            find_start = separator_start;
+            
             if (keep_separator) {
-                element_end_pos = element_start_pos;
+                element_end = element_start;
             } else {
-                element_end_pos = found_pos;
+                element_end = separator_start;
             }
         }
         
-        auto last_element = string.substr(0, element_end_pos);
-        yield(last_element);
-        count += 1;
-        
-        if (limit) {
-            RHETORIC_ASSERT(count <= *limit);
-        }
+        element_start = 0;
+        auto element = string.substr(element_start, element_end - element_start);
+        yield(element);
+        element_num += 1;
     }
 
     std::vector<std::string> SplitLines(const std::string & string) {
@@ -395,7 +375,7 @@ namespace rhetoric {
     }
     
     Ptr<Data> StringToData(const std::string & string) {
-        return New<Data>(string.c_str(), (int)string.size());
+        return New<Data>(string.c_str(), string.size());
     }
 }
 

@@ -1,5 +1,9 @@
 #pragma once
 
+#include "./std_dependency.h"
+#include "./unix_dependency.h"
+#include "./windows_dependency.h"
+
 #include "./attribute.h"
 #include "./defer.h"
 #include "./env.h"
@@ -10,13 +14,11 @@
 #include "./posix_error.h"
 #include "./ptr.h"
 #include "./result.h"
-#include "./std_dependency.h"
 #include "./string_function.h"
 #include "./string_windows.h"
 #include "./try_macro.h"
-#include "./unix_dependency.h"
 #include "./win32_error.h"
-#include "./windows_dependency.h"
+
 
 namespace rhetoric {
     class FileStream;
@@ -105,6 +107,7 @@ namespace rhetoric {
                  const Optional<std::string> & drive_letter,
                  const std::vector<std::string> & elements);
 
+        RHETORIC_NO_DISCARD
         Result<struct stat> GetStat() const;
 
         Ptr<PosixError> CreateStatError(int err) const;

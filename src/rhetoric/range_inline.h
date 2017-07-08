@@ -71,8 +71,9 @@ namespace rhetoric {
     }
 
     template <typename T>
-    double Range<T>::GetRate(const T & value) const {
-        return static_cast<double>(value - lower_bound_) / static_cast<double>(count());
+    template <typename R>
+    R Range<T>::GetRate(const T & value) const {
+        return static_cast<R>(value - lower_bound_) / static_cast<R>(count());
     }
 
     template <typename T>

@@ -27,8 +27,6 @@
 #   define RHETORIC_PRINTF_LIKE(f, a)
 #endif
 
-#define RHETORIC_NON_COPYABLE(_type) \
-_type(const _type &) = delete;\
-_type & operator=(const _type &) = delete
+
 
 

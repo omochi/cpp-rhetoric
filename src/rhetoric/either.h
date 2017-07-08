@@ -1,11 +1,12 @@
 #pragma once
 
-#include "./assert.h"
-#include "./fatal.h"
 #include "./std_dependency.h"
 
+#include "./assert.h"
+#include "./fatal.h"
+
 namespace rhetoric {
-    enum class Either2Tag : int8_t {
+    enum class Either2Tag : uint8_t {
         Case0 = 0,
         Case1 = 1
     };
@@ -67,7 +68,7 @@ namespace rhetoric {
         Either2CaseWrapper(const T & value);
     };
 
-    enum class Either3Tag : int8_t {
+    enum class Either3Tag : uint8_t {
         Case0 = 0,
         Case1 = 1,
         Case2 = 2
@@ -139,7 +140,7 @@ namespace rhetoric {
         Either3CaseWrapper(const T & value);
     };
 
-    enum class Either4Tag : int8_t {
+    enum class Either4Tag : uint8_t {
         Case0 = 0,
         Case1 = 1,
         Case2 = 2,
@@ -221,7 +222,7 @@ namespace rhetoric {
         Either4CaseWrapper(const T & value);
     };
 
-    enum class Either5Tag : int8_t {
+    enum class Either5Tag : uint8_t {
         Case0 = 0,
         Case1 = 1,
         Case2 = 2,
@@ -313,7 +314,7 @@ namespace rhetoric {
         Either5CaseWrapper(const T & value);
     };
 
-    enum class Either6Tag : int8_t {
+    enum class Either6Tag : uint8_t {
         Case0 = 0,
         Case1 = 1,
         Case2 = 2,
@@ -415,7 +416,7 @@ namespace rhetoric {
         Either6CaseWrapper(const T & value);
     };
 
-    enum class Either7Tag : int8_t {
+    enum class Either7Tag : uint8_t {
         Case0 = 0,
         Case1 = 1,
         Case2 = 2,
@@ -527,7 +528,7 @@ namespace rhetoric {
         Either7CaseWrapper(const T & value);
     };
 
-    enum class Either8Tag : int8_t {
+    enum class Either8Tag : uint8_t {
         Case0 = 0,
         Case1 = 1,
         Case2 = 2,

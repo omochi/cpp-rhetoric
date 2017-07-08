@@ -43,10 +43,10 @@ namespace rhetoric {
         return Success(data);
     }
 
-    Result<Ptr<Data>> FileStream::Read(int size) {
+    Result<Ptr<Data>> FileStream::Read(size_t size) {
         Ptr<Data> data = New<Data>(size);
 
-        RHETORIC_TRY_ASSIGN(int read_size,
+        RHETORIC_TRY_ASSIGN(size_t read_size,
                             ReadToBytes(data->bytes(), data->size()))
 
         data->set_size(read_size);
@@ -54,17 +54,17 @@ namespace rhetoric {
         return Success(data);
     }
 
-    Result<int> FileStream::ReadToBytes(void * bytes, int size) {
+    Result<size_t> FileStream::ReadToBytes(void * bytes, size_t size) {
         RHETORIC_ASSERT(!closed());
 
-        int len = (int)fread(bytes, 1, size, handle_);
+        size_t len = fread(bytes, 1, size, handle_);
         if (len < size) {
             if (feof(handle_)) {
                 return Success(len);
             }
 
             return Failure(PosixError::Create(ferror(handle_),
-                                              "fread(%d): %s",
+                                              "fread(%" PRIdS "): %s",
                                               size,
                                               path_.ToString().c_str()));
         }
@@ -75,13 +75,13 @@ namespace rhetoric {
         return WriteFromBytes(data->bytes(), data->size());
     }
 
-    Result<None> FileStream::WriteFromBytes(const void * bytes, int size) {
+    Result<None> FileStream::WriteFromBytes(const void * bytes, size_t size) {
         RHETORIC_ASSERT(!closed());
 
-        int len = (int)fwrite(bytes, 1, size, handle_);
+        size_t len = fwrite(bytes, 1, size, handle_);
         if (len < size) {
             return Failure(PosixError::Create(ferror(handle_),
-                                              "fwrite(%d): %s",
+                                              "fwrite(%" PRIdS "): %s",
                                               size,
                                               path_.ToString().c_str()));
         }

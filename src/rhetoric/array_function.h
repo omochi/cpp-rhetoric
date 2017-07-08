@@ -1,26 +1,30 @@
 #pragma once
 
+#include "./std_dependency.h"
+
 #include "./assert.h"
+#include "./attribute.h"
+#include "./format_macro.h"
 #include "./generic_error.h"
 #include "./macro.h"
 #include "./optional.h"
 #include "./result.h"
-#include "./std_dependency.h"
+#include "./signedness_convertion.h"
 
 namespace rhetoric {
     template <typename A>
     bool
-    ArrayCheckIndex(const A & array, int index);
-
+    ArrayCheckIndex(const A & array, size_t index);
 
     template <typename A>
+    RHETORIC_NO_DISCARD
     Result<typename A::value_type>
-    ArrayGetAt(const A & array, int index);
+    ArrayGetAt(const A & array, size_t index);
 
     template <typename A>
     Optional<typename A::value_type>
-    ArrayGetAtOrNone(const A & array, int index);
-
+    ArrayGetAtOrNone(const A & array, size_t index);
+    
     template <typename A, typename P>
     Optional<typename A::value_type>
     ArrayFind(const A & array,
@@ -42,22 +46,22 @@ namespace rhetoric {
                  const typename A::value_type & item);
 
     template <typename A, typename P>
-    Optional<int>
+    Optional<size_t>
     ArrayFindIndex(const A & array,
                    P && pred);
 
     template <typename A>
-    Optional<int>
+    Optional<size_t>
     ArrayFindIndexEq(const A & array,
                      const typename A::value_type & item);
 
     template <typename A, typename P>
-    Optional<int>
+    Optional<size_t>
     ArrayFindIndexR(const A & array,
                     P && pred);
 
     template <typename A>
-    Optional<int>
+    Optional<size_t>
     ArrayFindIndexEqR(const A & array,
                       const typename A::value_type & item);
 
@@ -73,7 +77,7 @@ namespace rhetoric {
                 P && pred);
     
     template <typename A, typename F>
-    using ArrayFlatMapResult = std::vector<  typename std::result_of< F(typename A::value_type) >::type::value_type  >;
+    using ArrayFlatMapResult = std::vector<  typename std::result_of_t< F(typename A::value_type) >::value_type  >;
     
     template <typename A, typename F>
     ArrayFlatMapResult<A, F>
@@ -81,7 +85,7 @@ namespace rhetoric {
                  F && f);
     
     template <typename A, typename F>
-    using ArrayFlatMapOptionalResult = std::vector<  typename std::result_of< F(typename A::value_type) >::type::ValueType  >;
+    using ArrayFlatMapOptionalResult = std::vector<  typename std::result_of_t< F(typename A::value_type) >::ValueType  >;
     
     template <typename A, typename F>
     ArrayFlatMapOptionalResult<A, F>
@@ -100,7 +104,7 @@ namespace rhetoric {
 
     template <typename A>
     void
-    ArrayRemoveAt(A * array, int index);
+    ArrayRemoveAt(A * array, size_t index);
 
     template <typename A, typename P>
     bool

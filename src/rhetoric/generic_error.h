@@ -1,10 +1,10 @@
 #pragma once
 
+#include "./std_dependency.h"
 
 #include "./attribute.h"
 #include "./error.h"
 #include "./format.h"
-#include "./std_dependency.h"
 #include "./string_function.h"
 #include "./ptr.h"
 

@@ -1,35 +1,37 @@
 #pragma once
 
-#include "./assert.h"
 #include "./std_dependency.h"
+
+#include "./accessor_macro.h"
+#include "./assert.h"
 #include "./ptr.h"
 
 namespace rhetoric {
     class Data : public std::enable_shared_from_this<Data> {
     public:
         Data();
-        Data(int size);
+        Data(size_t size);
         Data(const void * bytes,
-             int size,
+             size_t size,
              bool copy = true,
              bool free_when_done = true);
         ~Data();
 
         const void * bytes() const;
         void * bytes();
-
-        int size() const;
-        void set_size(int value);
-
+        
+        RHETORIC_GETTER(size_t, size)
+        void set_size(size_t value);
+        
         void Append(const Ptr<const Data> & data);
 
-        void ReserveCapacity(int capacity);
+        void ReserveCapacity(size_t capacity);
 
         std::string ToString() const;
     private:
         void * bytes_;
-        int capacity_;
-        int size_;
+        size_t capacity_;
+        size_t size_;
         bool free_when_done_;
     };
 }

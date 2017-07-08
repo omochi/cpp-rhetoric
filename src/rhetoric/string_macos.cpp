@@ -11,7 +11,7 @@ namespace rhetoric {
     std::string NSStringToString(NSString * ns_string) {
         NSData * buf = [ns_string dataUsingEncoding:NSUTF8StringEncoding
                                allowLossyConversion:YES];
-        return std::string(((const char *)buf.bytes), (int)buf.length);
+        return std::string(((const char *)buf.bytes), (size_t)buf.length);
     }
 }
 

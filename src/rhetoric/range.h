@@ -1,8 +1,10 @@
 #pragma once
 
+#include "./std_dependency.h"
+
 #include "./equatable_macro.h"
 #include "./range_iterator.h"
-#include "./std_dependency.h"
+
 
 namespace rhetoric {
     template <typename T>
@@ -33,7 +35,9 @@ namespace rhetoric {
 		RangeIterator<T> crend() const { return rend(); }
 
         T Blend(double rate) const;
-        double GetRate(const T & value) const;
+        
+        template <typename R>
+        R GetRate(const T & value) const;
         T Clamp(const T & value) const;
 
         template <typename F>
@@ -48,6 +52,8 @@ namespace rhetoric {
 
     template <typename T>
     Range<T> MakeRange(const T & lower_bound, const T & upper_bound);
+    
+    Range<size_t> MakeIndexRange(size_t lower_bound, size_t upper_bound);
 }
 
 #include "./range_inline.h"

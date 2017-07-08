@@ -1,12 +1,13 @@
 #pragma once
 
+#include "./windows_dependency.h"
+
 #include "./assert.h"
 #include "./attribute.h"
 #include "./defer.h"
 #include "./error.h"
 #include "./format.h"
 #include "./string_windows.h"
-#include "./windows_dependency.h"
 
 #if RHETORIC_WINDOWS
 

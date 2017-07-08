@@ -1,9 +1,10 @@
 #pragma once
 
+#include "./std_dependency.h"
+
 #include "./attribute.h"
 #include "./format.h"
 #include "./macro.h"
-#include "./std_dependency.h"
 
 #define RHETORIC_FATAL(message) \
 rhetoric::Fatal(message, RHETORIC_PRETTY_FUNCTION, __FILE__, __LINE__)

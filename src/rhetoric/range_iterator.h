@@ -1,7 +1,8 @@
 #pragma once
 
-#include "./equatable_macro.h"
 #include "./std_dependency.h"
+
+#include "./equatable_macro.h"
 
 namespace rhetoric {
 	template <typename T> class Range;
@@ -16,7 +17,6 @@ namespace rhetoric {
 		const T &>
 	{
 	public:
-		RangeIterator();
 		RangeIterator(const Range<T> * range, const T & value, const T & step);
 		RangeIterator(const RangeIterator<T> & other);
 

@@ -1,6 +1,6 @@
 namespace rhetoric {
-	template <typename T>
-	RangeIterator<T>::RangeIterator() : RangeIterator(nullptr, T(), T(1)) {}
+//	template <typename T>
+//	RangeIterator<T>::RangeIterator() : RangeIterator(nullptr, T(), T(1)) {}
 
 	template <typename T>
 	RangeIterator<T>::RangeIterator(const Range<T> * range, const T & value, const T & step) :

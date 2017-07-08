@@ -1,8 +1,9 @@
 #pragma once
 
-#include "./macos_dependency.h"
-#include "./platform.h"
 #include "./std_dependency.h"
+#include "./macos_dependency.h"
+
+#include "./platform.h"
 
 #if RHETORIC_MACOS
 
