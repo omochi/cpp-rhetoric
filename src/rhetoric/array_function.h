@@ -9,7 +9,7 @@
 #include "./macro.h"
 #include "./optional.h"
 #include "./result.h"
-#include "./signedness_convertion.h"
+#include "./int_convertion.h"
 
 namespace rhetoric {
     template <typename A>
@@ -117,7 +117,7 @@ namespace rhetoric {
                  P && pred);
 
     template <typename A, typename P>
-    int
+    size_t
     ArrayCount(const A & array,
                P && pred);
 

@@ -1,11 +1,11 @@
 namespace rhetoric {
     template <typename A>
     bool
-    ArrayCheckIndex(const A & array, const typename A::size_type & index)
+    ArrayCheckIndex(const A & array, size_t index)
     {
         return index < array.size();
     }
-
+    
     template <typename A>
     Result<typename A::value_type>
     ArrayGetAt(const A & array, size_t index)
@@ -83,7 +83,7 @@ namespace rhetoric {
         if (iter == end) {
             return None();
         }
-        size_t offset = iter - begin;
+        size_t offset = ToUnsigned(iter - begin);
         return Some(offset);
     }
 
@@ -219,11 +219,11 @@ namespace rhetoric {
     }
 
     template <typename A, typename P>
-    int
+    size_t
     ArrayCount(const A & array,
                P && pred)
     {
-        int c = 0;
+        size_t c = 0;
         for (auto it = array.cbegin(); it != array.cend(); it++) {
             if (pred(*it)) {
                 c += 1;

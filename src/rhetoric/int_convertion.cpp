@@ -1,4 +1,4 @@
-#include "./signedness_convertion.h"
+#include "./int_convertion.h"
 
 namespace rhetoric {
     unsigned char ToUnsigned(char x) {
@@ -54,5 +54,29 @@ namespace rhetoric {
         auto y = (long long)x;
         RHETORIC_ASSERT(y >= 0);
         return y;
+    }
+    
+    int ToInt(unsigned int x) {
+        return ToSigned(x);
+    }
+    
+    int ToInt(long x) {
+        RHETORIC_ASSERT(std::numeric_limits<int>::min() <= x);
+        RHETORIC_ASSERT(x <= std::numeric_limits<int>::max());
+        return (int)x;
+    }
+    
+    int ToInt(unsigned long x) {
+        return ToInt(ToSigned(x));
+    }
+    
+    int ToInt(long long x) {
+        RHETORIC_ASSERT(std::numeric_limits<int>::min() <= x);
+        RHETORIC_ASSERT(x <= std::numeric_limits<int>::max());
+        return (int)x;
+    }
+    
+    int ToInt(unsigned long long x) {
+        return ToInt(ToSigned(x));
     }
 }

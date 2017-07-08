@@ -34,7 +34,8 @@ namespace rhetoric {
 		RangeIterator<T> crbegin() const { return rbegin(); }
 		RangeIterator<T> crend() const { return rend(); }
 
-        T Blend(double rate) const;
+        template <typename R>
+        T Blend(R rate) const;
         
         template <typename R>
         R GetRate(const T & value) const;
