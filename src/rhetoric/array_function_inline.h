@@ -202,6 +202,15 @@ namespace rhetoric {
         array->erase(array->begin() + ToSigned(index));
     }
 
+    template <typename A>
+    void
+    ArrayRemoveRange(A * array, const Range<size_t> & range)
+    {
+        RHETORIC_ASSERT(array != nullptr);
+        array->erase(array->begin() + ToSigned(range.lower_bound()),
+                     array->begin() + ToSigned(range.upper_bound()));
+    }
+    
     template <typename A, typename P>
     bool
     ArrayTestAll(const A & array,

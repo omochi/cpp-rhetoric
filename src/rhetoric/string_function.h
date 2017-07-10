@@ -18,11 +18,10 @@ namespace rhetoric {
                         const std::string & target);
     bool CheckEndWith(const std::string & string,
                       const std::string & target);
-
+    
     bool CheckStartWith(const std::string & string,
                         size_t check_index,
                         const std::string & target);
-    
     bool CheckEndWith(const std::string & string,
                       size_t check_index,
                       const std::string & target);

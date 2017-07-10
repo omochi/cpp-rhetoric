@@ -8,6 +8,7 @@
 #include "./generic_error.h"
 #include "./macro.h"
 #include "./optional.h"
+#include "./range.h"
 #include "./result.h"
 #include "./signedness_convertion.h"
 
@@ -105,6 +106,10 @@ namespace rhetoric {
     template <typename A>
     void
     ArrayRemoveAt(A * array, size_t index);
+    
+    template <typename A>
+    void
+    ArrayRemoveRange(A * array, const Range<size_t> & range);
 
     template <typename A, typename P>
     bool
