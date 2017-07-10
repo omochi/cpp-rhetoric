@@ -66,8 +66,9 @@ namespace rhetoric {
 	}
 
     template <typename T>
-    T Range<T>::Blend(double rate) const {
-        return lower_bound_ + static_cast<DistanceType>(static_cast<double>(count()) * rate);
+    template <typename R>
+    T Range<T>::Blend(R rate) const {
+        return lower_bound_ + static_cast<DistanceType>(static_cast<R>(count()) * rate);
     }
 
     template <typename T>

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D62AD00C1ED828C7009FF226 /* env.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D62AD00A1ED828C7009FF226 /* env.cpp */; };
-		D639A0691F10E27C0059B6BA /* signedness_convertion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D639A0671F10E27C0059B6BA /* signedness_convertion.cpp */; };
+		D639A0691F10E27C0059B6BA /* int_convertion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D639A0671F10E27C0059B6BA /* int_convertion.cpp */; };
 		D639A06B1F10EE080059B6BA /* range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D639A06A1F10EE080059B6BA /* range.cpp */; };
 		D645EE241EDEAB2A0082A84F /* string_macos.mm in Sources */ = {isa = PBXBuildFile; fileRef = D645EE231EDEAB2A0082A84F /* string_macos.mm */; };
 		D645EE251EDEAFD90082A84F /* string_macos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D645EE1E1EDEAA260082A84F /* string_macos.cpp */; };
@@ -39,9 +39,10 @@
 		D634F74B1EE6420000F8EFBD /* range_inline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = range_inline.h; sourceTree = "<group>"; };
 		D639A0571F0E9D610059B6BA /* let.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = let.h; sourceTree = "<group>"; };
 		D639A0661F10BD230059B6BA /* format_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = format_macro.h; sourceTree = "<group>"; };
-		D639A0671F10E27C0059B6BA /* signedness_convertion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = signedness_convertion.cpp; sourceTree = "<group>"; };
-		D639A0681F10E27C0059B6BA /* signedness_convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = signedness_convertion.h; sourceTree = "<group>"; };
+		D639A0671F10E27C0059B6BA /* int_convertion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = int_convertion.cpp; sourceTree = "<group>"; };
+		D639A0681F10E27C0059B6BA /* int_convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = int_convertion.h; sourceTree = "<group>"; };
 		D639A06A1F10EE080059B6BA /* range.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = range.cpp; sourceTree = "<group>"; };
+		D639A06C1F1107040059B6BA /* non_copyable_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = non_copyable_macro.h; sourceTree = "<group>"; };
 		D645EE1E1EDEAA260082A84F /* string_macos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = string_macos.cpp; sourceTree = "<group>"; };
 		D645EE1F1EDEAA260082A84F /* string_macos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_macos.h; sourceTree = "<group>"; };
 		D645EE221EDEAA950082A84F /* macos_dependency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macos_dependency.h; sourceTree = "<group>"; };
@@ -169,9 +170,12 @@
 				D639A0661F10BD230059B6BA /* format_macro.h */,
 				D65E83851ECEFB5600705DB0 /* generic_error.cpp */,
 				D65E83861ECEFB5600705DB0 /* generic_error.h */,
+				D639A0671F10E27C0059B6BA /* int_convertion.cpp */,
+				D639A0681F10E27C0059B6BA /* int_convertion.h */,
 				D639A0571F0E9D610059B6BA /* let.h */,
 				D645EE221EDEAA950082A84F /* macos_dependency.h */,
 				D65E83781ECEEB2300705DB0 /* macro.h */,
+				D639A06C1F1107040059B6BA /* non_copyable_macro.h */,
 				D65E83921ED0133500705DB0 /* none.cpp */,
 				D65E83931ED0133500705DB0 /* none.h */,
 				D65E838F1ED012BB00705DB0 /* optional.h */,
@@ -192,8 +196,6 @@
 				D65E839B1ED2788200705DB0 /* result.h */,
 				D65E839E1ED278BA00705DB0 /* result_inline.h */,
 				D65E836A1ECEE4A700705DB0 /* rhetoric.h */,
-				D639A0671F10E27C0059B6BA /* signedness_convertion.cpp */,
-				D639A0681F10E27C0059B6BA /* signedness_convertion.h */,
 				D65E83641ECEE3C800705DB0 /* std_dependency.h */,
 				D65E83961ED015C100705DB0 /* string_function.cpp */,
 				D65E83971ED015C100705DB0 /* string_function.h */,
@@ -289,7 +291,7 @@
 				D6E5AF261ED427E600718686 /* file_stream.cpp in Sources */,
 				D65E838B1ECEFCD700705DB0 /* data.cpp in Sources */,
 				D65E83681ECEE43D00705DB0 /* print.cpp in Sources */,
-				D639A0691F10E27C0059B6BA /* signedness_convertion.cpp in Sources */,
+				D639A0691F10E27C0059B6BA /* int_convertion.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
