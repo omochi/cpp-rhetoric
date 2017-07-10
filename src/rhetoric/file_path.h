@@ -5,6 +5,7 @@
 #include "./windows_dependency.h"
 
 #include "./attribute.h"
+#include "./array_function.h"
 #include "./defer.h"
 #include "./env.h"
 #include "./equatable_macro.h"

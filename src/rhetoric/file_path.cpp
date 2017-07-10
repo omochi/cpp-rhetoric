@@ -76,10 +76,9 @@ namespace rhetoric {
 				return ret;
 			}
 
-			auto last_iter = ret.elements_.end() - 1;
-			auto last = *last_iter;
+            auto last = ret.elements_.back();
 			if (last == "" || last == ".") {
-				ret.elements_.erase(last_iter);
+                ArrayRemoveAt(&ret.elements_, ret.elements_.size() - 1);
 				continue;
 			}
 
@@ -87,8 +86,8 @@ namespace rhetoric {
 				ret.elements_.push_back("..");
 				return ret;
 			}
-
-			ret.elements_.erase(last_iter);
+            
+            ArrayRemoveAt(&ret.elements_, ret.elements_.size() - 1);
 			return ret;
 		}
 	}
