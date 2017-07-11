@@ -72,17 +72,6 @@ namespace rhetoric {
     }
 
     template <typename T>
-    template <typename R>
-    R Range<T>::GetRate(const T & value) const {
-        return static_cast<R>(value - lower_bound_) / static_cast<R>(count());
-    }
-
-    template <typename T>
-    T Range<T>::Clamp(const T & value) const {
-        return std::max(lower_bound_, std::min(value, upper_bound_));
-    }
-
-    template <typename T>
     template <typename F>
     auto Range<T>::Map(F && f) const
     -> Range<decltype(f(std::declval<T>()))>
@@ -98,6 +87,16 @@ namespace rhetoric {
     template <typename T>
     Range<T> MakeRange(const T & lower_bound, const T & upper_bound) {
         return Range<T>(lower_bound, std::max(lower_bound, upper_bound));
+    }
+    
+    template <typename T, typename R>
+    R GetRate(const T & value, const Range<T> & range) {
+        return static_cast<R>(value - range.lower_bound()) / static_cast<R>(range.count());
+    }
+    
+    template <typename T, typename R>
+    T Clamp(const T & value, const Range<T> & range) {
+        return std::max(range.lower_bound(), std::min(value, range.upper_bound()));
     }
 
 }

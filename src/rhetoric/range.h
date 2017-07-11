@@ -37,10 +37,6 @@ namespace rhetoric {
         template <typename R>
         T Blend(R rate) const;
         
-        template <typename R>
-        R GetRate(const T & value) const;
-        T Clamp(const T & value) const;
-
         template <typename F>
         auto Map(F && f) const
         -> Range<decltype(f(std::declval<T>()))>;
@@ -55,6 +51,12 @@ namespace rhetoric {
     Range<T> MakeRange(const T & lower_bound, const T & upper_bound);
     
     Range<size_t> MakeIndexRange(size_t lower_bound, size_t upper_bound);
+    
+    template <typename T, typename R>
+    R GetRate(const T & value, const Range<T> & range);
+    
+    template <typename T, typename R>
+    T Clamp(const T & value, const Range<T> & range);
 }
 
 #include "./range_inline.h"
