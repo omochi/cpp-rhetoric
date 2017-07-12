@@ -92,6 +92,7 @@
 		D6695F591ED6CE8E0009FF3B /* win32_error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = win32_error.cpp; sourceTree = "<group>"; };
 		D6695F5A1ED6CE8E0009FF3B /* win32_error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = win32_error.h; sourceTree = "<group>"; };
 		D6695F5B1ED6CE8E0009FF3B /* windows_dependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = windows_dependency.h; sourceTree = "<group>"; };
+		D6860C3B1F15BEB800ED2230 /* shared_from_this_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shared_from_this_macro.h; sourceTree = "<group>"; };
 		D6E0AE9F1EF11DB4001ABB2A /* accessor_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = accessor_macro.h; sourceTree = "<group>"; };
 		D6E5AF241ED427E600718686 /* file_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_stream.cpp; sourceTree = "<group>"; };
 		D6E5AF251ED427E600718686 /* file_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_stream.h; sourceTree = "<group>"; };
@@ -196,6 +197,7 @@
 				D65E839B1ED2788200705DB0 /* result.h */,
 				D65E839E1ED278BA00705DB0 /* result_inline.h */,
 				D65E836A1ECEE4A700705DB0 /* rhetoric.h */,
+				D6860C3B1F15BEB800ED2230 /* shared_from_this_macro.h */,
 				D65E83641ECEE3C800705DB0 /* std_dependency.h */,
 				D65E83961ED015C100705DB0 /* string_function.cpp */,
 				D65E83971ED015C100705DB0 /* string_function.h */,

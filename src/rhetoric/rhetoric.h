@@ -37,6 +37,7 @@
 #include "./range.h"
 #include "./range_iterator.h"
 #include "./result.h"
+#include "./shared_from_this_macro.h"
 #include "./string_function.h"
 #include "./string_macos.h"
 #include "./string_windows.h"
