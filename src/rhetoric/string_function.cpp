@@ -72,26 +72,34 @@ namespace rhetoric {
         return None();
     }
 
-    std::vector<std::string> white_chars()
+    std::vector<std::string> white_strs()
     {
         return { "\r", "\n", " ", "\t" };
     }
 
-    std::vector<std::string> newline_chars() {
+    std::vector<char> white_chars() {
+        return { '\r', '\n', ' ', '\t' };
+    }
+    
+    std::vector<std::string> newline_strs() {
         return { "\r\n", "\r", "\n" };
+    }
+    
+    std::vector<char> newline_chars() {
+        return { '\n', '\r' };
     }
     
     std::string
     StripL(const std::string & string) {
-        return StripL(string, white_chars());
+        return StripL(string, white_strs());
     }
 
     std::string StripR(const std::string & string) {
-        return StripR(string, white_chars());
+        return StripR(string, white_strs());
     }
 
     std::string Strip(const std::string & string) {
-        return Strip(string, white_chars());
+        return Strip(string, white_strs());
     }
     
     std::string StripL(const std::string & string_,
@@ -360,7 +368,7 @@ namespace rhetoric {
 
     std::vector<std::string> SplitLines(const std::string & string) {
         return Split(string,
-                     newline_chars(),
+                     newline_strs(),
                      None(),
                      true);
     }
@@ -368,7 +376,7 @@ namespace rhetoric {
     void SplitLinesIterate(const std::string & string,
                            const std::function<void(const std::string &)> & yield) {
         return SplitIterate(string,
-                            newline_chars(),
+                            newline_strs(),
                             None(),
                             true,
                             yield);

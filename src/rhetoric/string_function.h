@@ -36,9 +36,11 @@ namespace rhetoric {
                  size_t check_index,
                  const std::vector<std::string> & targets);
     
-    std::vector<std::string> white_chars();
-    std::vector<std::string> newline_chars();
-
+    std::vector<std::string> white_strs();
+    std::vector<char> white_chars();
+    std::vector<std::string> newline_strs();
+    std::vector<char> newline_chars();
+    
     std::string StripL(const std::string & string);
     std::string StripR(const std::string & string);
     std::string Strip(const std::string & string);
