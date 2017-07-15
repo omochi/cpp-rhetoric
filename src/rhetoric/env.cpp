@@ -1,7 +1,7 @@
 #include "./env.h"
 
 namespace rhetoric {
-    Optional<std::string> GetEnv(const std::string & name) {
+    Option<std::string> GetEnv(const std::string & name) {
 #if RHETORIC_WINDOWS
         WinString name_win = StringToWinString(name, CP_UTF8);
         TCHAR * str = nullptr;

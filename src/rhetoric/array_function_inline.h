@@ -11,15 +11,15 @@ namespace rhetoric {
     ArrayGetAt(const A & array, size_t index)
     {
         if (!ArrayCheckIndex(array, index)) {
-            return Failure(GenericError::Create("index is out of range: index=%" PRIdS ", count=%" PRIdS,
-                                                index,
-                                                (size_t)array.size()));
+            return GenericError::Create("index is out of range: index=%" PRIdS ", count=%" PRIdS,
+                                        index,
+                                        (size_t)array.size());
         }
-        return Success(array[index]);
+        return Ok(array[index]);
     }
 
     template <typename A>
-    Optional<typename A::value_type>
+    Option<typename A::value_type>
     ArrayGetAtOrNone(const A & array, size_t index)
     {
         if (!ArrayCheckIndex(array, index)) {
@@ -29,7 +29,7 @@ namespace rhetoric {
     }
 
     template <typename A, typename P>
-    Optional<typename A::value_type>
+    Option<typename A::value_type>
     ArrayFind(const A & array,
               P && pred)
     {
@@ -43,7 +43,7 @@ namespace rhetoric {
     }
 
     template <typename A>
-    Optional<typename A::value_type>
+    Option<typename A::value_type>
     ArrayFindEq(const A & array,
                 const typename A::value_type & item)
     {
@@ -51,7 +51,7 @@ namespace rhetoric {
     }
 
     template <typename A, typename P>
-    Optional<typename A::value_type>
+    Option<typename A::value_type>
     ArrayFindR(const A & array,
                P && pred)
     {
@@ -65,7 +65,7 @@ namespace rhetoric {
     }
 
     template <typename A>
-    Optional<typename A::value_type>
+    Option<typename A::value_type>
     ArrayFindEqR(const A & array,
                  const typename A::value_type & item)
     {
@@ -73,7 +73,7 @@ namespace rhetoric {
     }
 
     template <typename A, typename P>
-    Optional<size_t>
+    Option<size_t>
     ArrayFindIndex(const A & array,
                    P && pred)
     {
@@ -88,7 +88,7 @@ namespace rhetoric {
     }
 
     template <typename A>
-    Optional<size_t>
+    Option<size_t>
     ArrayFindIndexEq(const A & array,
                      const typename A::value_type & item)
     {
@@ -96,7 +96,7 @@ namespace rhetoric {
     }
 
     template <typename A, typename P>
-    Optional<size_t>
+    Option<size_t>
     ArrayFindIndexR(const A & array,
                     P && pred)
     {
@@ -111,7 +111,7 @@ namespace rhetoric {
     }
 
     template <typename A>
-    Optional<size_t>
+    Option<size_t>
     ArrayFindIndexEqR(const A & array,
                       const typename A::value_type & item)
     {
@@ -162,11 +162,11 @@ namespace rhetoric {
     }
     
     template <typename A, typename F>
-    ArrayFlatMapOptionalResult<A, F>
-    ArrayFlatMapOptional(const A & array,
+    ArrayFlatMapOptionResult<A, F>
+    ArrayFlatMapOption(const A & array,
                          F && f)
     {
-        ArrayFlatMapOptionalResult<A, F> ret;
+        ArrayFlatMapOptionResult<A, F> ret;
         for (auto & x : array) {
             auto item_opt = f(x);
             if (item_opt) {

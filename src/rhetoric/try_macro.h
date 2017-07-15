@@ -11,7 +11,7 @@
 #define _RHETORIC_TRY_RETURN_IF_FAILURE(result_var, expression) \
 auto result_var = expression; \
 if (!result_var) { \
-    return rhetoric::Failure(result_var); \
+    return result_var.error(); \
 }
 
 #define _RHETORIC_TRY_VOID_1(counter_macro, expression) \

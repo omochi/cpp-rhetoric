@@ -14,22 +14,22 @@ namespace rhetoric {
     constexpr Either2Tag SomeTag = Either2Tag::Case1;
     
     template <typename T>
-    class Optional {
+    class Option {
     public:
         using ValueType = T;
         
-        Optional();
-        /* implicit */ Optional(const None &);
-        explicit Optional(const Either2CaseWrapper<SomeTag, T> & value);
+        Option();
+        /* implicit */ Option(const None &);
+        explicit Option(const Either2CaseWrapper<SomeTag, T> & value);
         
-        Optional(const Optional<T> & other);
-        Optional<T> & operator=(const Optional<T> & other);
+        Option(const Option<T> & other);
+        Option<T> & operator=(const Option<T> & other);
 
         template <typename U>
-        Optional(const Optional<U> & other,
+        Option(const Option<U> & other,
                  typename std::enable_if_t<std::is_convertible<U, T>::value> * = nullptr);
 
-        ~Optional();
+        ~Option();
 
         bool presented() const;
         explicit operator bool() const;
@@ -39,8 +39,8 @@ namespace rhetoric {
         const T * operator->() const;
         const T & operator*() const;
 
-        bool operator==(const Optional<T> & other) const;
-        RHETORIC_EQUATABLE_DEFAULT(Optional<T>);
+        bool operator==(const Option<T> & other) const;
+        RHETORIC_EQUATABLE_DEFAULT(Option<T>);
 
         T GetOr(const T & default_value) const;
     private:
@@ -48,7 +48,7 @@ namespace rhetoric {
     };
 
     template <typename T>
-    Optional<T> Some(const T & value);
+    Option<T> Some(const T & value);
 }
 
-#include "./optional_inline.h"
+#include "./option_inline.h"

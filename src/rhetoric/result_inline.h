@@ -1,18 +1,25 @@
 namespace rhetoric {
     template <typename T>
     Result<T>::Result():
-    either_(EitherCase<SuccessTag>(T()))
+    either_(EitherCase<OkTag>(T()))
     {}
 
     template <typename T>
-    Result<T>::Result(const ResultFailure & failure):
-    either_(EitherCase<FailureTag>(failure.error))
+    Result<T>::Result(const Ptr<Error> & error):
+    either_(EitherCase<ErrorTag>(error))
     {
-        RHETORIC_ASSERT(failure.error != nullptr);
+        RHETORIC_ASSERT(error != nullptr);
     }
     
     template <typename T>
-    Result<T>::Result(const Either2CaseWrapper<SuccessTag, T> & value):
+    template <typename E>
+    Result<T>::Result(const E & error,
+                      std::enable_if_t<std::is_convertible<E, Ptr<Error>>::value> *):
+    Result(static_cast<Ptr<Error>>(error))
+    {}
+    
+    template <typename T>
+    Result<T>::Result(const Either2CaseWrapper<OkTag, T> & value):
     either_(value)
     {}
 
@@ -31,9 +38,9 @@ namespace rhetoric {
     template <typename U>
     Result<T>::Result(const Result<U> & other,
                       typename std::enable_if_t<std::is_convertible<U, T>::value> *):
-    either_(other.succeeded() ?
-            Either2<Ptr<Error>, T>(EitherCase<SuccessTag>(static_cast<T>(other.value()))) :
-            Either2<Ptr<Error>, T>(EitherCase<FailureTag>(other.error()))
+    either_(other.is_ok() ?
+            Either2<Ptr<Error>, T>(EitherCase<OkTag>(static_cast<T>(other.value()))) :
+            Either2<Ptr<Error>, T>(EitherCase<ErrorTag>(other.error()))
             )
     {}
 
@@ -42,13 +49,13 @@ namespace rhetoric {
     {}
 
     template <typename T>
-    bool Result<T>::succeeded() const {
+    bool Result<T>::is_ok() const {
         return operator bool();
     }
 
     template <typename T>
     Result<T>::operator bool() const {
-        return either_.tag() == SuccessTag;
+        return either_.tag() == OkTag;
     }
 
     template <typename T>
@@ -73,20 +80,14 @@ namespace rhetoric {
 
     template <typename T>
     T Result<T>::Recover(const T & recovery_value) const {
-        if (succeeded()) {
+        if (is_ok()) {
             return value();
         }
         return recovery_value;
     }
 
     template <typename T>
-    Result<T> Success(const T & value) {
-        return Result<T>(EitherCase<SuccessTag>(value));
+    Result<T> Ok(const T & value) {
+        return Result<T>(EitherCase<OkTag>(value));
     }
-
-    template <typename T>
-    ResultFailure Failure(const Result<T> & result) {
-        return ResultFailure { result.error() };
-    }
-
 }

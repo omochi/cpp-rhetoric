@@ -40,7 +40,7 @@ namespace rhetoric {
             data->Append(chunk);
         }
 
-        return Success(data);
+        return Ok(data);
     }
 
     Result<Ptr<Data>> FileStream::Read(size_t size) {
@@ -51,7 +51,7 @@ namespace rhetoric {
 
         data->set_size(read_size);
 
-        return Success(data);
+        return Ok(data);
     }
 
     Result<size_t> FileStream::ReadToBytes(void * bytes, size_t size) {
@@ -60,15 +60,15 @@ namespace rhetoric {
         size_t len = fread(bytes, 1, size, handle_);
         if (len < size) {
             if (feof(handle_)) {
-                return Success(len);
+                return Ok(len);
             }
 
-            return Failure(PosixError::Create(ferror(handle_),
-                                              "fread(%" PRIdS "): %s",
-                                              size,
-                                              path_.ToString().c_str()));
+            return PosixError::Create(ferror(handle_),
+                                      "fread(%" PRIdS "): %s",
+                                      size,
+                                      path_.ToString().c_str());
         }
-        return Success(len);
+        return Ok(len);
     }
 
     Result<None> FileStream::Write(const Ptr<const Data> & data) {
@@ -80,13 +80,13 @@ namespace rhetoric {
 
         size_t len = fwrite(bytes, 1, size, handle_);
         if (len < size) {
-            return Failure(PosixError::Create(ferror(handle_),
-                                              "fwrite(%" PRIdS "): %s",
-                                              size,
-                                              path_.ToString().c_str()));
+            return PosixError::Create(ferror(handle_),
+                                      "fwrite(%" PRIdS "): %s",
+                                      size,
+                                      path_.ToString().c_str());
         }
 
-        return Success(None());
+        return Ok(None());
     }
 
 #if RHETORIC_MACOS
@@ -95,14 +95,14 @@ namespace rhetoric {
 
         int ret = fseek(handle_, offset, whence);
         if (ret == -1) {
-            return Failure(PosixError::Create(errno,
-                                              "fseek(%lld, %d): %s",
-                                              offset,
-                                              whence,
-                                              path_.ToString().c_str()));
+            return PosixError::Create(errno,
+                                      "fseek(%lld, %d): %s",
+                                      offset,
+                                      whence,
+                                      path_.ToString().c_str());
         }
 
-        return Success(None());
+        return Ok(None());
     }
 #endif
 
@@ -112,12 +112,12 @@ namespace rhetoric {
 
         long pos = ftell(handle_);
         if (pos == -1) {
-            return Failure(PosixError::Create(errno,
-                                              "ftell: %s",
-                                              path_.ToString().c_str()));
+            return PosixError::Create(errno,
+                                      "ftell: %s",
+                                      path_.ToString().c_str());
         }
 
-        return Success(pos);
+        return Ok(pos);
     }
 #endif
 
@@ -129,12 +129,12 @@ namespace rhetoric {
         FILE * handle;
         auto err = fopen_internal(&handle, path_str.c_str(), mode.c_str());
         if (err) {
-            return Failure(PosixError::Create(err,
-                                              "fopen(%s, %s)",
-                                              path_str.c_str(),
-                                              mode.c_str()));
+            return PosixError::Create(err,
+                                      "fopen(%s, %s)",
+                                      path_str.c_str(),
+                                      mode.c_str());
         }
-        return Success(Ptr<FileStream>(new FileStream(handle, path)));
+        return Ok(Ptr<FileStream>(new FileStream(handle, path)));
     }
 
     FileStream::FileStream(FILE * handle,

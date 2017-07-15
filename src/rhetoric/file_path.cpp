@@ -26,7 +26,7 @@ namespace rhetoric {
 		return type_;
 	}
 
-	const Optional<std::string> & FilePath::drive_letter() const {
+	const Option<std::string> & FilePath::drive_letter() const {
 		return drive_letter_;
 	}
 
@@ -97,7 +97,7 @@ namespace rhetoric {
 		std::string str = ToString();
 		DIR * handle = opendir(str.c_str());
 		if (!handle) {
-			return Failure(PosixError::Create(errno, "opendir(%s)", str.c_str()));
+            return PosixError::Create(errno, "opendir(%s)", str.c_str());
 		}
 
 		RHETORIC_DEFER([=] {
@@ -114,7 +114,7 @@ namespace rhetoric {
 			entry = readdir(handle);
 			if (!entry) {
 				if (errno) {
-					return Failure(PosixError::Create(errno, "readdir: %s", str.c_str()));
+					return PosixError::Create(errno, "readdir: %s", str.c_str());
 				}
 				break;
 			}
@@ -127,7 +127,7 @@ namespace rhetoric {
 			ret.push_back(*this + FilePath(name));
 		}
 
-		return Success(ret);
+		return Ok(ret);
 	}
 #endif
 
@@ -194,7 +194,7 @@ namespace rhetoric {
 		}
 	}
 
-	Optional<std::string> FilePath::extension() const {
+	Option<std::string> FilePath::extension() const {
         auto strs = SplitR(basename().ToString(), ".", Some(2));
 		if (strs.size() < 2) {
 			return None();
@@ -214,7 +214,7 @@ namespace rhetoric {
         return ret;
     }
 
-    void FilePath::ReplaceExtension(const Optional<std::string> & extension) {
+    void FilePath::ReplaceExtension(const Option<std::string> & extension) {
         auto split_ret = SplitExtension();
         std::string new_basename = split_ret.name;
         if (extension) {
@@ -291,11 +291,11 @@ namespace rhetoric {
         int x = stat(ToString().c_str(), &st);
         if (x == -1) {
             if (errno == ENOENT) {
-                return Success(false);
+                return Ok(false);
             }
-            return Failure(CreateStatError(errno));
+            return CreateStatError(errno);
         }
-        return Success(true);
+        return Ok(true);
 	}
 
 	Result<FileEntryType> FilePath::GetEntryType() const {
@@ -311,7 +311,7 @@ namespace rhetoric {
 			ret = FileEntryType::Other;
 		}
 
-        return Success(ret);
+        return Ok(ret);
 	}
 
 	Result<None> FilePath::CreateDirectory(bool recursive) const {
@@ -333,13 +333,13 @@ namespace rhetoric {
 
 			auto create_ret = create_path.CreateDirectorySingle();
 			if (!create_ret) {
-                return Failure(GenericError::Create(create_ret.error(),
-                                                    "CreateDirectorySingle: path=%s",
-                                                    ToString().c_str()));
-			}
-		}
-
-		return Success(None());
+                return GenericError::Create(create_ret.error(),
+                                            "CreateDirectorySingle: path=%s",
+                                            ToString().c_str());
+            }
+        }
+        
+        return Ok(None());
 	}
 
 	Result<Ptr<FileStream>> FilePath::Open(const std::string & mode) const {
@@ -349,13 +349,13 @@ namespace rhetoric {
 	Result<Ptr<Data>> FilePath::Read() const {
         RHETORIC_TRY_ASSIGN(auto stream, Open("rb"))
         RHETORIC_TRY_ASSIGN(auto data, stream->Read())
-		return Success(data);
+		return Ok(data);
 	}
 
 	Result<None> FilePath::Write(const Ptr<const Data> & data) const {
         RHETORIC_TRY_ASSIGN(auto stream, Open("wb"))
         RHETORIC_TRY_VOID(stream->Write(data))
-		return Success(None());
+		return Ok(None());
 	}
 
 	std::string FilePath::separator() {
@@ -400,7 +400,7 @@ namespace rhetoric {
 #endif
 
     FilePath::FilePath(Type type,
-                       const Optional<std::string> & drive_letter,
+                       const Option<std::string> & drive_letter,
                        const std::vector<std::string> & elements):
     type_(type),
     drive_letter_(drive_letter),
@@ -414,10 +414,10 @@ namespace rhetoric {
         struct stat st;
         int x = stat(str.c_str(), &st);
         if (x == -1) {
-            return Failure(CreateStatError(errno));
+            return CreateStatError(errno);
         }
 
-        return Success(st);
+        return Ok(st);
     }
 
     Ptr<PosixError> FilePath::CreateStatError(int err) const {
@@ -431,9 +431,9 @@ namespace rhetoric {
         std::string path = ToString();
         int t = mkdir(path.c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
         if (t == -1) {
-            return Failure(PosixError::Create(errno, "mkdir(%s)", path.c_str()));
+            return PosixError::Create(errno, "mkdir(%s)", path.c_str());
         }
-        return Success(None());
+        return Ok(None());
     }
 #endif
 

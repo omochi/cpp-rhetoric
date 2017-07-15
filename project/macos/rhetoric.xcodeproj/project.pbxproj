@@ -71,8 +71,8 @@
 		D65E83891ECEFCD700705DB0 /* data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = data.cpp; sourceTree = "<group>"; };
 		D65E838A1ECEFCD700705DB0 /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
 		D65E838D1ECEFFD900705DB0 /* array_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = array_macro.h; sourceTree = "<group>"; };
-		D65E838E1ED012BB00705DB0 /* optional_inline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = optional_inline.h; sourceTree = "<group>"; };
-		D65E838F1ED012BB00705DB0 /* optional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = optional.h; sourceTree = "<group>"; };
+		D65E838E1ED012BB00705DB0 /* option_inline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = option_inline.h; sourceTree = "<group>"; };
+		D65E838F1ED012BB00705DB0 /* option.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = option.h; sourceTree = "<group>"; };
 		D65E83921ED0133500705DB0 /* none.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = none.cpp; sourceTree = "<group>"; };
 		D65E83931ED0133500705DB0 /* none.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = none.h; sourceTree = "<group>"; };
 		D65E83961ED015C100705DB0 /* string_function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = string_function.cpp; sourceTree = "<group>"; };
@@ -179,8 +179,8 @@
 				D639A06C1F1107040059B6BA /* non_copyable_macro.h */,
 				D65E83921ED0133500705DB0 /* none.cpp */,
 				D65E83931ED0133500705DB0 /* none.h */,
-				D65E838F1ED012BB00705DB0 /* optional.h */,
-				D65E838E1ED012BB00705DB0 /* optional_inline.h */,
+				D65E838F1ED012BB00705DB0 /* option.h */,
+				D65E838E1ED012BB00705DB0 /* option_inline.h */,
 				D65E83651ECEE3FB00705DB0 /* platform.h */,
 				D65E83801ECEF63C00705DB0 /* posix_error.cpp */,
 				D65E83811ECEF63C00705DB0 /* posix_error.h */,

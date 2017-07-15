@@ -42,7 +42,7 @@ namespace rhetoric {
         return sub == target;
     }
     
-    Optional<FindResult>
+    Option<FindResult>
     CheckStartWith(const std::string & string,
                    size_t check_index,
                    const std::vector<std::string> & targets)
@@ -57,7 +57,7 @@ namespace rhetoric {
         return None();
     }
     
-    Optional<FindResult>
+    Option<FindResult>
     CheckEndWith(const std::string & string,
                  size_t check_index,
                  const std::vector<std::string> & targets)
@@ -132,19 +132,19 @@ namespace rhetoric {
         return s;
     }
     
-    Optional<size_t> Find(const std::string & string,
+    Option<size_t> Find(const std::string & string,
                           const std::string & target)
     {
         return Find(string, 0, target);
     }
     
-    Optional<size_t> FindR(const std::string & string,
+    Option<size_t> FindR(const std::string & string,
                            const std::string & target)
     {
         return FindR(string, string.size(), target);
     }
     
-    Optional<size_t> Find(const std::string & string,
+    Option<size_t> Find(const std::string & string,
                           size_t start_index,
                           const std::string & target)
     {
@@ -154,7 +154,7 @@ namespace rhetoric {
         return Some(ret->index);
     }
     
-    Optional<size_t> FindR(const std::string & string,
+    Option<size_t> FindR(const std::string & string,
                            size_t start_index,
                            const std::string & target)
     {
@@ -164,7 +164,7 @@ namespace rhetoric {
         return Some(ret->index);
     }
     
-    Optional<FindResult> Find(const std::string & string,
+    Option<FindResult> Find(const std::string & string,
                               size_t start_index,
                               const std::vector<std::string> & targets)
     {
@@ -177,7 +177,7 @@ namespace rhetoric {
         return None();
     }
     
-    Optional<FindResult> FindR(const std::string & string,
+    Option<FindResult> FindR(const std::string & string,
                                size_t start_index,
                                const std::vector<std::string> & targets)
     {
@@ -194,7 +194,7 @@ namespace rhetoric {
     std::vector<std::string>
     Split(const std::string & string,
           const std::string & separator,
-          const Optional<size_t> & limit,
+          const Option<size_t> & limit,
           bool keep_separator)
     {
         return Split(string,
@@ -206,7 +206,7 @@ namespace rhetoric {
     std::vector<std::string>
     SplitR(const std::string & string,
            const std::string & separator,
-           const Optional<size_t> & limit,
+           const Option<size_t> & limit,
            bool keep_separator)
     {
         return SplitR(string,
@@ -218,7 +218,7 @@ namespace rhetoric {
     std::vector<std::string>
     Split(const std::string & string,
           const std::vector<std::string> & separators,
-          const Optional<size_t> & limit,
+          const Option<size_t> & limit,
           bool keep_separator)
     {
         std::vector<std::string> ret;
@@ -233,7 +233,7 @@ namespace rhetoric {
     std::vector<std::string>
     SplitR(const std::string & string,
            const std::vector<std::string> & separators,
-           const Optional<size_t> & limit,
+           const Option<size_t> & limit,
            bool keep_separator)
     {
         std::vector<std::string> ret;
@@ -248,7 +248,7 @@ namespace rhetoric {
     
     void SplitIterate(const std::string & string,
                       const std::vector<std::string> & separators,
-                      const Optional<size_t> & limit,
+                      const Option<size_t> & limit,
                       bool keep_separator,
                       const std::function<void(const std::string &)> & yield)
     {
@@ -302,7 +302,7 @@ namespace rhetoric {
     
     void SplitIterateR(const std::string & string,
                        const std::vector<std::string> & separators,
-                       const Optional<size_t> & limit,
+                       const Option<size_t> & limit,
                        bool keep_separator,
                        const std::function<void(const std::string &)> & yield)
     {

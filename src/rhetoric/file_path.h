@@ -11,7 +11,7 @@
 #include "./equatable_macro.h"
 #include "./fatal.h"
 #include "./generic_error.h"
-#include "./optional.h"
+#include "./option.h"
 #include "./posix_error.h"
 #include "./ptr.h"
 #include "./result.h"
@@ -32,7 +32,7 @@ namespace rhetoric {
 
     struct SplitExtensionResult {
         std::string name;
-        Optional<std::string> extension;
+        Option<std::string> extension;
     };
 
     class FilePath {
@@ -49,7 +49,7 @@ namespace rhetoric {
         FilePath & operator=(const FilePath & other);
 
         Type type() const;
-        const Optional<std::string> & drive_letter() const;
+        const Option<std::string> & drive_letter() const;
         const std::vector<std::string> & elements() const;
 
         std::string ToString() const;
@@ -66,10 +66,10 @@ namespace rhetoric {
         FilePath basename() const;
         void set_basename(const FilePath & value);
 
-        Optional<std::string> extension() const;
+        Option<std::string> extension() const;
 
         SplitExtensionResult SplitExtension() const;
-        void ReplaceExtension(const Optional<std::string> & extension);
+        void ReplaceExtension(const Option<std::string> & extension);
         void AppendExtension(const std::string & extension);
 
         void Append(const FilePath & path);
@@ -105,7 +105,7 @@ namespace rhetoric {
 #endif
     private:
         FilePath(Type type,
-                 const Optional<std::string> & drive_letter,
+                 const Option<std::string> & drive_letter,
                  const std::vector<std::string> & elements);
 
         RHETORIC_NO_DISCARD
@@ -119,7 +119,7 @@ namespace rhetoric {
         static FilePath Parse(const std::string & string);
 
         Type type_;
-        Optional<std::string> drive_letter_;
+        Option<std::string> drive_letter_;
         std::vector<std::string> elements_;
     };
 }
