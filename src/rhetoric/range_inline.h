@@ -89,12 +89,12 @@ namespace rhetoric {
         return Range<T>(lower_bound, std::max(lower_bound, upper_bound));
     }
     
-    template <typename T, typename R>
+    template <typename R, typename T>
     R GetRate(const T & value, const Range<T> & range) {
         return static_cast<R>(value - range.lower_bound()) / static_cast<R>(range.count());
     }
     
-    template <typename T, typename R>
+    template <typename T>
     T Clamp(const T & value, const Range<T> & range) {
         return std::max(range.lower_bound(), std::min(value, range.upper_bound()));
     }

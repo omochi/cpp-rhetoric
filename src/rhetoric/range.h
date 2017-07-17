@@ -52,10 +52,10 @@ namespace rhetoric {
     
     Range<size_t> MakeIndexRange(size_t lower_bound, size_t upper_bound);
     
-    template <typename T, typename R>
+    template <typename R, typename T>
     R GetRate(const T & value, const Range<T> & range);
     
-    template <typename T, typename R>
+    template <typename T>
     T Clamp(const T & value, const Range<T> & range);
 }
 
