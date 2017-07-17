@@ -25,11 +25,11 @@ namespace rhetoric {
             buf.resize(len + 1);
             int print2_ret = vsnprintf(buf.data(), buf.size(), format, args2);
             if (print2_ret < 0) {
-                throw std::logic_error("[Format V] vsnprintf (2) failed");
+                throw std::logic_error("[FormatV] vsnprintf (2) failed");
             }
             size_t len2 = ToUnsigned(print2_ret);
             if (len != len2) {
-                throw std::logic_error("[Format V] vsnprintf (2) length check error");
+                throw std::logic_error("[FormatV] vsnprintf (2) length check error");
             }
         }
 
