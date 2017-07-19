@@ -6,7 +6,6 @@
 #include "./attribute.h"
 #include "./format_macro.h"
 #include "./generic_error.h"
-#include "./macro.h"
 #include "./option.h"
 #include "./range.h"
 #include "./result.h"

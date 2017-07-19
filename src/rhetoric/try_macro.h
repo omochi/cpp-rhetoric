@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./macro.h"
+#include "./result.h"
 
 #define RHETORIC_TRY_VOID(expression) _RHETORIC_TRY_VOID_1(__COUNTER__, expression)
 

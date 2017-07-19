@@ -2,7 +2,7 @@
 
 #include "./std_dependency.h"
 
-#include "./equatable_macro.h"
+#include "./concept_macro.h"
 
 namespace rhetoric {
 	template <typename T> class Range;

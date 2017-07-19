@@ -4,8 +4,8 @@
 
 #include "./assert.h"
 #include "./attribute.h"
+#include "./concept_macro.h"
 #include "./either.h"
-#include "./equatable_macro.h"
 #include "./none.h"
 
 namespace rhetoric {

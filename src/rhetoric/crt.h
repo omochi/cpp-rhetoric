@@ -4,5 +4,5 @@
 #include "./platform.h"
 
 namespace rhetoric {
-    errno_t fopen_internal(FILE ** handle_ptr, const char * filename, const char * mode);
+    errno_t _fopen(FILE ** handle_ptr, const char * filename, const char * mode);
 }

@@ -4,6 +4,7 @@
 
 #include "./accessor_macro.h"
 #include "./assert.h"
+#include "./concept_macro.h"
 #include "./ptr.h"
 
 namespace rhetoric {
@@ -16,6 +17,8 @@ namespace rhetoric {
              bool copy = true,
              bool free_when_done = true);
         ~Data();
+        
+        RHETORIC_NON_COPYABLE(Data)
 
         const void * bytes() const;
         void * bytes();

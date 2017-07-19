@@ -2,9 +2,8 @@
 
 #include "./std_dependency.h"
 
-#include "./equatable_macro.h"
+#include "./concept_macro.h"
 #include "./range_iterator.h"
-
 
 namespace rhetoric {
     template <typename T>

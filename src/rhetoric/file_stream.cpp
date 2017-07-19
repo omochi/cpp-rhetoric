@@ -127,7 +127,7 @@ namespace rhetoric {
         std::string path_str = path.ToString();
         
         FILE * handle;
-        auto err = fopen_internal(&handle, path_str.c_str(), mode.c_str());
+        auto err = _fopen(&handle, path_str.c_str(), mode.c_str());
         if (err) {
             return PosixError::Create(err,
                                       "fopen(%s, %s)",

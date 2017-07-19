@@ -1,7 +1,7 @@
 #pragma once
 
 #include "./attribute.h"
-#include "./equatable_macro.h"
+#include "./concept_macro.h"
 
 namespace rhetoric {
     struct None {

@@ -1,11 +1,11 @@
 #include "./defer.h"
 
 namespace rhetoric {
-    Defer::Defer(const std::function<void()> proc):
+    _Defer::_Defer(const std::function<void()> proc):
     proc_(proc)
     {}
 
-    Defer::~Defer(){
+    _Defer::~_Defer(){
         if (proc_) {
             proc_();
         }

@@ -1,15 +1,14 @@
 #pragma once
 
 #include "./std_dependency.h"
-#include "./macro.h"
 
 #define RHETORIC_DEFER(proc) _RHETORIC_DEFER_1(__COUNTER__, proc)
 
 namespace rhetoric {
-    class Defer {
+    class _Defer {
     public:
-        Defer(const std::function<void()> proc);
-        ~Defer();
+        _Defer(const std::function<void()> proc);
+        ~_Defer();
     private:
         std::function<void()> proc_;
     };
@@ -19,6 +18,6 @@ namespace rhetoric {
 _RHETORIC_DEFER_2(rhetoric_defer_object_, counter, proc)
 
 #define _RHETORIC_DEFER_2(var, counter, proc) \
-rhetoric::Defer var ## counter = rhetoric::Defer(proc)
+rhetoric::_Defer var ## counter = rhetoric::_Defer(proc)
 
 

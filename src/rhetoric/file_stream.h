@@ -15,6 +15,8 @@ namespace rhetoric {
     class FileStream : public std::enable_shared_from_this<FileStream> {
     public:
         ~FileStream();
+        
+        RHETORIC_NON_COPYABLE(FileStream)
 
         FILE * handle() const;
         FilePath path() const;
