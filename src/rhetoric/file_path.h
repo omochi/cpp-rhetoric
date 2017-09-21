@@ -81,7 +81,8 @@ namespace rhetoric {
         FilePath Expanded() const;
 
         RHETORIC_NO_DISCARD
-        Result<bool> GetExists() const;
+        Result<bool> Exists() const;
+
         RHETORIC_NO_DISCARD
         Result<FileEntryType> GetEntryType() const;
 

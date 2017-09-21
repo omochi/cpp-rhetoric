@@ -286,7 +286,7 @@ namespace rhetoric {
 		return ret;
 	}
 
-	Result<bool> FilePath::GetExists() const {
+	Result<bool> FilePath::Exists() const {
         struct stat st;
         int x = stat(ToString().c_str(), &st);
         if (x == -1) {
@@ -326,7 +326,7 @@ namespace rhetoric {
 		for (auto element : path.elements_) {
 			create_path.Append(FilePath(element));
 
-            RHETORIC_TRY_ASSIGN(auto exi, create_path.GetExists());
+            RHETORIC_TRY_ASSIGN(auto exi, create_path.Exists());
 			if (exi) {
 				continue;
 			}
