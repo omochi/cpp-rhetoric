@@ -139,7 +139,7 @@ namespace rhetoric {
 		WIN32_FIND_DATA entry;
 		HANDLE handle = FindFirstFile(winstr.c_str(), &entry);
 		if (handle == INVALID_HANDLE_VALUE) {
-			return Failure(Win32Error::Create(GetLastError(), "FindFirstFile(%s)", str.c_str()));
+            return Win32Error::Create(GetLastError(), "FindFirstFile(%s)", str.c_str());
 		}
 
 		RHETORIC_DEFER([=] {
@@ -157,7 +157,7 @@ namespace rhetoric {
 				if (!next_ret) {
 					DWORD error = GetLastError();
 					if (error != ERROR_NO_MORE_FILES) {
-						return Failure(Win32Error::Create(error, "FindNextFile: %s", str.c_str()));
+                        return Win32Error::Create(error, "FindNextFile: %s", str.c_str());
 					}
 					break;
 				}
@@ -171,7 +171,7 @@ namespace rhetoric {
 			ret.push_back(*this + FilePath(name));
 		}
 
-		return Success(ret);
+		return Ok(ret);
 	}
 #endif
 
@@ -195,7 +195,7 @@ namespace rhetoric {
 	}
 
 	Option<std::string> FilePath::extension() const {
-        auto strs = SplitR(basename().ToString(), ".", Some(2));
+        auto strs = SplitR(basename().ToString(), ".", Some(2u));
 		if (strs.size() < 2) {
 			return None();
 		}
@@ -203,7 +203,7 @@ namespace rhetoric {
 	}
 
     SplitExtensionResult FilePath::SplitExtension() const {
-        auto strs = SplitR(basename().ToString(), ".", Some(2));
+        auto strs = SplitR(basename().ToString(), ".", Some(2u));
         SplitExtensionResult ret;
         if (strs.size() == 2) {
             ret.extension = Some(strs[1]);
@@ -443,9 +443,9 @@ namespace rhetoric {
 		WinString win_path = StringToWinString(path, CP_UTF8);
 		BOOL create_ret = ::CreateDirectory(win_path.c_str(), nullptr);
 		if (!create_ret) {
-			return Failure(Win32Error::Create(GetLastError(), "CreateDirectory(%s)", path.c_str()));
+            return Win32Error::Create(GetLastError(), "CreateDirectory(%s)", path.c_str());
 		}
-		return Success(None());
+		return Ok(None());
 	}
 #endif
 

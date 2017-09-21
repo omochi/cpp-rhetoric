@@ -28,7 +28,7 @@ namespace rhetoric {
     template <typename T>
     template <typename U>
     Option<T>::Option(const Option<U> & other,
-                          typename std::enable_if<std::is_convertible<U, T>::value>::type *):
+        std::enable_if_t<std::is_convertible<U, T>::value> *):
     either_(other.presented() ?
             Either2<None, T>(EitherCase<SomeTag>(static_cast<T>(other.value()))) :
             Either2<None, T>(EitherCase<NoneTag>(None()))

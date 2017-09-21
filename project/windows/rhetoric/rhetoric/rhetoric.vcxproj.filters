@@ -15,16 +15,19 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\array_function_inline.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\array_macro.h">
-      <Filter>rhetoric</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\assert.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\attribute.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\comparable_macro.h">
+    <ClInclude Include="..\..\..\..\src\rhetoric\c_array_macro.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\concept_macro.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\crt.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\data.h">
@@ -33,10 +36,16 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\defer.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\env.h">
+    <ClInclude Include="..\..\..\..\src\rhetoric\either.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\equatable_macro.h">
+    <ClInclude Include="..\..\..\..\src\rhetoric\either_inline.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\eitheraa.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\env.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\error.h">
@@ -54,28 +63,37 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\format.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\format_macro.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\generic_error.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\int_convertion.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\let.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\macos_dependency.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\macro.h">
-      <Filter>rhetoric</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\none.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\optional.h">
+    <ClInclude Include="..\..\..\..\src\rhetoric\option.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\optional_inline.h">
+    <ClInclude Include="..\..\..\..\src\rhetoric\option_inline.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\platform.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\posix_error.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\pretty_function_macro.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\print.h">
@@ -93,6 +111,12 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\range_inline.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\range_iterator.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\range_iterator_inline.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\result.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
@@ -102,10 +126,16 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\rhetoric.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\shared_from_this_macro.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\std_dependency.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\string_function.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\string_function_inline.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\string_macos.h">
@@ -126,15 +156,12 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\windows_dependency.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\range_iterator_inline.h">
-      <Filter>rhetoric</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\rhetoric\crt.h">
-      <Filter>rhetoric</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\rhetoric\assert.cpp">
+      <Filter>rhetoric</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\rhetoric\crt.cpp">
       <Filter>rhetoric</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\rhetoric\data.cpp">
@@ -161,6 +188,9 @@
     <ClCompile Include="..\..\..\..\src\rhetoric\generic_error.cpp">
       <Filter>rhetoric</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\src\rhetoric\int_convertion.cpp">
+      <Filter>rhetoric</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\src\rhetoric\none.cpp">
       <Filter>rhetoric</Filter>
     </ClCompile>
@@ -168,6 +198,9 @@
       <Filter>rhetoric</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\rhetoric\print.cpp">
+      <Filter>rhetoric</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\rhetoric\range.cpp">
       <Filter>rhetoric</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\rhetoric\result.cpp">
@@ -185,11 +218,16 @@
     <ClCompile Include="..\..\..\..\src\rhetoric\win32_error.cpp">
       <Filter>rhetoric</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\rhetoric\range_iterator.h">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\src\rhetoric\either.h.gyb">
       <Filter>rhetoric</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\rhetoric\crt.cpp">
+    </None>
+    <None Include="..\..\..\..\src\rhetoric\either_inline.h.gyb">
       <Filter>rhetoric</Filter>
-    </ClCompile>
+    </None>
+    <None Include="..\..\..\..\src\rhetoric\string_macos.mm">
+      <Filter>rhetoric</Filter>
+    </None>
   </ItemGroup>
 </Project>
