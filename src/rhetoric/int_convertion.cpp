@@ -79,4 +79,34 @@ namespace rhetoric {
     int ToInt(unsigned long long x) {
         return ToInt(ToSigned(x));
     }
+
+    size_t ToSize(int x) {
+        return ToSize(ToUnsigned(x));
+    }
+
+    size_t ToSize(unsigned int x) {
+        RHETORIC_ASSERT(std::numeric_limits<size_t>::min() <= x);
+        RHETORIC_ASSERT(x <= std::numeric_limits<size_t>::max());
+        return (size_t)x;
+    }
+
+    size_t ToSize(long x) {
+        return ToSize(ToUnsigned(x));
+    }
+
+    size_t ToSize(unsigned long x) {
+        RHETORIC_ASSERT(std::numeric_limits<size_t>::min() <= x);
+        RHETORIC_ASSERT(x <= std::numeric_limits<size_t>::max());
+        return (size_t)x;
+    }
+
+    size_t ToSize(long long x) {
+        return ToSize(ToUnsigned(x));
+    }
+
+    size_t ToSize(unsigned long long x) {
+        RHETORIC_ASSERT(std::numeric_limits<size_t>::min() <= x);
+        RHETORIC_ASSERT(x <= std::numeric_limits<size_t>::max());
+        return (size_t)x;
+    }
 }

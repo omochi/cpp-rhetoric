@@ -20,4 +20,11 @@ namespace rhetoric {
     int ToInt(unsigned long x);
     int ToInt(long long x);
     int ToInt(unsigned long long x);
+
+    size_t ToSize(int x);
+    size_t ToSize(unsigned int x);
+    size_t ToSize(long x);
+    size_t ToSize(unsigned long x);
+    size_t ToSize(long long x);
+    size_t ToSize(unsigned long long x);
 }
