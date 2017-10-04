@@ -15,14 +15,14 @@ namespace rhetoric {
     bool CheckEndWith(const std::string & string,
                       const std::string & target)
     {
-        return CheckEndWith(string, 0, target);
+        return CheckEndWith(string, string.size(), target);
     }
     
     bool CheckStartWith(const std::string & string,
                         size_t check_index,
                         const std::string & target)
     {
-        if (string.size() < check_index + target.size()) {
+        if (!(check_index + target.size() <= string.size())) {
             return false;
         }
         size_t slice_start = check_index;
@@ -34,12 +34,12 @@ namespace rhetoric {
                       size_t check_index,
                       const std::string & target)
     {
-        if (check_index < target.size()) {
+        if (!(target.size() <= check_index && check_index <= string.size())) {
             return false;
         }
         size_t slice_start = check_index - target.size();
-        std::string sub = string.substr(slice_start, target.size());
-        return sub == target;
+        std::string slice = string.substr(slice_start, target.size());
+        return slice == target;
     }
     
     Option<FindResult>
