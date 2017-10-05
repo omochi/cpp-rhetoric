@@ -147,6 +147,9 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\try_macro.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\src\rhetoric\type_arch.h">
+      <Filter>rhetoric</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\src\rhetoric\unix_dependency.h">
       <Filter>rhetoric</Filter>
     </ClInclude>
@@ -218,16 +221,5 @@
     <ClCompile Include="..\..\..\..\src\rhetoric\win32_error.cpp">
       <Filter>rhetoric</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\src\rhetoric\either.h.gyb">
-      <Filter>rhetoric</Filter>
-    </None>
-    <None Include="..\..\..\..\src\rhetoric\either_inline.h.gyb">
-      <Filter>rhetoric</Filter>
-    </None>
-    <None Include="..\..\..\..\src\rhetoric\string_macos.mm">
-      <Filter>rhetoric</Filter>
-    </None>
   </ItemGroup>
 </Project>

@@ -66,6 +66,7 @@
     <ClInclude Include="..\..\..\..\src\rhetoric\string_macos.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\string_windows.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\try_macro.h" />
+    <ClInclude Include="..\..\..\..\src\rhetoric\type_arch.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\unix_dependency.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\win32_error.h" />
     <ClInclude Include="..\..\..\..\src\rhetoric\windows_dependency.h" />
@@ -91,11 +92,6 @@
     <ClCompile Include="..\..\..\..\src\rhetoric\string_macos.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\string_windows.cpp" />
     <ClCompile Include="..\..\..\..\src\rhetoric\win32_error.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\src\rhetoric\either.h.gyb" />
-    <None Include="..\..\..\..\src\rhetoric\either_inline.h.gyb" />
-    <None Include="..\..\..\..\src\rhetoric\string_macos.mm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
