@@ -38,7 +38,7 @@ namespace rhetoric {
     template <typename U>
     Result<T>::Result(const Result<U> & other,
                       typename std::enable_if_t<std::is_convertible<U, T>::value> *):
-    either_(other.is_ok() ?
+    either_(other.ok() ?
             Either2<Ptr<Error>, T>(EitherCase<OkTag>(static_cast<T>(other.value()))) :
             Either2<Ptr<Error>, T>(EitherCase<ErrorTag>(other.error()))
             )
@@ -49,7 +49,7 @@ namespace rhetoric {
     {}
 
     template <typename T>
-    bool Result<T>::is_ok() const {
+    bool Result<T>::ok() const {
         return operator bool();
     }
 
@@ -60,7 +60,10 @@ namespace rhetoric {
 
     template <typename T>
     const T & Result<T>::value() const {
-        return operator*();
+        if (!ok()) {
+            RHETORIC_FATAL(Format("Result is error: %s", either_.AsCase0()->ToString().c_str()));
+        }
+        return either_.AsCase1();
     }
 
     template <typename T>
@@ -75,12 +78,12 @@ namespace rhetoric {
 
     template <typename T>
     const T & Result<T>::operator*() const {
-        return either_.AsCase1();
+        return value();
     }
 
     template <typename T>
     T Result<T>::Recover(const T & recovery_value) const {
-        if (is_ok()) {
+        if (ok()) {
             return value();
         }
         return recovery_value;

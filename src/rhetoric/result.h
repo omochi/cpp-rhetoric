@@ -4,6 +4,7 @@
 #include "./attribute.h"
 #include "./either.h"
 #include "./error.h"
+#include "./fatal.h"
 #include "./option.h"
 #include "./ptr.h"
 
@@ -36,7 +37,7 @@ namespace rhetoric {
         
         ~Result();
 
-        bool is_ok() const;
+        bool ok() const;
         explicit operator bool() const;
 
         const T & value() const;
