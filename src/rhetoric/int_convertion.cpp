@@ -85,8 +85,9 @@ namespace rhetoric {
     }
 
     size_t ToSize(unsigned int x) {
-        RHETORIC_ASSERT(std::numeric_limits<size_t>::min() <= x);
+#if RHETORIC_POINTER_SIZE < RHETORIC_INT_SIZE
         RHETORIC_ASSERT(x <= std::numeric_limits<size_t>::max());
+#endif
         return (size_t)x;
     }
 
@@ -95,8 +96,9 @@ namespace rhetoric {
     }
 
     size_t ToSize(unsigned long x) {
-        RHETORIC_ASSERT(std::numeric_limits<size_t>::min() <= x);
+#if RHETORIC_POINTER_SIZE < RHETORIC_LONG_SIZE
         RHETORIC_ASSERT(x <= std::numeric_limits<size_t>::max());
+#endif
         return (size_t)x;
     }
 
@@ -105,8 +107,9 @@ namespace rhetoric {
     }
 
     size_t ToSize(unsigned long long x) {
-        RHETORIC_ASSERT(std::numeric_limits<size_t>::min() <= x);
+#if RHETORIC_POINTER_SIZE < RHETORIC_LONG_LONG_SIZE
         RHETORIC_ASSERT(x <= std::numeric_limits<size_t>::max());
+#endif
         return (size_t)x;
     }
 }

@@ -40,6 +40,7 @@
 #include "./string_macos.h"
 #include "./string_windows.h"
 #include "./try_macro.h"
+#include "./type_arch.h"
 #include "./win32_error.h"
 
 

@@ -27,7 +27,7 @@ namespace rhetoric {
 
         template <typename U>
         Option(const Option<U> & other,
-            std::enable_if_t<std::is_convertible<U, T>::value> *);
+            std::enable_if_t<std::is_convertible<U, T>::value> * = nullptr);
 
         ~Option();
 

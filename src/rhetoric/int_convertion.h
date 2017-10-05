@@ -1,6 +1,7 @@
 #pragma once
 
 #include "./assert.h"
+#include "./type_arch.h"
 
 namespace rhetoric {
     unsigned char ToUnsigned(char x);

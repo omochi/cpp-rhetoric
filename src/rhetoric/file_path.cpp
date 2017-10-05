@@ -195,7 +195,7 @@ namespace rhetoric {
 	}
 
 	Option<std::string> FilePath::extension() const {
-        auto strs = SplitR(basename().ToString(), ".", Some(2u));
+        auto strs = SplitR(basename().ToString(), ".", Some(2));
 		if (strs.size() < 2) {
 			return None();
 		}
@@ -203,7 +203,7 @@ namespace rhetoric {
 	}
 
     SplitExtensionResult FilePath::SplitExtension() const {
-        auto strs = SplitR(basename().ToString(), ".", Some(2u));
+        auto strs = SplitR(basename().ToString(), ".", Some(2));
         SplitExtensionResult ret;
         if (strs.size() == 2) {
             ret.extension = Some(strs[1]);
